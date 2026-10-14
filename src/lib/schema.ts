@@ -49,9 +49,10 @@ export function person() {
     '@id': PERSON_ID,
     name: site.founder.name,
     jobTitle: site.founder.jobTitle,
+    description: site.founder.bio,
     worksFor: { '@id': ORG_ID },
     url: `${site.url}/about/`,
-    knowsAbout: ['Paid media', 'SEO', 'AI search visibility', 'Lead generation', 'Web development'],
+    knowsAbout: ['Search Essence Optimization', 'Paid media', 'SEO', 'AI search visibility', 'Lead generation', 'Marketing automation', 'Web development'],
     ...(site.founder.sameAs.length ? { sameAs: site.founder.sameAs } : {}),
   };
 }

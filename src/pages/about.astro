@@ -4,7 +4,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { site } from '../site.config';
 import { graph, person, breadcrumbs, ORG_ID, PERSON_ID } from '../lib/schema';
 
-const description = `About ${site.name}: a Cleveland-based lead generation firm for high-value service businesses, founded by ${site.founder.name}.`;
+const description = `About ${site.name} and founder ${site.founder.name}: Search Essence Optimization, lead generation and follow-up for high-value service businesses.`;
 const schema = graph(
   { '@type': 'AboutPage', url: `${site.url}/about/`, name: `About ${site.name}`, about: { '@id': ORG_ID }, mainEntity: { '@id': PERSON_ID } },
   person(),
@@ -15,18 +15,47 @@ const schema = graph(
   <div class="container narrow">
     <header class="page-head">
       <p class="crumbs"><a href="/">Home</a> / About</p>
-      <h1>Marketing that keeps going after the launch.</h1>
+      <h1>Your clients aren't just searching to find you. They're searching to understand you.</h1>
     </header>
     <article class="prose" style="padding-bottom: 72px;">
-      <!-- TODO (Owen): edit this in your own voice before launch. -->
       <p>
-        {site.name} was founded in {site.founded} by {site.founder.name}, who leads paid media and organic SEO.
-        He has run ads and content for as many as 15 accounts at once, including B2B campaigns, built seminar
-        and webinar campaigns that convert attendees into clients, and set up the automation that keeps
-        follow-up consistent.
+        {site.name} was founded in {site.founded} by {site.founder.name}. Since 2016 he has worked across
+        nearly every part of growing a business online: paid media, SEO, web design, content, B2B and B2C sales,
+        and ecommerce. The firm exists to put all of that to work for businesses where a single client is worth
+        a great deal.
+      </p>
+
+      <h2>Search Essence Optimization</h2>
+      <p>
+        Owen describes SEO a little differently: Search Essence Optimization. Ranking still matters, but it is
+        no longer the whole job. Prospects now ask Google and AI assistants detailed questions, and those systems
+        try to understand who you are, what you stand for and who you serve before they recommend you.
       </p>
       <p>
-        Earlier, he helped ecommerce brands grow on Shopify and Amazon. He also holds a full stack web
+        So the work starts by finding the essence of your brand: what you do best, who you do it for and why it
+        matters to them. Then we express it clearly and consistently everywhere a prospect looks, so people and
+        AI search reach the same understanding of you. Your future clients are already moving toward you with
+        their questions. Our job is to meet them in the middle.
+      </p>
+
+      <h2>What we believe about winning clients</h2>
+      <ul>
+        <li><strong>Match the path to the intent.</strong> If someone asks for a guide, give them the guide right away on a simple page. Every extra step costs trust.</li>
+        <li><strong>Respond fast, and stay human.</strong> Automation should make follow-up quicker and more consistent without making it feel automated.</li>
+        <li><strong>Trust is decided before the first conversation.</strong> Your ads, website, emails and reviews should tell one consistent story.</li>
+        <li><strong>Stories beat service lists.</strong> People remember how you helped someone like them far longer than a list of what you offer.</li>
+        <li><strong>Fix the fundamentals first.</strong> Better follow-up and less friction usually do more than another campaign or another tool.</li>
+      </ul>
+
+      <h2>Background</h2>
+      <p>
+        Owen has run paid media and content for as many as 15 accounts at once, including B2B lead generation,
+        and has built seminar and webinar campaigns that turn attendees into clients. He sets up the automation
+        that keeps follow-up consistent, and he earlier helped ecommerce brands grow on Shopify and Amazon.
+      </p>
+      <p>
+        He has been a featured guest on industry marketing podcasts, talking through website and SEO essentials,
+        lead follow-up systems and the shifts reshaping how buyers find businesses. He also holds a full stack web
         development certificate, which is why this firm builds its own pages, workflows and tools instead of
         handing them off.
       </p>

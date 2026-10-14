@@ -16,6 +16,8 @@ export const GET: APIRoute = async () => {
     '',
     `${site.name} (legal name ${site.legalName}) was founded in ${site.founded} by ${site.founder.name} and is based in ${site.location.city}, ${site.location.region}. It serves high-value service businesses across the ${site.areaServed}. Contact: ${site.email}.`,
     '',
+    site.founder.bio,
+    '',
     '## Services',
     '',
     ...services.map((s) => `- [${s.data.title}](${site.url}/services/${s.id}/): ${s.data.summary}`),
