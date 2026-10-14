@@ -29,7 +29,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 ## Later
 - [ ] Validate the estate security niche: keyword volumes and CPCs (safe room, panic room, residential security assessment) for Palm Beach County; check the local pack and AI answers; talk to 5 local architects or estate managers
 - [ ] Consider a second estate security market page (Greater Los Angeles: wildfire rebuild hardening)
-- [ ] Contact form that feeds GoHighLevel (server-side, no content-rendering JS)
+- [ ] Contact form that feeds the CRM (server-side, no content-rendering JS)
 - [ ] Case studies once clients approve them (real results only)
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
@@ -43,3 +43,4 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - 2026-10-14: Drafted insight (unpublished, draft: true): Is HubSpot still worth it for a service business in 2026?
 - 2026-10-14: New Growth rings logo in the header and as the favicon
 - 2026-10-14: Removed the YouTube comment archive example from the Custom Tools service page
+- 2026-10-14: Removed all GoHighLevel mentions from the site (Marketing Automation page now says CRM)
