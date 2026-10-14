@@ -4,6 +4,7 @@ description: HubSpot is still a capable CRM, but its AI agents and pricing raise
 answer: "For many service businesses, yes, but the CRM is rarely what decides results. HubSpot is still capable and easy to learn, and its AI agents work best on narrow tasks with clean data. It can't fix slow follow-up or a website AI search can't read. The edge comes from fundamentals: clean records, fast human response and content worth citing."
 published: 2026-10-14
 tags: [CRM, AI agents, marketing automation]
+draft: true
 faqs:
   - q: Should I switch away from HubSpot?
     a: Usually not as a first step. If your follow-up is slow or your records are messy, a new CRM will inherit the same problems. Clean the data, trim seats you don't use and tighten response times first. Then decide whether the platform is still the constraint.
