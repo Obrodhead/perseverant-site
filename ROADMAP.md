@@ -34,3 +34,4 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - 2026-10-14: Contact email set to connect@perseverantdigital.com
 - 2026-10-14: About page rewritten around Search Essence Optimization; founder bio in schema and llms.txt
 - 2026-10-14: Thoreau and Marcus Aurelius quotes paired to each page
+- 2026-10-14: Removed the YouTube comment archive example from the Custom Tools service page

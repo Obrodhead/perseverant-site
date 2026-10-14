@@ -1,7 +1,7 @@
 ---
 title: Custom Marketing Tools and Integrations
 summary: Custom apps, AI workflows and integrations that replace costly third-party tools and remove manual marketing work.
-answer: Sometimes the right fix is a small custom tool instead of another subscription. We build focused apps, AI-assisted workflows and integrations, such as an automated YouTube comment archive built to replace a paid third-party archiving service, that cut cost and remove repetitive manual work.
+answer: Sometimes the right fix is a small custom tool instead of another subscription. We build focused apps, AI-assisted workflows and integrations that replace costly third-party tools, fit the way your team already works, and remove repetitive manual marketing work. Each build starts with a workflow review, so we only automate what is worth automating.
 audience: Businesses paying for tools that only half fit, or doing repetitive marketing tasks by hand.
 order: 6
 status: active
