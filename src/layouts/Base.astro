@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site, nav } from '../site.config';
 import { activeServices, activeIndustries } from '../lib/content';
+import { quoteFor } from '../lib/quotes';
 
 interface Props {
   title: string;
@@ -18,6 +19,7 @@ const path = Astro.url.pathname;
 const services = await activeServices();
 const industries = await activeIndustries();
 const year = new Date().getFullYear();
+const quote = quoteFor(path);
 ---
 <!doctype html>
 <html lang="en">
@@ -102,8 +104,8 @@ const year = new Date().getFullYear();
           </div>
         </div>
         <blockquote class="quote">
-          “I have great faith in a seed. Convince me that you have a seed there, and I am prepared to expect wonders.”
-          <cite>Henry David Thoreau, The Dispersion of Seeds</cite>
+          “{quote.text}”
+          <cite>{quote.author}, {quote.source}</cite>
         </blockquote>
         <p class="fineprint">© {year} {site.legalName}. All rights reserved.</p>
       </div>

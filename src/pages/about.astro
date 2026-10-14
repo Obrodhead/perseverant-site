@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../site.config';
 import { graph, person, breadcrumbs, ORG_ID, PERSON_ID } from '../lib/schema';
+import { quotes } from '../lib/quotes';
 
 const description = `About ${site.name} and founder ${site.founder.name}: Search Essence Optimization, lead generation and follow-up for high-value service businesses.`;
 const schema = graph(
@@ -26,6 +27,10 @@ const schema = graph(
       </p>
 
       <h2>Search Essence Optimization</h2>
+      <blockquote class="pull-quote">
+        <p>“{quotes.lookWithin.text}”</p>
+        <cite>{quotes.lookWithin.author}, {quotes.lookWithin.source}</cite>
+      </blockquote>
       <p>
         Owen describes SEO a little differently: Search Essence Optimization. Ranking still matters, but it is
         no longer the whole job. Prospects now ask Google and AI assistants detailed questions, and those systems
@@ -61,14 +66,20 @@ const schema = graph(
       </p>
 
       <h2>Why "Perseverant"</h2>
+      <blockquote class="pull-quote">
+        <p>“{quotes.promontory.text}”</p>
+        <cite>{quotes.promontory.author}, {quotes.promontory.source}</cite>
+      </blockquote>
       <p>
         Lead generation for high-value services compounds. Search pages gain trust over months, a campaign
         improves with every test, and a client relationship can pay off for years. The name is a reminder that
         results come from steady, intentional work rather than one big push.
       </p>
       <p>
-        It also borrows from Henry David Thoreau, who wrote that he had great faith in a seed and was prepared
-        to expect wonders from one. Every client engagement starts as a seed.
+        It draws on two writers who believed in quiet, steady work. Henry David Thoreau wrote that he had great
+        faith in a seed and was prepared to expect wonders from one. Marcus Aurelius reminded himself each
+        morning that he was rising to the work of a human being. Every client engagement starts as a seed, and
+        we show up every day to tend it.
       </p>
 
       <h2>Who we work with</h2>
