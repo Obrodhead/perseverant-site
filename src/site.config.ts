@@ -21,7 +21,7 @@ export const site = {
     name: 'Owen Brodhead', // TODO: confirm how you want your name to appear
     jobTitle: 'Founder',
     // Used in Person schema and llms.txt. Keep it factual and under ~300 characters.
-    bio: 'Owen Brodhead is the founder of Perseverant Digital. He has worked across paid media, SEO, web design, content and sales since 2016, and approaches SEO as Search Essence Optimization: making a brand understood, not just found, by people and AI search.',
+    bio: 'Owen Brodhead is the founder of Perseverant Digital. He has worked across paid media, SEO, web design, content and sales since 2016, including as an integration systems architect, and approaches SEO as Search Essence Optimization: making a brand understood, not just found, by people and AI search.',
     sameAs: [
       // TODO: add your personal LinkedIn URL. This is one of the strongest entity signals.
     ] as string[],

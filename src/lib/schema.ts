@@ -52,7 +52,7 @@ export function person() {
     description: site.founder.bio,
     worksFor: { '@id': ORG_ID },
     url: `${site.url}/about/`,
-    knowsAbout: ['Search Essence Optimization', 'Paid media', 'SEO', 'AI search visibility', 'Lead generation', 'Marketing automation', 'Web development'],
+    knowsAbout: ['Search Essence Optimization', 'Paid media', 'SEO', 'AI search visibility', 'Lead generation', 'Marketing automation', 'Integration systems architecture', 'Web development'],
     ...(site.founder.sameAs.length ? { sameAs: site.founder.sameAs } : {}),
   };
 }
