@@ -1,4 +1,4 @@
-# Working on perseverant.com
+# Working on perseverantdigital.com
 
 Instructions for Claude (and anyone else) editing this site. Read ARCHITECTURE.md for the why.
 

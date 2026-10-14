@@ -1,7 +1,7 @@
 # Perseverant Digital — Site Architecture
 
 Working backwards from the goal: when the owner of a high-value service business asks Google,
-ChatGPT, Claude, Perplexity or Gemini how to get more clients, the answer cites perseverant.com. Every decision below serves that.
+ChatGPT, Claude, Perplexity or Gemini how to get more clients, the answer cites perseverantdigital.com. Every decision below serves that.
 
 ## What AI search and Google need from a page
 

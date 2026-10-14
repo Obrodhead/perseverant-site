@@ -1,4 +1,4 @@
-# perseverant.com
+# perseverantdigital.com
 
 The Perseverant Digital website. Astro, static HTML, zero client-side JavaScript.
 
@@ -15,7 +15,7 @@ npm run build     # outputs to dist/
 1. Push this repo to GitHub.
 2. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → pick the repo.
 3. Framework preset: **Astro**. Build command `npm run build`. Output directory `dist`.
-4. Under the project's Custom domains, add `perseverant.com` and `www.perseverant.com`.
+4. Under the project's Custom domains, add `perseverantdigital.com` and `www.perseverantdigital.com`.
    If the domain's DNS is not on Cloudflare, follow the prompt to add the CNAME records at your registrar.
 5. Every push to `main` deploys automatically. Pull requests get preview URLs.
 
