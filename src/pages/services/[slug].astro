@@ -1,0 +1,80 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ShortAnswer from '../../components/ShortAnswer.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../site.config';
+import { activeServices, isoDate } from '../../lib/content';
+import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const services = await activeServices();
+  return services.map((entry) => ({ params: { slug: entry.id }, props: { entry, others: services.filter((s) => s.id !== entry.id) } }));
+}
+
+const { entry, others } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const path = `/services/${entry.id}/`;
+
+const schema = graph(
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${path}#service`,
+    name: d.title,
+    description: d.answer,
+    serviceType: d.title,
+    provider: { '@id': ORG_ID },
+    areaServed: { '@type': 'Country', name: site.areaServed },
+    audience: { '@type': 'BusinessAudience', name: d.audience },
+    url: `${site.url}${path}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${path}`,
+    url: `${site.url}${path}`,
+    name: d.title,
+    description: d.summary,
+    dateModified: isoDate(d.updated),
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}${path}#service` },
+  },
+  faqPage(d.faqs, path),
+  breadcrumbs([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: d.title, path },
+  ]),
+);
+---
+<Base title={d.title} description={d.summary} schema={schema}>
+  <div class="container">
+    <header class="page-head narrow" style="padding-inline: 0;">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/services/">Services</a></p>
+      <h1>{d.title}</h1>
+    </header>
+    <div class="split">
+      <article class="prose">
+        <ShortAnswer text={d.answer} updated={d.updated} />
+        <Content />
+        <Faq faqs={d.faqs} />
+      </article>
+      <aside class="aside">
+        <div class="aside-box">
+          <h2>Who it's for</h2>
+          <p>{d.audience}</p>
+        </div>
+        <div class="aside-box">
+          <h2>What you get</h2>
+          <ul>{d.deliverables.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        <div class="aside-box">
+          <h2>Related services</h2>
+          <ul>{others.slice(0, 3).map((o) => <li><a href={`/services/${o.id}/`}>{o.data.title}</a></li>)}</ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <CtaBand />
+</Base>

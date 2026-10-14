@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../site.config';
+import { activeServices, publishedInsights, displayDate, isoDate } from '../lib/content';
+import { graph, organization, person, website } from '../lib/schema';
+
+const services = await activeServices();
+const insights = (await publishedInsights()).slice(0, 3);
+const schema = graph(organization(), person(), website());
+---
+<Base title={site.name} description={site.description} schema={schema}>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Marketing for financial advisors and RIAs</p>
+      <h1>Be the firm AI assistants recommend.</h1>
+      <p class="lede">
+        Prospects now ask ChatGPT, Claude, Perplexity and Google who to trust with their money.
+        {site.name} gets advisory firms into those answers, then turns the attention into booked meetings.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={site.bookingUrl || '/contact/'}>{site.bookingUrl ? 'Book a call' : 'Get in touch'}</a>
+        <a class="btn btn-secondary" href="/services/">See services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Services</p>
+        <h2>Every channel a prospect uses before they call you.</h2>
+        <p>Pick one or combine them. Each service is built for advisory firms and written with compliance review in mind.</p>
+      </div>
+      <ul class="service-grid">
+        {services.map((s, i) => (
+          <li>
+            <a href={`/services/${s.id}/`}>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.data.title}</h3>
+              <p>{s.data.summary}</p>
+              <span class="more">Learn more →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">How we work</p>
+        <h2>Built by an operator, not a pitch deck.</h2>
+      </div>
+      <div class="principles">
+        <div>
+          <h3>Advisor marketing is the specialty</h3>
+          <p>Our founder has led paid media and SEO for many financial advisor accounts at once, from seminar campaigns to firm-wide SEO.</p>
+        </div>
+        <div>
+          <h3>Measured by meetings</h3>
+          <p>Clicks and rankings are only useful if they lead to conversations. We track every campaign to booked and held appointments.</p>
+        </div>
+        <div>
+          <h3>Compliance-aware from the first draft</h3>
+          <p>Copy is written for review under the SEC Marketing Rule, so your compliance team edits instead of rewriting.</p>
+        </div>
+        <div>
+          <h3>Marketer who builds</h3>
+          <p>With a full stack development background, we build the pages, automations and tools ourselves instead of handing them off.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {insights.length > 0 && (
+    <section class="section">
+      <div class="container narrow">
+        <div class="section-head">
+          <p class="eyebrow">Insights</p>
+          <h2>Straight answers on advisor marketing.</h2>
+        </div>
+        <ul class="post-list">
+          {insights.map((p) => (
+            <li>
+              <a href={`/insights/${p.id}/`}>
+                <time datetime={isoDate(p.data.published)}>{displayDate(p.data.published)}</time>
+                <h3>{p.data.title}</h3>
+                <p>{p.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</Base>

@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../site.config';
+import { activeServices } from '../../lib/content';
+import { graph, breadcrumbs, ORG_ID } from '../../lib/schema';
+
+const services = await activeServices();
+const description = 'Marketing services for financial advisors and RIAs: AI search visibility, SEO, paid social, seminar and webinar campaigns, automation and custom tools.';
+const schema = graph(
+  {
+    '@type': 'ItemList',
+    name: `${site.name} services`,
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${site.url}/services/${s.id}/`,
+      name: s.data.title,
+    })),
+  },
+  breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Services', path: '/services/' }]),
+  { '@type': 'CollectionPage', url: `${site.url}/services/`, name: 'Services', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': ORG_ID } },
+);
+---
+<Base title="Services" description={description} schema={schema}>
+  <div class="container">
+    <header class="page-head">
+      <p class="crumbs"><a href="/">Home</a> / Services</p>
+      <h1>Services</h1>
+      <p class="lede" style="color: var(--muted); font-size: var(--step-1); max-width: 52ch;">Modular services for advisory firms. Start with the one that fixes your biggest gap, then add the rest as you grow.</p>
+    </header>
+    <ul class="service-grid" style="margin-bottom: 72px;">
+      {services.map((s, i) => (
+        <li>
+          <a href={`/services/${s.id}/`}>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h2 style="font-size: 1.2rem;">{s.data.title}</h2>
+            <p>{s.data.summary}</p>
+            <span class="more">Learn more →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <CtaBand />
+</Base>

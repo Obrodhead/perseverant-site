@@ -1,0 +1,15 @@
+{
+  "name": "perseverant-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "7.3.5",
+    "@astrojs/sitemap": "3.7.4"
+  }
+}

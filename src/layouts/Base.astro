@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+import { site, nav } from '../site.config';
+import { activeServices } from '../lib/content';
+
+interface Props {
+  title: string;
+  description: string;
+  schema?: object;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, schema, ogType = 'website', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const fullTitle = title === site.name ? `${site.name} — ${site.tagline}` : `${title} | ${site.name}`;
+const path = Astro.url.pathname;
+const services = await activeServices();
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+    />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/" aria-label={`${site.name} home`}>
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="6" fill="#24503f" />
+            <path d="M16 25V13M16 13c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5Zm0 4c0-3.2-2.4-5.2-5.6-5.2 0 3.2 2.4 5.2 5.6 5.2Z" fill="none" stroke="#f1f4ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          {site.name}
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            {nav.map((item) => (
+              <li><a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2>Services</h2>
+            <ul>
+              {services.map((s) => <li><a href={`/services/${s.id}/`}>{s.data.title}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h2>Company</h2>
+            <ul>
+              {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h2>Contact</h2>
+            <ul>
+              <li>{site.email}</li>
+              <li>{site.location.city}, {site.location.region}</li>
+            </ul>
+          </div>
+        </div>
+        <blockquote class="quote">
+          “I have great faith in a seed. Convince me that you have a seed there, and I am prepared to expect wonders.”
+          <cite>Henry David Thoreau, The Dispersion of Seeds</cite>
+        </blockquote>
+        <p class="fineprint">© {year} {site.legalName}. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

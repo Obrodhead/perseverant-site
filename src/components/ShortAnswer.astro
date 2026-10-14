@@ -1,0 +1,15 @@
+---
+// The quotable answer block. Word count is shown so writers can keep it in the
+// 40–70 word range that AI answers and featured snippets tend to lift.
+interface Props { text: string; updated: Date }
+import { isoDate, displayDate } from '../lib/content';
+const { text, updated } = Astro.props;
+const words = text.trim().split(/\s+/).length;
+---
+<section class="answer" aria-label="Short answer">
+  <div class="answer-label">
+    <span><b>■</b> The short answer · {words} words</span>
+    <span>Reviewed <time datetime={isoDate(updated)}>{displayDate(updated)}</time></span>
+  </div>
+  <p>{text}</p>
+</section>

@@ -1,0 +1,16 @@
+---
+import { site } from '../site.config';
+interface Props { heading?: string; text?: string }
+const {
+  heading = 'Find out what AI assistants say about your firm.',
+  text = 'Tell us about your practice. We will check how your firm shows up in Google and the major AI assistants and send back what we find.',
+} = Astro.props;
+const href = site.bookingUrl || '/contact/';
+---
+<section class="cta-band">
+  <div class="container">
+    <h2>{heading}</h2>
+    <p>{text}</p>
+    <a class="btn btn-primary" href={href}>{site.bookingUrl ? 'Book a call' : 'Get in touch'}</a>
+  </div>
+</section>
