@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, nav } from '../site.config';
-import { activeServices } from '../lib/content';
+import { activeServices, activeIndustries } from '../lib/content';
 
 interface Props {
   title: string;
@@ -16,6 +16,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 const fullTitle = title === site.name ? `${site.name} — ${site.tagline}` : `${title} | ${site.name}`;
 const path = Astro.url.pathname;
 const services = await activeServices();
+const industries = await activeIndustries();
 const year = new Date().getFullYear();
 ---
 <!doctype html>
@@ -78,6 +79,12 @@ const year = new Date().getFullYear();
             <h2>Services</h2>
             <ul>
               {services.map((s) => <li><a href={`/services/${s.id}/`}>{s.data.title}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h2>Industries</h2>
+            <ul>
+              {industries.map((s) => <li><a href={`/industries/${s.id}/`}>{s.data.label}</a></li>)}
             </ul>
           </div>
           <div>

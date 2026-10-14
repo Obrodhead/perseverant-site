@@ -5,6 +5,11 @@ export async function activeServices() {
   return all.sort((a, b) => a.data.order - b.data.order);
 }
 
+export async function activeIndustries() {
+  const all = await getCollection('industries', ({ data }) => data.status === 'active');
+  return all.sort((a, b) => a.data.order - b.data.order);
+}
+
 export async function publishedInsights() {
   const all = await getCollection('insights', ({ data }) => !data.draft);
   return all.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());

@@ -4,7 +4,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { site } from '../site.config';
 import { graph, person, breadcrumbs, ORG_ID, PERSON_ID } from '../lib/schema';
 
-const description = `About ${site.name}: a Cleveland-based marketing firm for financial advisors, founded by ${site.founder.name}.`;
+const description = `About ${site.name}: a Cleveland-based lead generation firm for high-value service businesses, founded by ${site.founder.name}.`;
 const schema = graph(
   { '@type': 'AboutPage', url: `${site.url}/about/`, name: `About ${site.name}`, about: { '@id': ORG_ID }, mainEntity: { '@id': PERSON_ID } },
   person(),
@@ -20,21 +20,21 @@ const schema = graph(
     <article class="prose" style="padding-bottom: 72px;">
       <!-- TODO (Owen): edit this in your own voice before launch. -->
       <p>
-        {site.name} was founded in {site.founded} by {site.founder.name}, who leads paid media and organic SEO
-        for financial advisory firms. He has run ads and content for as many as 15 accounts at once, built
-        seminar and webinar campaigns that convert attendees into clients, and set up the automation that
-        keeps follow-up consistent.
+        {site.name} was founded in {site.founded} by {site.founder.name}, who leads paid media and organic SEO.
+        He has run ads and content for as many as 15 accounts at once, including B2B campaigns, built seminar
+        and webinar campaigns that convert attendees into clients, and set up the automation that keeps
+        follow-up consistent.
       </p>
       <p>
-        Before focusing on advisors, he helped ecommerce brands grow on Shopify and Amazon. He also holds a
-        full stack web development certificate, which is why this firm builds its own pages, workflows and
-        tools instead of handing them off.
+        Earlier, he helped ecommerce brands grow on Shopify and Amazon. He also holds a full stack web
+        development certificate, which is why this firm builds its own pages, workflows and tools instead of
+        handing them off.
       </p>
 
       <h2>Why "Perseverant"</h2>
       <p>
-        Good marketing for advisors compounds. SEO pages gain trust over months, a campaign improves with
-        every test, and a referral network grows one relationship at a time. The name is a reminder that
+        Lead generation for high-value services compounds. Search pages gain trust over months, a campaign
+        improves with every test, and a client relationship can pay off for years. The name is a reminder that
         results come from steady, intentional work rather than one big push.
       </p>
       <p>
@@ -42,9 +42,11 @@ const schema = graph(
         to expect wonders from one. Every client engagement starts as a seed.
       </p>
 
-      <h2>Where we work</h2>
+      <h2>Who we work with</h2>
       <p>
-        We are based in {site.location.city}, Ohio, and work with advisory firms across the {site.areaServed}.
+        We focus on <a href="/industries/">businesses where one client is worth a lot</a>: law firms, elective
+        healthcare practices, home improvement companies, senior living providers, and recruiting and staffing
+        firms. We are based in {site.location.city}, Ohio, and work with clients across the {site.areaServed}.
       </p>
     </article>
   </div>

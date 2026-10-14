@@ -6,7 +6,7 @@ import { activeServices } from '../../lib/content';
 import { graph, breadcrumbs, ORG_ID } from '../../lib/schema';
 
 const services = await activeServices();
-const description = 'Marketing services for financial advisors and RIAs: AI search visibility, SEO, paid social, seminar and webinar campaigns, automation and custom tools.';
+const description = 'Lead generation services for high-value businesses: AI search visibility, SEO, paid social, seminar and webinar campaigns, automation and custom tools.';
 const schema = graph(
   {
     '@type': 'ItemList',
@@ -27,7 +27,7 @@ const schema = graph(
     <header class="page-head">
       <p class="crumbs"><a href="/">Home</a> / Services</p>
       <h1>Services</h1>
-      <p class="lede" style="color: var(--muted); font-size: var(--step-1); max-width: 52ch;">Modular services for advisory firms. Start with the one that fixes your biggest gap, then add the rest as you grow.</p>
+      <p class="lede" style="color: var(--muted); font-size: var(--step-1); max-width: 52ch;">Modular services for businesses where one client is worth a lot. Start with the one that fixes your biggest gap, then add the rest as you grow.</p>
     </header>
     <ul class="service-grid" style="margin-bottom: 72px;">
       {services.map((s, i) => (

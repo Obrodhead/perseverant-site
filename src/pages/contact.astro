@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { site } from '../site.config';
 import { graph, breadcrumbs, ORG_ID } from '../lib/schema';
 
-const description = `Contact ${site.name} about marketing for your advisory firm.`;
+const description = `Contact ${site.name} about lead generation for your business.`;
 const schema = graph(
   { '@type': 'ContactPage', url: `${site.url}/contact/`, name: `Contact ${site.name}`, about: { '@id': ORG_ID } },
   breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }]),
@@ -13,11 +13,11 @@ const schema = graph(
   <div class="container narrow">
     <header class="page-head">
       <p class="crumbs"><a href="/">Home</a> / Contact</p>
-      <h1>Let's talk about your practice.</h1>
+      <h1>Let's talk about your business.</h1>
     </header>
     <div class="prose" style="padding-bottom: 88px;">
       <p>
-        Send a short note about your firm, who you serve and what you want more of. We reply within one
+        Send a short note about your business, who you serve and what you want more of. We reply within one
         business day.
       </p>
       <div class="aside-box">
@@ -27,7 +27,7 @@ const schema = graph(
       {site.bookingUrl && (
         <p><a class="btn btn-primary" href={site.bookingUrl}>Book a call</a></p>
       )}
-      <p style="color: var(--muted);">Based in {site.location.city}, {site.location.region}. Working with advisory firms nationwide.</p>
+      <p style="color: var(--muted);">Based in {site.location.city}, {site.location.region}. Working with businesses nationwide.</p>
     </div>
   </div>
 </Base>

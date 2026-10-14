@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../site.config';
+import { activeIndustries } from '../../lib/content';
+import { graph, breadcrumbs, ORG_ID } from '../../lib/schema';
+
+const industries = await activeIndustries();
+const description = 'Lead generation for high-value service businesses: law firms, elective healthcare, home improvement, senior living, and recruiting and staffing firms.';
+const schema = graph(
+  {
+    '@type': 'CollectionPage',
+    url: `${site.url}/industries/`,
+    name: 'Industries',
+    about: { '@id': ORG_ID },
+    isPartOf: { '@id': `${site.url}/#website` },
+  },
+  {
+    '@type': 'ItemList',
+    name: `Industries served by ${site.name}`,
+    itemListElement: industries.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.url}/industries/${s.id}/`, name: s.data.title })),
+  },
+  breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Industries', path: '/industries/' }]),
+);
+---
+<Base title="Industries" description={description} schema={schema}>
+  <div class="container">
+    <header class="page-head">
+      <p class="crumbs"><a href="/">Home</a> / Industries</p>
+      <h1>Industries</h1>
+      <p style="color: var(--muted); font-size: var(--step-1); max-width: 54ch;">We focus on businesses where a single client is worth a lot and decisions are researched carefully. That is where AI search, strong follow-up and patient nurture pay off most.</p>
+    </header>
+    <ul class="service-grid" style="margin-bottom: 72px;">
+      {industries.map((s) => (
+        <li>
+          <a href={`/industries/${s.id}/`}>
+            <span class="num">{s.data.examples.slice(0, 3).join(' · ')}</span>
+            <h2 style="font-size: 1.2rem;">{s.data.label}</h2>
+            <p>{s.data.summary}</p>
+            <span class="more">Learn more →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <CtaBand />
+</Base>

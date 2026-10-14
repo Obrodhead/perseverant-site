@@ -30,8 +30,15 @@ Body rules:
 - Use `##` headings phrased as the sub-questions readers have.
 - Lead each section with its conclusion. Short paragraphs.
 - Cite specific facts with a named source and date. Never invent statistics, client results or quotes.
-- No performance claims, return promises, superlatives ("best advisor") or testimonials. Content
-  for advisors must stay reviewable under the SEC Marketing Rule (Rule 206(4)-1).
+- No guaranteed outcomes, unverifiable superlatives ("best lawyer in Ohio") or invented testimonials.
+  Legal content must stay reviewable under state bar advertising rules; healthcare content never
+  implies patient data use and avoids promising results.
+
+## Add, pause or retire an industry
+
+Industries live in `src/content/industries/`, one file each, with the same `status: active | paused`
+switch as services. `services:` lists the service file ids that fit, in priority order; those pages
+cross-link automatically. Never mention financial advisors or advisory firms anywhere on the site.
 
 ## Add, pause or retire a service
 

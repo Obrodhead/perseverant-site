@@ -36,4 +36,22 @@ const insights = defineCollection({
   }),
 });
 
-export const collections = { services, insights };
+const industries = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/industries' }),
+  schema: z.object({
+    title: z.string(),
+    // Short label for grids and nav, e.g. "Law firms"
+    label: z.string(),
+    summary: z.string().max(160),
+    answer: z.string(),
+    examples: z.array(z.string()).min(1),
+    // Service file ids that fit this industry best, in priority order
+    services: z.array(z.string()).default([]),
+    faqs: z.array(faq).default([]),
+    order: z.number().default(100),
+    status: z.enum(['active', 'paused']).default('active'),
+    updated: z.coerce.date(),
+  }),
+});
+
+export const collections = { services, insights, industries };

@@ -5,7 +5,7 @@ import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../site.config';
-import { activeServices, isoDate } from '../../lib/content';
+import { activeServices, activeIndustries, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
 
 export async function getStaticPaths() {
@@ -17,6 +17,7 @@ const { entry, others } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const path = `/services/${entry.id}/`;
+const industries = (await activeIndustries()).filter((i) => i.data.services.includes(entry.id));
 
 const schema = graph(
   {
@@ -69,6 +70,12 @@ const schema = graph(
           <h2>What you get</h2>
           <ul>{d.deliverables.map((x) => <li>{x}</li>)}</ul>
         </div>
+        {industries.length > 0 && (
+          <div class="aside-box">
+            <h2>Industries</h2>
+            <ul>{industries.map((i) => <li><a href={`/industries/${i.id}/`}>{i.data.label}</a></li>)}</ul>
+          </div>
+        )}
         <div class="aside-box">
           <h2>Related services</h2>
           <ul>{others.slice(0, 3).map((o) => <li><a href={`/services/${o.id}/`}>{o.data.title}</a></li>)}</ul>

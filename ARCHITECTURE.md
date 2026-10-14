@@ -1,8 +1,7 @@
 # Perseverant Digital — Site Architecture
 
-Working backwards from the goal: when a financial advisor asks Google, ChatGPT, Claude,
-Perplexity or Gemini a question about growing their practice, the answer cites
-perseverant.com. Every decision below serves that.
+Working backwards from the goal: when the owner of a high-value service business asks Google,
+ChatGPT, Claude, Perplexity or Gemini how to get more clients, the answer cites perseverant.com. Every decision below serves that.
 
 ## What AI search and Google need from a page
 
@@ -24,6 +23,8 @@ perseverant.com. Every decision below serves that.
 | `/` | Positioning, services, proof, CTA | `ProfessionalService`, `WebSite`, `Person` |
 | `/services/` | All active services | `ItemList`, `BreadcrumbList` |
 | `/services/{slug}/` | One service: answer, who it's for, deliverables, FAQ | `Service`, `FAQPage`, `BreadcrumbList` |
+| `/industries/` | All active industries | `CollectionPage`, `ItemList`, `BreadcrumbList` |
+| `/industries/{slug}/` | One niche: answer, who, matching services, FAQ | `Service`, `FAQPage`, `BreadcrumbList` |
 | `/insights/` | Articles index | `Blog`, `BreadcrumbList` |
 | `/insights/{slug}/` | Question-led article | `BlogPosting`, `FAQPage` (if FAQs), `BreadcrumbList` |
 | `/about/` | Founder, story, the name | `AboutPage`, `Person` |
@@ -35,12 +36,15 @@ perseverant.com. Every decision below serves that.
 
 - **services/** — `status: active | paused` lets you add, pause or retire an offering without
   touching layouts. Paused services drop out of nav, sitemap and llms.txt automatically.
+- **industries/** — the five niches, same `status` switch; each lists the services that fit.
 - **insights/** — question-led articles. `draft: true` keeps one out of the build.
 
 ## Positioning (v1)
 
-Growth marketing for financial advisors and RIAs, built for the AI search era. Services are
-modular so the offering can widen later without a redesign.
+Lead generation for high-value, high-lifetime-value service businesses, built for the AI search
+era. Five niches: law firms, elective healthcare, home improvement, senior living, and recruiting
+and staffing. Channels (services) and niches (industries) are separate collections, so either can
+change without a redesign.
 
 ## Stack
 

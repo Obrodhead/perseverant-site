@@ -26,14 +26,18 @@ export function organization() {
     },
     areaServed: { '@type': 'Country', name: site.areaServed },
     knowsAbout: [
-      'Financial advisor marketing',
+      'Lead generation',
       'Answer engine optimization',
       'Generative engine optimization',
       'Search engine optimization',
       'Meta advertising',
       'Seminar marketing',
       'Marketing automation',
-      'SEC Marketing Rule',
+      'Law firm marketing',
+      'Healthcare practice marketing',
+      'Home improvement marketing',
+      'Senior living marketing',
+      'Recruiting and staffing marketing',
     ],
     ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
   };
@@ -47,7 +51,7 @@ export function person() {
     jobTitle: site.founder.jobTitle,
     worksFor: { '@id': ORG_ID },
     url: `${site.url}/about/`,
-    knowsAbout: ['Paid media', 'SEO', 'AI search visibility', 'Financial advisor marketing', 'Web development'],
+    knowsAbout: ['Paid media', 'SEO', 'AI search visibility', 'Lead generation', 'Web development'],
     ...(site.founder.sameAs.length ? { sameAs: site.founder.sameAs } : {}),
   };
 }

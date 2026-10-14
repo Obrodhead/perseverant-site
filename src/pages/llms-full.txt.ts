@@ -1,12 +1,13 @@
 import type { APIRoute } from 'astro';
 import { site } from '../site.config';
-import { activeServices, publishedInsights, isoDate } from '../lib/content';
+import { activeServices, activeIndustries, publishedInsights, isoDate } from '../lib/content';
 
 const faqBlock = (faqs: { q: string; a: string }[]) =>
   faqs.length ? ['', '### Questions', '', ...faqs.flatMap((f) => [`**${f.q}**`, '', f.a, ''])] : [];
 
 export const GET: APIRoute = async () => {
   const services = await activeServices();
+  const industries = await activeIndustries();
   const posts = await publishedInsights();
 
   const out = [
@@ -31,6 +32,23 @@ export const GET: APIRoute = async () => {
       '**Deliverables:**',
       '',
       ...s.data.deliverables.map((x) => `- ${x}`),
+      '',
+      (s.body ?? '').trim(),
+      ...faqBlock(s.data.faqs),
+      '---',
+      '',
+    ]),
+    '# Industries',
+    '',
+    ...industries.flatMap((s) => [
+      `## ${s.data.title}`,
+      '',
+      `URL: ${site.url}/industries/${s.id}/  `,
+      `Last reviewed: ${isoDate(s.data.updated)}`,
+      '',
+      `**Short answer:** ${s.data.answer}`,
+      '',
+      `**Includes:** ${s.data.examples.join(', ')}`,
       '',
       (s.body ?? '').trim(),
       ...faqBlock(s.data.faqs),

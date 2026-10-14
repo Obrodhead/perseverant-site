@@ -2,26 +2,49 @@
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../site.config';
-import { activeServices, publishedInsights, displayDate, isoDate } from '../lib/content';
+import { activeServices, activeIndustries, publishedInsights, displayDate, isoDate } from '../lib/content';
 import { graph, organization, person, website } from '../lib/schema';
 
 const services = await activeServices();
+const industries = await activeIndustries();
 const insights = (await publishedInsights()).slice(0, 3);
 const schema = graph(organization(), person(), website());
 ---
 <Base title={site.name} description={site.description} schema={schema}>
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Marketing for financial advisors and RIAs</p>
-      <h1>Be the firm AI assistants recommend.</h1>
+      <p class="eyebrow">Lead generation for high-value services</p>
+      <h1>Be the name AI assistants recommend.</h1>
       <p class="lede">
-        Prospects now ask ChatGPT, Claude, Perplexity and Google who to trust with their money.
-        {site.name} gets advisory firms into those answers, then turns the attention into booked meetings.
+        Your next client is asking ChatGPT, Claude, Perplexity and Google who to hire.
+        {site.name} gets your business into those answers, then turns the attention into booked appointments.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href={site.bookingUrl || '/contact/'}>{site.bookingUrl ? 'Book a call' : 'Get in touch'}</a>
-        <a class="btn btn-secondary" href="/services/">See services</a>
+        <a class="btn btn-secondary" href="/industries/">See industries</a>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Industries</p>
+        <h2>Built for businesses where one client is worth a lot.</h2>
+        <p>High-value decisions are researched carefully. We focus on industries where earning trust early and following up well pays off for years.</p>
+      </div>
+      <ul class="service-grid">
+        {industries.map((s) => (
+          <li>
+            <a href={`/industries/${s.id}/`}>
+              <span class="num">{s.data.examples.slice(0, 3).join(' · ')}</span>
+              <h3>{s.data.label}</h3>
+              <p>{s.data.summary}</p>
+              <span class="more">Learn more →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -30,7 +53,7 @@ const schema = graph(organization(), person(), website());
       <div class="section-head">
         <p class="eyebrow">Services</p>
         <h2>Every channel a prospect uses before they call you.</h2>
-        <p>Pick one or combine them. Each service is built for advisory firms and written with compliance review in mind.</p>
+        <p>Pick one or combine them. Each service is measured by booked appointments, not clicks.</p>
       </div>
       <ul class="service-grid">
         {services.map((s, i) => (
@@ -55,16 +78,16 @@ const schema = graph(organization(), person(), website());
       </div>
       <div class="principles">
         <div>
-          <h3>Advisor marketing is the specialty</h3>
-          <p>Our founder has led paid media and SEO for many financial advisor accounts at once, from seminar campaigns to firm-wide SEO.</p>
+          <h3>Lead generation is the specialty</h3>
+          <p>Our founder has run paid media and SEO for as many as 15 accounts at once, from event campaigns to search programs, and earlier helped ecommerce brands grow on Shopify and Amazon.</p>
         </div>
         <div>
-          <h3>Measured by meetings</h3>
-          <p>Clicks and rankings are only useful if they lead to conversations. We track every campaign to booked and held appointments.</p>
+          <h3>Measured by appointments</h3>
+          <p>Clicks and rankings only matter if they lead to conversations. We track every campaign to booked and held appointments, then to revenue.</p>
         </div>
         <div>
-          <h3>Compliance-aware from the first draft</h3>
-          <p>Copy is written for review under the SEC Marketing Rule, so your compliance team edits instead of rewriting.</p>
+          <h3>Ready for regulated industries</h3>
+          <p>Legal and healthcare marketing have rules. Copy is drafted for your review, with no outcome guarantees and no patient data in ad platforms.</p>
         </div>
         <div>
           <h3>Marketer who builds</h3>
@@ -79,7 +102,7 @@ const schema = graph(organization(), person(), website());
       <div class="container narrow">
         <div class="section-head">
           <p class="eyebrow">Insights</p>
-          <h2>Straight answers on advisor marketing.</h2>
+          <h2>Straight answers on lead generation.</h2>
         </div>
         <ul class="post-list">
           {insights.map((p) => (

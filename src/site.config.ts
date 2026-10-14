@@ -6,9 +6,9 @@ export const site = {
   name: 'Perseverant Digital',
   legalName: 'Perseverant Digital LLC',
   url: 'https://perseverant.com',
-  tagline: 'Growth marketing for financial advisors, built for AI search.',
+  tagline: 'Lead generation for high-value services, built for AI search.',
   description:
-    'Perseverant Digital is a Cleveland-based marketing firm that helps financial advisors and RIAs win clients through AI search visibility, SEO, paid social, seminar and webinar campaigns, and marketing automation.',
+    'Perseverant Digital is a Cleveland-based lead generation firm for businesses where one client is worth a lot: law firms, elective healthcare practices, home improvement companies, senior living providers, and recruiting and staffing firms. We combine AI search visibility, SEO, paid social, event campaigns and automation to turn attention into booked appointments.',
   email: 'hello@perseverant.com', // TODO: confirm once Google Workspace is set up
   bookingUrl: '', // TODO: paste a scheduling link (Calendly, GoHighLevel, etc.) to show a booking button
   location: { city: 'Cleveland', region: 'OH', country: 'US' },
@@ -28,6 +28,7 @@ export const site = {
 
 export const nav = [
   { href: '/services/', label: 'Services' },
+  { href: '/industries/', label: 'Industries' },
   { href: '/insights/', label: 'Insights' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },

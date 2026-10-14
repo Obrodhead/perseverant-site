@@ -5,7 +5,7 @@ import { publishedInsights, displayDate, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, ORG_ID, PERSON_ID } from '../../lib/schema';
 
 const posts = await publishedInsights();
-const description = 'Straight answers on marketing for financial advisors: AI search, SEO, paid social, events, automation and compliance.';
+const description = 'Straight answers on lead generation for high-value service businesses: AI search, SEO, paid social, events, automation and measurement.';
 const schema = graph(
   {
     '@type': 'Blog',
@@ -29,7 +29,7 @@ const schema = graph(
     <header class="page-head">
       <p class="crumbs"><a href="/">Home</a> / Insights</p>
       <h1>Insights</h1>
-      <p style="color: var(--muted); font-size: var(--step-1); max-width: 52ch;">Question-led articles for advisors who want marketing that works and stays compliant.</p>
+      <p style="color: var(--muted); font-size: var(--step-1); max-width: 52ch;">Question-led articles for businesses that want lead generation they can measure.</p>
     </header>
     <ul class="post-list" style="margin-bottom: 80px;">
       {posts.map((p) => (
