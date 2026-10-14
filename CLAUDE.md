@@ -1,6 +1,6 @@
 # Working on perseverantdigital.com
 
-Instructions for Claude (and anyone else) editing this site. Read ARCHITECTURE.md for the why.
+Instructions for Claude (and anyone else) editing this site. Read ROADMAP.md for what is next and ARCHITECTURE.md for the why. Update ROADMAP.md when you finish or discover work.
 
 ## Publishing workflow
 

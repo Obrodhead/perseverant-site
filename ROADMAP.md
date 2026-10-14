@@ -1,0 +1,36 @@
+# Roadmap
+
+What's next for perseverantdigital.com. Claude: read this first, work from the top, and move items to Done with the date when finished.
+
+## Before sharing the site
+- [ ] Add Owen's personal LinkedIn URL to `founder.sameAs` and the company LinkedIn page to `sameAs` in `src/site.config.ts`
+- [ ] Add a booking link (`bookingUrl`) so "Book a call" buttons appear
+- [ ] Confirm the founder name display ("Owen Brodhead") and remove its TODO
+- [ ] Owen reviews the About page copy for voice
+- [ ] Add a social share image (Open Graph) so links preview well on LinkedIn and texts
+- [ ] Finish Microsoft 365 email DNS records in Cloudflare (MX, SPF, autodiscover, DKIM) and update DMARC
+
+## Launch
+- [ ] Verify the site in Google Search Console; submit `/sitemap-index.xml`
+- [ ] Verify in Bing Webmaster Tools (feeds Copilot and other AI products); submit the sitemap
+- [ ] Turn on Cloudflare Web Analytics (free, no cookie banner needed)
+- [ ] Run Google's Rich Results Test on the home, a service, an industry and an article page
+- [ ] Create a Google Business Profile for Perseverant Digital (service-area business) with matching name and description
+
+## Content engine
+- [ ] Publish two question-led insights per month, rotating across the five industries
+- [ ] Add industry-by-service pages for the strongest combinations (for example "AI search visibility for law firms")
+- [ ] Turn each podcast appearance and new idea into an insight that credits Search Essence Optimization
+- [ ] Build a monthly check of how ChatGPT, Claude, Perplexity and Google AI Overviews answer target questions, and log results
+
+## Later
+- [ ] Contact form that feeds GoHighLevel (server-side, no content-rendering JS)
+- [ ] Case studies once clients approve them (real results only)
+- [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
+
+## Done
+- 2026-10-14: Site built and launched on perseverantdigital.com (Astro, Cloudflare, GitHub auto-deploy)
+- 2026-10-14: Repositioned around five high-LTV niches; industries pages added
+- 2026-10-14: Contact email set to connect@perseverantdigital.com
+- 2026-10-14: About page rewritten around Search Essence Optimization; founder bio in schema and llms.txt
+- 2026-10-14: Thoreau and Marcus Aurelius quotes paired to each page
