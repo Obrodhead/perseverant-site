@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { site } from '../site.config';
-import { activeServices, activeIndustries, publishedInsights } from '../lib/content';
+import { activeServices, activeIndustries, activeLocations, placeSlug, publishedInsights } from '../lib/content';
 
 // llms.txt: a concise, Markdown map of the site for AI assistants (llmstxt.org format).
 // Generated from the same content files as the pages, so it can never go stale.
@@ -8,6 +8,7 @@ export const GET: APIRoute = async () => {
   const services = await activeServices();
   const industries = await activeIndustries();
   const posts = await publishedInsights();
+  const locations = await activeLocations();
 
   const out = [
     `# ${site.name}`,
@@ -26,6 +27,9 @@ export const GET: APIRoute = async () => {
     '',
     ...industries.map((s) => `- [${s.data.title}](${site.url}/industries/${s.id}/): ${s.data.summary}`),
     '',
+    ...(locations.length
+      ? ['## Local markets', '', ...locations.map((l) => `- [${l.data.title}](${site.url}/industries/${l.data.industry}/${placeSlug(l.id)}/): ${l.data.summary}`), '']
+      : []),
     '## Insights',
     '',
     ...posts.map((p) => `- [${p.data.title}](${site.url}/insights/${p.id}/): ${p.data.description}`),

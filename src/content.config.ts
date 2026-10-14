@@ -54,4 +54,24 @@ const industries = defineCollection({
   }),
 });
 
-export const collections = { services, insights, industries };
+// Local market pages for an industry, served at /industries/{industry}/{place}/.
+// File path: src/content/locations/{industry id}/{place slug}.md
+const locations = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/locations' }),
+  schema: z.object({
+    title: z.string(),
+    // Place name for nav and breadcrumbs, e.g. "Palm Beach County"
+    label: z.string(),
+    // Industry file id this market belongs to
+    industry: z.string(),
+    // Used for areaServed in schema, e.g. "Palm Beach County, Florida"
+    region: z.string(),
+    summary: z.string().max(160),
+    answer: z.string(),
+    faqs: z.array(faq).default([]),
+    status: z.enum(['active', 'paused']).default('active'),
+    updated: z.coerce.date(),
+  }),
+});
+
+export const collections = { services, insights, industries, locations };

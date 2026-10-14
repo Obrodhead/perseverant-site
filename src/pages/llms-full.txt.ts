@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { site } from '../site.config';
-import { activeServices, activeIndustries, publishedInsights, isoDate } from '../lib/content';
+import { activeServices, activeIndustries, activeLocations, placeSlug, publishedInsights, isoDate } from '../lib/content';
 
 const faqBlock = (faqs: { q: string; a: string }[]) =>
   faqs.length ? ['', '### Questions', '', ...faqs.flatMap((f) => [`**${f.q}**`, '', f.a, ''])] : [];
@@ -9,6 +9,7 @@ export const GET: APIRoute = async () => {
   const services = await activeServices();
   const industries = await activeIndustries();
   const posts = await publishedInsights();
+  const locations = await activeLocations();
 
   const out = [
     `# ${site.name} — full text`,
@@ -52,6 +53,21 @@ export const GET: APIRoute = async () => {
       '',
       (s.body ?? '').trim(),
       ...faqBlock(s.data.faqs),
+      '---',
+      '',
+    ]),
+    ...(locations.length ? ['# Local markets', ''] : []),
+    ...locations.flatMap((l) => [
+      `## ${l.data.title}`,
+      '',
+      `URL: ${site.url}/industries/${l.data.industry}/${placeSlug(l.id)}/  `,
+      `Area served: ${l.data.region}  `,
+      `Last reviewed: ${isoDate(l.data.updated)}`,
+      '',
+      `**Short answer:** ${l.data.answer}`,
+      '',
+      (l.body ?? '').trim(),
+      ...faqBlock(l.data.faqs),
       '---',
       '',
     ]),

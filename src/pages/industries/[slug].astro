@@ -5,7 +5,7 @@ import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../site.config';
-import { activeIndustries, isoDate } from '../../lib/content';
+import { activeIndustries, activeLocations, placeSlug, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
 
 export async function getStaticPaths() {
@@ -19,6 +19,7 @@ const d = entry.data;
 const path = `/industries/${entry.id}/`;
 const services = (await Promise.all(d.services.map((id) => getEntry('services', id))))
   .filter((s): s is NonNullable<typeof s> => Boolean(s) && s!.data.status === 'active');
+const markets = await activeLocations(entry.id);
 
 const schema = graph(
   {
@@ -71,6 +72,12 @@ const schema = graph(
           <div class="aside-box">
             <h2>Services that fit</h2>
             <ul>{services.map((s) => <li><a href={`/services/${s.id}/`}>{s.data.title}</a></li>)}</ul>
+          </div>
+        )}
+        {markets.length > 0 && (
+          <div class="aside-box">
+            <h2>Local markets</h2>
+            <ul>{markets.map((m) => <li><a href={`${path}${placeSlug(m.id)}/`}>{m.data.label}</a></li>)}</ul>
           </div>
         )}
         <div class="aside-box">

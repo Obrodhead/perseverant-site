@@ -10,6 +10,15 @@ export async function activeIndustries() {
   return all.sort((a, b) => a.data.order - b.data.order);
 }
 
+export async function activeLocations(industry?: string) {
+  const all = await getCollection('locations', ({ data }) => data.status === 'active' && (!industry || data.industry === industry));
+  return all.sort((a, b) => a.data.label.localeCompare(b.data.label));
+}
+
+export function placeSlug(id: string) {
+  return id.split('/').pop()!;
+}
+
 export async function publishedInsights() {
   const all = await getCollection('insights', ({ data }) => !data.draft);
   return all.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());

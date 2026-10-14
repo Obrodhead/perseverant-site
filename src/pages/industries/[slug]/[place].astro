@@ -1,0 +1,93 @@
+---
+import { render, getEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import ShortAnswer from '../../../components/ShortAnswer.astro';
+import Faq from '../../../components/Faq.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { site } from '../../../site.config';
+import { activeLocations, placeSlug, isoDate } from '../../../lib/content';
+import { graph, breadcrumbs, faqPage, ORG_ID } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const locations = await activeLocations();
+  const paths = [];
+  for (const entry of locations) {
+    const industry = await getEntry('industries', entry.data.industry);
+    if (!industry || industry.data.status !== 'active') continue;
+    paths.push({ params: { slug: industry.id, place: placeSlug(entry.id) }, props: { entry, industry } });
+  }
+  return paths;
+}
+
+const { entry, industry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const industryPath = `/industries/${industry.id}/`;
+const path = `${industryPath}${placeSlug(entry.id)}/`;
+const services = (await Promise.all(industry.data.services.map((id) => getEntry('services', id))))
+  .filter((s): s is NonNullable<typeof s> => Boolean(s) && s!.data.status === 'active');
+
+const schema = graph(
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${path}#service`,
+    name: d.title,
+    description: d.answer,
+    serviceType: 'Lead generation',
+    provider: { '@id': ORG_ID },
+    areaServed: { '@type': 'AdministrativeArea', name: d.region },
+    audience: { '@type': 'BusinessAudience', name: industry.data.label, audienceType: industry.data.examples.join(', ') },
+    isRelatedTo: { '@id': `${site.url}${industryPath}#service` },
+    url: `${site.url}${path}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${path}`,
+    url: `${site.url}${path}`,
+    name: d.title,
+    description: d.summary,
+    dateModified: isoDate(d.updated),
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}${path}#service` },
+  },
+  faqPage(d.faqs, path),
+  breadcrumbs([
+    { name: 'Home', path: '/' },
+    { name: 'Industries', path: '/industries/' },
+    { name: industry.data.label, path: industryPath },
+    { name: d.label, path },
+  ]),
+);
+---
+<Base title={d.title} description={d.summary} schema={schema}>
+  <div class="container">
+    <header class="page-head narrow" style="padding-inline: 0;">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/industries/">Industries</a> / <a href={industryPath}>{industry.data.label}</a></p>
+      <h1>{d.title}</h1>
+    </header>
+    <div class="split">
+      <article class="prose">
+        <ShortAnswer text={d.answer} updated={d.updated} />
+        <Content />
+        <Faq faqs={d.faqs} />
+      </article>
+      <aside class="aside">
+        <div class="aside-box">
+          <h2>Who we work with</h2>
+          <ul>{industry.data.examples.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        {services.length > 0 && (
+          <div class="aside-box">
+            <h2>Services that fit</h2>
+            <ul>{services.map((s) => <li><a href={`/services/${s.id}/`}>{s.data.title}</a></li>)}</ul>
+          </div>
+        )}
+        <div class="aside-box">
+          <h2>Industry overview</h2>
+          <ul><li><a href={industryPath}>{industry.data.title}</a></li></ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <CtaBand />
+</Base>
