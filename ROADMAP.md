@@ -7,6 +7,9 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Add a booking link (`bookingUrl`) so "Book a call" buttons appear
 - [ ] Confirm the founder name display ("Owen Brodhead") and remove its TODO
 - [ ] Owen reviews the About page copy for voice
+- [ ] Shorten the homepage meta description (365 chars; add a separate SEO description under 160 in `src/site.config.ts`)
+- [ ] Add shorter title tags (~60 chars) for the homepage, insights and industry pages; keep full question titles as H1s
+- [ ] Strengthen the About title and the Contact meta description
 - [ ] Add a social share image (Open Graph) so links preview well on LinkedIn and texts
 - [ ] Finish Microsoft 365 email DNS records in Cloudflare (MX, SPF, autodiscover, DKIM) and update DMARC
 
