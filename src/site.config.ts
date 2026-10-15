@@ -14,10 +14,9 @@ export const site = {
   // Lead forms. Plain HTML forms (no JavaScript) post to Web3Forms, which emails every
   // submission to the inbox the access key was created with (connect@perseverantdigital.com).
   // Each email says which form and which page it came from. The key is public by design.
-  // TODO: create a free key at web3forms.com with connect@perseverantdigital.com and paste it here.
-  // Until then, forms fall back to a pre-addressed email link so no lead is lost.
+  // If the key is ever removed, forms fall back to a pre-addressed email link.
   leads: {
-    web3formsKey: '',
+    web3formsKey: '001bfb3f-9795-400a-837c-9b0cd7175655',
     endpoint: 'https://api.web3forms.com/submit',
     callMinutes: 25,
   },
