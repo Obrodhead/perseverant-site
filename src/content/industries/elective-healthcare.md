@@ -12,10 +12,10 @@ examples:
 services: [ai-search-visibility, paid-social, seo, marketing-automation]
 order: 2
 status: active
-updated: 2026-10-14
+updated: 2026-10-15
 faqs:
-  - q: What makes elective procedures a strong lead generation niche?
-    a: Patients pay directly for high-value procedures and often return for related treatments, so each new patient can be worth far more than the first visit. That supports a healthy cost per consultation.
+  - q: How long do patients research before booking a consultation?
+    a: Often for weeks. They compare practices, read reviews, watch videos and ask AI assistants about cost and recovery. The practice that answers those questions clearly, and follows up kindly when they are ready, tends to earn the consultation.
   - q: How do you handle patient privacy in marketing?
     a: We keep protected health information out of ad platforms and analytics, follow HIPAA-conscious practices in forms and tracking, and work within each ad platform's policies on health-related targeting.
 ---

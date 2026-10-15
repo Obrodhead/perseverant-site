@@ -6,7 +6,7 @@ import { activeServices } from '../../lib/content';
 import { graph, breadcrumbs, ORG_ID } from '../../lib/schema';
 
 const services = await activeServices();
-const description = 'Lead generation services for high-value businesses: AI search visibility, SEO, paid social, seminar and webinar campaigns, automation and custom tools.';
+const description = 'Lead generation services: AI search visibility, SEO, Meta lead ads, seminars and webinars, CRM follow-up and custom tools, measured by booked appointments.';
 const schema = graph(
   {
     '@type': 'ItemList',
@@ -22,12 +22,13 @@ const schema = graph(
   { '@type': 'CollectionPage', url: `${site.url}/services/`, name: 'Services', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': ORG_ID } },
 );
 ---
-<Base title="Services" description={description} schema={schema}>
+<Base title="Lead Generation Services" description={description} schema={schema}>
   <div class="container">
     <header class="page-head">
       <p class="crumbs"><a href="/">Home</a> / Services</p>
-      <h1>Services</h1>
-      <p class="lede" style="color: var(--muted); font-size: var(--step-1); max-width: 52ch;">Modular services for businesses where one client is worth a lot. Start with the one that fixes your biggest gap, then add the rest as you grow.</p>
+      <p class="eyebrow">Services</p>
+      <h1>Grassroots growth that draws your people, sharpened by precise paid media.</h1>
+      <p class="lede" style="color: var(--muted); font-size: var(--step-1); max-width: 56ch;">The foundation is earned: clear answers in Google and AI search, a strong local presence, events and follow-up that feel human. Paid media then reaches the right people at the right moment. Start with the piece that closes your biggest gap, and measure everything by booked appointments.</p>
     </header>
     <ul class="service-grid" style="margin-bottom: 72px;">
       {services.map((s, i) => (

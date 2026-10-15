@@ -12,10 +12,10 @@ examples:
 services: [paid-social, ai-search-visibility, seo, marketing-automation]
 order: 5
 status: active
-updated: 2026-10-14
+updated: 2026-10-15
 faqs:
-  - q: Why does client lifetime value matter so much for recruiting firms?
-    a: An employer who trusts your firm can send search after search for years. That repeat business means a single new client relationship can be worth many placements, which justifies investing in steady lead generation.
+  - q: How do recruiting firms win employer clients who stay?
+    a: By showing they understand the roles and industries they fill before the first meeting. Hiring managers choose partners who know their market, respond quickly and deliver on hard roles. Trust built that way tends to bring repeat searches for years.
   - q: Should a recruiting firm market to candidates or employers?
     a: Both, but they need separate messages and campaigns. We focus lead generation on the employer side, where client relationships drive revenue, while keeping your candidate-facing pages strong.
 ---

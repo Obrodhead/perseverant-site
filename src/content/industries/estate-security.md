@@ -13,7 +13,7 @@ examples:
 services: [ai-search-visibility, seo, seminar-webinar-campaigns, marketing-automation, custom-tools, paid-social]
 order: 6
 status: active
-updated: 2026-10-14
+updated: 2026-10-15
 faqs:
   - q: How do you market a business whose clients want privacy?
     a: Most buyers never post about their security, and most providers prefer it that way. We publish plain educational answers about assessments, safe rooms and hardening, and build referral paths with architects, builders, estate managers, CPAs and luxury agents. We never publish client names, addresses or project details.
@@ -21,7 +21,7 @@ faqs:
     a: An assessment maps how a home, its staff, its travel and its online footprint fit together, then recommends changes in order. ASIS International reported in April 2025 that a professional threat assessment typically costs $25,000 to $50,000. It is also the natural first step, because hardening, safe rooms and protection plans all depend on it.
 ---
 
-## Why estate security is a high-value niche
+## Why this work runs on trust and discretion
 
 A single engagement can include an assessment, design work, a safe room and ongoing protection,
 and the relationship often lasts as long as the family owns the home. Demand has grown. ASIS

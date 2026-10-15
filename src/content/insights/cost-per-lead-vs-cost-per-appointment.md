@@ -13,7 +13,7 @@ faqs:
 
 ## Why cost per lead misleads
 
-Cost per lead treats every inquiry as equal. In businesses where one client is worth a lot,
+Cost per lead treats every inquiry as equal. In businesses where clients research carefully before they commit,
 such as a law firm, a cosmetic surgery practice or a roofing company, the difference between
 a serious prospect and a tire-kicker is enormous. Optimizing for cheap leads often means
 optimizing for the wrong people.
