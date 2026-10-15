@@ -142,7 +142,7 @@ p { margin: 0; }
 .crumbs a { color: var(--muted); }
 
 /* Prose */
-.prose { display: grid; gap: 1.1em; }
+.prose { display: grid; gap: 1.1em; align-content: start; }
 .prose h2 { font-size: var(--step-2); margin-top: 0.9em; }
 .prose h3 { margin-top: 0.6em; }
 .prose ul, .prose ol { margin: 0; padding-left: 1.3em; display: grid; gap: 0.4em; }
