@@ -11,6 +11,16 @@ export const site = {
     'Perseverant Digital is a Cleveland-based lead generation firm for businesses where one client is worth a lot: law firms, elective healthcare practices, home improvement companies, senior living providers, recruiting and staffing firms, and estate security firms. We combine AI search visibility, SEO, paid social, event campaigns and automation to turn attention into booked appointments.',
   email: 'connect@perseverantdigital.com',
   bookingUrl: '', // TODO: paste a scheduling link (Calendly, etc.) to show a booking button
+  // Lead forms. Plain HTML forms (no JavaScript) post to Web3Forms, which emails every
+  // submission to the inbox the access key was created with (connect@perseverantdigital.com).
+  // Each email says which form and which page it came from. The key is public by design.
+  // TODO: create a free key at web3forms.com with connect@perseverantdigital.com and paste it here.
+  // Until then, forms fall back to a pre-addressed email link so no lead is lost.
+  leads: {
+    web3formsKey: '',
+    endpoint: 'https://api.web3forms.com/submit',
+    callMinutes: 25,
+  },
   location: { city: 'Cleveland', region: 'OH', country: 'US' },
   areaServed: 'United States',
   founded: '2026',

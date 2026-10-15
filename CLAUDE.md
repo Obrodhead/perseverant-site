@@ -46,6 +46,14 @@ cross-link automatically. Never mention financial advisors or advisory firms any
 - Pause: set `status: paused`. It disappears from nav, sitemap and llms.txt; the file stays.
 - Retire: delete the file, and add a redirect in `public/_redirects` (`/services/old/ /services/ 301`).
 
+## Lead magnet guides and forms
+
+One guide per service in `src/content/guides/{service id}.md` (schema in `src/content.config.ts`).
+The service page shows the offer and form; the full guide is at `/guides/{id}/`, noindex and left out of
+the sitemap and llms.txt. Facts in guides come only from `docs/research/guide-spec.md` with source and date.
+Forms are plain HTML (`src/components/LeadForm.astro`) posting to Web3Forms with hidden `form` and `page`
+fields, so every lead email says where it came from. Settings live in `leads` in `src/site.config.ts`.
+
 ## Entity consistency
 
 Brand name, legal name, founder, location and description live only in `src/site.config.ts`.

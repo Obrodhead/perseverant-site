@@ -1,16 +1,19 @@
 ---
 import { site } from '../site.config';
-interface Props { heading?: string; text?: string }
+interface Props { heading?: string; text?: string; href?: string; label?: string }
 const {
   heading = 'Find out what AI assistants say about your business.',
   text = 'Tell us about your business. We will check how you show up in Google and the major AI assistants and send back what we find.',
+  href: hrefProp,
+  label: labelProp,
 } = Astro.props;
-const href = site.bookingUrl || '/contact/';
+const href = hrefProp || site.bookingUrl || '/contact/';
+const label = labelProp || (site.bookingUrl ? 'Book a call' : 'Get in touch');
 ---
 <section class="cta-band">
   <div class="container">
     <h2>{heading}</h2>
     <p>{text}</p>
-    <a class="btn btn-primary" href={href}>{site.bookingUrl ? 'Book a call' : 'Get in touch'}</a>
+    <a class="btn btn-primary" href={href}>{label}</a>
   </div>
 </section>

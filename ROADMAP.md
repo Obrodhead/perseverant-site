@@ -3,6 +3,8 @@
 What's next for perseverantdigital.com. Claude: read this first, work from the top, and move items to Done with the date when finished.
 
 ## Before sharing the site
+- [ ] Create a free Web3Forms access key with connect@perseverantdigital.com and paste it into `leads.web3formsKey` in `src/site.config.ts` (until then every form falls back to a pre-addressed email link)
+- [ ] Submit one test lead per form type (guide, call, contact) and confirm the email arrives with form and page
 - [ ] Add Owen's personal LinkedIn URL to `founder.sameAs` and the company LinkedIn page to `sameAs` in `src/site.config.ts`
 - [ ] Add a booking link (`bookingUrl`) so "Book a call" buttons appear
 - [ ] Confirm the founder name display ("Owen Brodhead") and remove its TODO
@@ -29,11 +31,14 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 ## Later
 - [ ] Validate the estate security niche: keyword volumes and CPCs (safe room, panic room, residential security assessment) for Palm Beach County; check the local pack and AI answers; talk to 5 local architects or estate managers
 - [ ] Consider a second estate security market page (Greater Los Angeles: wildfire rebuild hardening)
-- [ ] Contact form that feeds the CRM (server-side, no content-rendering JS)
+- [ ] Move lead forms from Web3Forms to the CRM (or a Cloudflare Worker) once a CRM is chosen; keep the `form` and `page` fields
+- [ ] Add an automated reply email that sends the guide link (Web3Forms autoresponder is a paid feature, or do it in the CRM)
+- [ ] Owen reviews the six guides for voice; legal and healthcare examples reviewed before running ads to them
 - [ ] Case studies once clients approve them (real results only)
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-15: Six lead magnet guides, one per service page (`src/content/guides/`, served at /guides/{id}/, noindex), with a no-JS request form on each service page, a 25-minute exploration call form at the end of each guide, a contact page form and /thanks/. Every lead email names the form and page. Research in `docs/research/`.
 - 2026-10-14: Site built and launched on perseverantdigital.com (Astro, Cloudflare, GitHub auto-deploy)
 - 2026-10-14: Repositioned around five high-LTV niches; industries pages added
 - 2026-10-14: Contact email set to connect@perseverantdigital.com

@@ -183,3 +183,54 @@ p { margin: 0; }
 .skip:focus { left: 16px; top: 16px; background: var(--paper); padding: 8px 12px; z-index: 10; }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* Lead magnet offer on service pages */
+.guide-offer { margin-top: 1.4em; border: 1px solid var(--line); border-top: 3px solid var(--seed); background: var(--panel); padding: clamp(20px, 4vw, 32px); border-radius: 4px; display: grid; gap: 12px; scroll-margin-top: 24px; }
+.guide-offer h2 { margin-top: 0; }
+.guide-hook { font-size: 1.12rem; color: var(--ink); }
+.guide-offer-grid { display: grid; gap: 24px; margin-top: 6px; }
+.guide-offer-grid h3 { font-size: 1rem; font-family: var(--mono); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.aside-guide { border-top: 3px solid var(--seed); }
+.aside-guide .btn { justify-self: start; }
+
+/* Forms (plain HTML, no JavaScript) */
+.lead-form { display: grid; gap: 14px; min-width: 0; }
+.lead-form label { display: grid; gap: 6px; font-family: var(--display); font-size: 0.95rem; font-weight: 600; min-width: 0; }
+.lead-form .opt { font-weight: 400; color: var(--muted); }
+.lead-form input[type='text'], .lead-form input[type='email'], .lead-form input[type='tel'], .lead-form select, .lead-form textarea {
+  width: 100%; font: inherit; font-family: var(--body); font-weight: 400; font-size: 1rem; color: var(--ink);
+  background: #fff; border: 1px solid #b9c2b5; border-radius: 4px; padding: 10px 12px; min-height: 44px;
+}
+.lead-form textarea { resize: vertical; }
+.lead-form input:focus-visible, .lead-form select:focus-visible, .lead-form textarea:focus-visible { outline: 2px solid var(--pine); outline-offset: 1px; }
+.field-row { display: grid; gap: 14px; }
+@media (min-width: 640px) { .field-row { grid-template-columns: 1fr 1fr; } }
+.lead-form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-family: var(--body); }
+.lead-form .check input { margin-top: 0.3em; width: 18px; height: 18px; flex: none; accent-color: var(--pine); }
+.lead-form .btn { justify-self: start; cursor: pointer; }
+.form-note { font-size: 0.88rem; color: var(--muted); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* Guide pages */
+.guide .guide-lede { font-size: var(--step-1); line-height: 1.5; color: var(--muted); max-width: 52ch; }
+.guide-tools { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.guide-body table { width: 100%; border-collapse: collapse; font-size: 0.96rem; display: block; overflow-x: auto; }
+.guide-body th, .guide-body td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.guide-body th { background: var(--panel); font-family: var(--display); font-weight: 600; }
+.guide-body blockquote { margin: 0; border-left: 3px solid var(--seed); background: var(--panel); padding: 14px 18px; border-radius: 0 4px 4px 0; display: grid; gap: 0.6em; }
+.guide-body li:has(> input[type='checkbox']) { list-style: none; margin-left: -1.3em; }
+.guide-body input[type='checkbox'] { width: 16px; height: 16px; margin-right: 8px; vertical-align: -2px; accent-color: var(--pine); }
+.guide-body hr { border: 0; border-top: 1px solid var(--line); margin: 0.6em 0; }
+.guide-call { margin-block: 48px 88px; border: 1px solid var(--line); border-top: 3px solid var(--pine); background: var(--panel); padding: clamp(20px, 4vw, 32px); border-radius: 4px; display: grid; gap: 14px; scroll-margin-top: 24px; }
+.guide-call ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+
+@media print {
+  .site-header, .site-footer, .no-print, .skip { display: none !important; }
+  body { background: #fff; font-size: 11pt; }
+  .guide-body a { color: inherit; }
+  .guide-body a[href^='http']::after { content: ' (' attr(href) ')'; font-size: 0.8em; color: #555; }
+  .guide-body h2 { break-after: avoid; }
+  .guide-body table, .guide-body blockquote { break-inside: avoid; }
+}
+.lead-form .lbl .opt { font-weight: 400; }
+.guide h1 { font-size: var(--step-3); }

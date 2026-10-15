@@ -15,6 +15,14 @@ export async function activeLocations(industry?: string) {
   return all.sort((a, b) => a.data.label.localeCompare(b.data.label));
 }
 
+export async function activeGuides() {
+  return getCollection('guides', ({ data }) => data.status === 'active');
+}
+
+export async function guideFor(serviceId: string) {
+  return (await activeGuides()).find((g) => g.data.service === serviceId);
+}
+
 export function placeSlug(id: string) {
   return id.split('/').pop()!;
 }

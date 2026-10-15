@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+const mins = site.leads.callMinutes;
+---
+<Base title="Thanks" description={`Thanks for reaching out to ${site.name}.`} noindex>
+  <div class="container narrow">
+    <header class="page-head">
+      <p class="crumbs"><a href="/">Home</a> / Thanks</p>
+      <h1>Got it. Thank you.</h1>
+    </header>
+    <div class="prose" style="padding-bottom: 88px;">
+      <p>
+        Your note is in. Owen reads every message himself and will reply within one business day, usually
+        with a few times for a {mins}-minute call.
+      </p>
+      <p>
+        To make the call more useful, have two numbers handy if you know them: roughly how many new
+        inquiries you get a month, and how many become paying clients.
+      </p>
+      <p>Need to reach us sooner? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p><a class="btn btn-secondary" href="/insights/">Read our latest insights</a></p>
+    </div>
+  </div>
+</Base>

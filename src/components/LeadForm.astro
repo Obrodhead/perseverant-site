@@ -1,0 +1,93 @@
+---
+// Plain HTML lead form. No JavaScript: the browser posts straight to Web3Forms, which emails
+// the submission to Owen and then redirects the visitor back to this site.
+// Every email includes `form` (which form) and `page` (which page it was submitted on).
+import { site } from '../site.config';
+import { activeIndustries } from '../lib/content';
+
+type Kind = 'guide' | 'call' | 'contact';
+interface Props {
+  kind: Kind;
+  /** Stable form id that shows in the lead email, e.g. "guide:seo" */
+  formId: string;
+  /** Human label for the email subject, e.g. "SEO guide request" */
+  formLabel: string;
+  /** Path of the page the form sits on */
+  page: string;
+  /** Path to send the visitor to after submitting */
+  redirect: string;
+  submitLabel: string;
+  guideTitle?: string;
+}
+
+const { kind, formId, formLabel, page, redirect, submitLabel, guideTitle } = Astro.props;
+const { web3formsKey, endpoint, callMinutes } = site.leads;
+const industries = (await activeIndustries()).map((i) => i.data.label);
+const uid = formId.replace(/[^a-z0-9]+/gi, '-');
+const subject = `New lead: ${formLabel} (${page})`;
+
+const mailBody = encodeURIComponent(
+  `Form: ${formId}\nPage: ${site.url}${page}\n\nName:\nCompany:\nWebsite:\nPhone:\nIndustry:\n\n` +
+    (kind === 'guide' ? `Please send me ${guideTitle ?? 'the guide'}.\n` : `I'd like a ${callMinutes}-minute exploration call.\n`),
+);
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${mailBody}`;
+---
+{web3formsKey ? (
+  <form class="lead-form" method="POST" action={endpoint} accept-charset="UTF-8">
+    <input type="hidden" name="access_key" value={web3formsKey} />
+    <input type="hidden" name="subject" value={subject} />
+    <input type="hidden" name="from_name" value={`${site.name} website`} />
+    <input type="hidden" name="form" value={formId} />
+    <input type="hidden" name="page" value={`${site.url}${page}`} />
+    {guideTitle && <input type="hidden" name="guide" value={guideTitle} />}
+    <input type="hidden" name="redirect" value={`${site.url}${redirect}`} />
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <div class="field-row">
+      <label for={`${uid}-name`}><span class="lbl">Name</span><input id={`${uid}-name`} name="name" type="text" autocomplete="name" required /></label>
+      <label for={`${uid}-email`}><span class="lbl">Work email</span><input id={`${uid}-email`} name="email" type="email" autocomplete="email" required /></label>
+    </div>
+    <div class="field-row">
+      <label for={`${uid}-company`}><span class="lbl">Business name</span><input id={`${uid}-company`} name="company" type="text" autocomplete="organization" required /></label>
+      <label for={`${uid}-phone`}><span class="lbl">Phone <span class="opt">{kind === 'guide' ? '(optional)' : ''}</span></span><input id={`${uid}-phone`} name="phone" type="tel" autocomplete="tel" required={kind !== 'guide'} /></label>
+    </div>
+    <div class="field-row">
+      <label for={`${uid}-website`}><span class="lbl">Website <span class="opt">(optional)</span></span><input id={`${uid}-website`} name="website" type="text" inputmode="url" placeholder="yourbusiness.com" /></label>
+      <label for={`${uid}-industry`}><span class="lbl">Industry</span>
+        <select id={`${uid}-industry`} name="industry" required>
+          <option value="">Choose one</option>
+          {industries.map((i) => <option>{i}</option>)}
+          <option>Other</option>
+        </select>
+      </label>
+    </div>
+
+    {kind === 'guide' && (
+      <label class="check" for={`${uid}-call`}>
+        <input id={`${uid}-call`} name="wants_call" type="checkbox" value={`Yes, set up a ${callMinutes}-minute exploration call`} />
+        <span>Also set up a free {callMinutes}-minute exploration call to see if we're a good fit.</span>
+      </label>
+    )}
+    {kind !== 'guide' && (
+      <>
+        <label for={`${uid}-goal`}><span class="lbl">What would you most like to fix or grow?</span>
+          <textarea id={`${uid}-goal`} name="message" rows="3" required></textarea>
+        </label>
+        <label for={`${uid}-times`}><span class="lbl">Best days and times for a {callMinutes}-minute call <span class="opt">(optional)</span></span><input id={`${uid}-times`} name="best_times" type="text" placeholder="e.g. Tue or Thu afternoons, Eastern" />
+        </label>
+      </>
+    )}
+
+    <button class="btn btn-primary" type="submit">{submitLabel}</button>
+    <p class="form-note">
+      {kind === 'guide'
+        ? 'Your guide opens on the next page. A real person reads every submission. No spam, and we never sell your details.'
+        : 'Owen replies within one business day with a few times. No spam, and we never sell your details.'}
+    </p>
+  </form>
+) : (
+  <div class="lead-form lead-fallback">
+    <p>Email us and we'll {kind === 'guide' ? 'send the guide back' : 'reply with a few times'} within one business day.</p>
+    <a class="btn btn-primary" href={mailto}>{submitLabel}</a>
+  </div>
+)}

@@ -5,7 +5,7 @@ import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../site.config';
-import { activeIndustries, activeLocations, placeSlug, isoDate } from '../../lib/content';
+import { activeIndustries, activeLocations, activeGuides, placeSlug, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
 
 export async function getStaticPaths() {
@@ -20,6 +20,9 @@ const path = `/industries/${entry.id}/`;
 const services = (await Promise.all(d.services.map((id) => getEntry('services', id))))
   .filter((s): s is NonNullable<typeof s> => Boolean(s) && s!.data.status === 'active');
 const markets = await activeLocations(entry.id);
+const guides = (await activeGuides())
+  .filter((g) => d.services.includes(g.data.service))
+  .sort((a, b) => d.services.indexOf(a.data.service) - d.services.indexOf(b.data.service));
 
 const schema = graph(
   {
@@ -64,6 +67,12 @@ const schema = graph(
         <Faq faqs={d.faqs} />
       </article>
       <aside class="aside">
+        {guides.length > 0 && (
+          <div class="aside-box aside-guide">
+            <h2>Free guides</h2>
+            <ul>{guides.map((g) => <li><a href={`/services/${g.data.service}/#guide`}>{g.data.title}</a></li>)}</ul>
+          </div>
+        )}
         <div class="aside-box">
           <h2>Who we work with</h2>
           <ul>{d.examples.map((x) => <li>{x}</li>)}</ul>

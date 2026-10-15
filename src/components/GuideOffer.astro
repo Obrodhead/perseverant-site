@@ -1,0 +1,29 @@
+---
+// The lead magnet offer shown on a service page: what's inside plus the request form.
+import type { CollectionEntry } from 'astro:content';
+import LeadForm from './LeadForm.astro';
+
+interface Props { guide: CollectionEntry<'guides'>; page: string }
+const { guide, page } = Astro.props;
+const g = guide.data;
+---
+<section class="guide-offer" id="guide" aria-labelledby={`guide-${guide.id}`}>
+  <p class="eyebrow">Free guide</p>
+  <h2 id={`guide-${guide.id}`}>{g.title}</h2>
+  <p class="guide-hook">{g.hook}</p>
+  <div class="guide-offer-grid">
+    <div>
+      <h3>Inside</h3>
+      <ul>{g.inside.map((x) => <li>{x}</li>)}</ul>
+    </div>
+    <LeadForm
+      kind="guide"
+      formId={`guide:${guide.id}`}
+      formLabel={`${g.title} (guide request)`}
+      page={page}
+      redirect={`/guides/${guide.id}/`}
+      submitLabel="Send me the guide"
+      guideTitle={g.title}
+    />
+  </div>
+</section>

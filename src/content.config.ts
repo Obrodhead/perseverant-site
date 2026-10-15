@@ -74,4 +74,27 @@ const locations = defineCollection({
   }),
 });
 
-export const collections = { services, insights, industries, locations };
+// Lead magnet guides, one per service. File id must match the service file id.
+// The service page shows the offer and form; the full guide lives at /guides/{id}/ (noindex,
+// left out of the sitemap and llms.txt) and is where the form redirects after submission.
+const guides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/guides' }),
+  schema: z.object({
+    title: z.string(),
+    // Service file id this guide belongs to
+    service: z.string(),
+    // One line shown above the form on the service page
+    hook: z.string().max(220),
+    summary: z.string().max(160),
+    // 40–70 words, shown at the top of the guide
+    answer: z.string(),
+    // What's inside, shown on the service page offer
+    inside: z.array(z.string()).min(3).max(6),
+    // What the 25-minute exploration call covers for this guide
+    callAgenda: z.array(z.string()).min(2).max(5),
+    status: z.enum(['active', 'paused']).default('active'),
+    updated: z.coerce.date(),
+  }),
+});
+
+export const collections = { services, insights, industries, locations, guides };

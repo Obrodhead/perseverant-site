@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../site.config';
+import LeadForm from '../components/LeadForm.astro';
 import { graph, breadcrumbs, ORG_ID } from '../lib/schema';
 
 const description = `Contact ${site.name} about lead generation for your business.`;
@@ -17,11 +18,19 @@ const schema = graph(
     </header>
     <div class="prose" style="padding-bottom: 88px;">
       <p>
-        Send a short note about your business, who you serve and what you want more of. We reply within one
-        business day.
+        Tell us about your business, who you serve and what you want more of. We reply within one
+        business day, usually with times for a free {site.leads.callMinutes}-minute exploration call.
       </p>
+      <LeadForm
+        kind="contact"
+        formId="contact"
+        formLabel={`${site.leads.callMinutes}-minute exploration call (contact page)`}
+        page="/contact/"
+        redirect="/thanks/"
+        submitLabel={`Request a ${site.leads.callMinutes}-minute call`}
+      />
       <div class="aside-box">
-        <h2>Email</h2>
+        <h2>Prefer email?</h2>
         <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
       </div>
       {site.bookingUrl && (

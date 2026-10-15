@@ -4,8 +4,9 @@ import Base from '../../layouts/Base.astro';
 import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import GuideOffer from '../../components/GuideOffer.astro';
 import { site } from '../../site.config';
-import { activeServices, activeIndustries, isoDate } from '../../lib/content';
+import { activeServices, activeIndustries, guideFor, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
 
 export async function getStaticPaths() {
@@ -17,6 +18,7 @@ const { entry, others } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const path = `/services/${entry.id}/`;
+const guide = await guideFor(entry.id);
 const industries = (await activeIndustries()).filter((i) => i.data.services.includes(entry.id));
 
 const schema = graph(
@@ -59,9 +61,17 @@ const schema = graph(
       <article class="prose">
         <ShortAnswer text={d.answer} updated={d.updated} />
         <Content />
+        {guide && <GuideOffer guide={guide} page={path} />}
         <Faq faqs={d.faqs} />
       </article>
       <aside class="aside">
+        {guide && (
+          <div class="aside-box aside-guide">
+            <h2>Free guide</h2>
+            <p><strong>{guide.data.title}</strong></p>
+            <a class="btn btn-primary" href="#guide">Get the guide</a>
+          </div>
+        )}
         <div class="aside-box">
           <h2>Who it's for</h2>
           <p>{d.audience}</p>
@@ -83,5 +93,7 @@ const schema = graph(
       </aside>
     </div>
   </div>
-  <CtaBand />
+  {guide
+    ? <CtaBand heading={`Get ${guide.data.title}.`} text={guide.data.hook} href="#guide" label="Get the free guide" />
+    : <CtaBand />}
 </Base>
