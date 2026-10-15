@@ -1,10 +1,7 @@
 ---
-// Plain HTML lead form: the browser posts straight to Web3Forms, which emails the submission
-// to Owen and then redirects the visitor back to this site.
-// Every email includes `form` (which form) and `page` (which page it was submitted on).
-// Guide forms carry one small inline script that points the redirect at the version of the guide
-// for the industry picked. It renders no content; without it, visitors land on the general
-// version, which links to every industry version.
+// Plain HTML lead form, no JavaScript: the browser posts straight to Web3Forms, which emails the
+// submission to Owen and then redirects the visitor back to this site.
+// Every email includes `form` (which form), `page` (which page) and `industry`.
 import { site } from '../site.config';
 import { activeIndustries } from '../lib/content';
 
@@ -23,9 +20,12 @@ interface Props {
   guideTitle?: string;
   /** Preselect this industry label */
   industry?: string;
+  /** Send the industry as a hidden field instead of asking */
+  fixedIndustry?: boolean;
 }
 
-const { kind, formId, formLabel, page, redirect, submitLabel, guideTitle, industry } = Astro.props;
+const { kind, formId, formLabel, page, redirect, submitLabel, guideTitle, industry, fixedIndustry = false } = Astro.props;
+const askIndustry = !(fixedIndustry && industry);
 const { web3formsKey, endpoint, callMinutes } = site.leads;
 const industries = (await activeIndustries()).map((i) => ({ id: i.id, label: i.data.label }));
 const uid = formId.replace(/[^a-z0-9]+/gi, '-');
@@ -38,7 +38,7 @@ const mailBody = encodeURIComponent(
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${mailBody}`;
 ---
 {web3formsKey ? (
-  <form class="lead-form" method="POST" action={endpoint} accept-charset="UTF-8" data-guide-form={kind === 'guide' ? '' : undefined}>
+  <form class="lead-form" method="POST" action={endpoint} accept-charset="UTF-8">
     <input type="hidden" name="access_key" value={web3formsKey} />
     <input type="hidden" name="subject" value={subject} />
     <input type="hidden" name="from_name" value={`${site.name} website`} />
@@ -56,15 +56,18 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body
       <label for={`${uid}-company`}><span class="lbl">Business name</span><input id={`${uid}-company`} name="company" type="text" autocomplete="organization" required /></label>
       <label for={`${uid}-phone`}><span class="lbl">Phone <span class="opt">{kind === 'guide' ? '(optional)' : ''}</span></span><input id={`${uid}-phone`} name="phone" type="tel" autocomplete="tel" required={kind !== 'guide'} /></label>
     </div>
-    <div class="field-row">
+    {!askIndustry && <input type="hidden" name="industry" value={industry} />}
+    <div class={askIndustry ? 'field-row' : undefined}>
       <label for={`${uid}-website`}><span class="lbl">Website <span class="opt">(optional)</span></span><input id={`${uid}-website`} name="website" type="text" inputmode="url" placeholder="yourbusiness.com" /></label>
-      <label for={`${uid}-industry`}><span class="lbl">Industry</span>
-        <select id={`${uid}-industry`} name="industry" required>
-          <option value="">Choose one</option>
-          {industries.map((i) => <option value={i.label} data-slug={i.id} selected={i.label === industry}>{i.label}</option>)}
-          <option>Other</option>
-        </select>
-      </label>
+      {askIndustry && (
+        <label for={`${uid}-industry`}><span class="lbl">Industry</span>
+          <select id={`${uid}-industry`} name="industry" required>
+            <option value="">Choose one</option>
+            {industries.map((i) => <option value={i.label} selected={i.label === industry}>{i.label}</option>)}
+            <option>Other</option>
+          </select>
+        </label>
+      )}
     </div>
 
     {kind === 'guide' && (
@@ -95,20 +98,4 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body
     <p>Email us and we'll {kind === 'guide' ? 'send the guide back' : 'reply with a few times'} within one business day.</p>
     <a class="btn btn-primary" href={mailto}>{submitLabel}</a>
   </div>
-)}
-{web3formsKey && kind === 'guide' && (
-  <script is:inline>
-    document.querySelectorAll('form[data-guide-form]').forEach(function (f) {
-      var sel = f.querySelector('select[name=industry]');
-      var red = f.querySelector('input[name=redirect]');
-      if (!sel || !red) return;
-      var base = red.value;
-      function set() {
-        var o = sel.options[sel.selectedIndex];
-        red.value = o && o.dataset.slug ? base + o.dataset.slug + '/' : base;
-      }
-      sel.addEventListener('change', set);
-      set();
-    });
-  </script>
 )}

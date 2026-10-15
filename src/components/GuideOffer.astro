@@ -1,10 +1,10 @@
 ---
-// The lead magnet offer shown on a service page: what's inside plus the request form.
+// The lead magnet offer shown on an industry page: what's inside plus the request form.
 import type { CollectionEntry } from 'astro:content';
 import LeadForm from './LeadForm.astro';
 
-interface Props { guide: CollectionEntry<'guides'>; page: string }
-const { guide, page } = Astro.props;
+interface Props { guide: CollectionEntry<'guides'>; page: string; industryLabel: string }
+const { guide, page, industryLabel } = Astro.props;
 const g = guide.data;
 ---
 <section class="guide-offer" id="guide" aria-labelledby={`guide-${guide.id}`}>
@@ -24,6 +24,8 @@ const g = guide.data;
       redirect={`/guides/${guide.id}/`}
       submitLabel="Send me the guide"
       guideTitle={g.title}
+      industry={industryLabel}
+      fixedIndustry
     />
   </div>
 </section>

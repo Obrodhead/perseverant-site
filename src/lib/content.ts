@@ -19,8 +19,8 @@ export async function activeGuides() {
   return getCollection('guides', ({ data }) => data.status === 'active');
 }
 
-export async function guideFor(serviceId: string) {
-  return (await activeGuides()).find((g) => g.data.service === serviceId);
+export async function guideFor(industryId: string) {
+  return (await activeGuides()).find((g) => g.data.industry === industryId);
 }
 
 export function placeSlug(id: string) {

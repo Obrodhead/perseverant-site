@@ -36,12 +36,19 @@ Lead generation for high-value, high-lifetime-value service businesses, built fo
 - **Hosting:** Cloudflare Worker "perseverant-site" with static assets, auto-builds on push to `main`. Custom domains: perseverantdigital.com and www.
 - **Contact email:** connect@perseverantdigital.com (Microsoft 365 through GoDaddy).
 
-## Lead magnets and lead capture (added October 15, 2026)
-- Each service page offers a free guide: The AI Answer Audit (AI Search Visibility), The Local Map Pack Playbook (SEO), The Cost-per-Appointment Blueprint for Meta Ads (Paid Social), The Seminar Seat-to-Client Playbook, The 5-Minute Follow-Up System (Automation), The Cost-per-Client Tracking Map (Custom Tools).
-- Guides live in `src/content/guides/`, served at /guides/{service}/ (noindex, left out of the sitemap and llms.txt). Each ends with a 25-minute exploration call form. Industry pages link to the guides that fit.
-- Forms are plain HTML posting to Web3Forms. Every lead email to connect@perseverantdigital.com includes the form id (for example `guide:seo`, `call:seo`, `contact`), the page URL, name, email, business, phone, website, industry and whether they want the call.
-- **To switch forms on:** create a free access key at web3forms.com using connect@perseverantdigital.com and paste it into `leads.web3formsKey` in `src/site.config.ts`. Until then, forms fall back to a pre-addressed email link.
-- Research: `docs/research/owner-search-research-2026-10.md`. Verified facts allowed in guides: `docs/research/guide-spec.md`.
+## Lead magnets and lead capture (updated October 15, 2026)
+- One guide per industry, built on what owners search (not on our service names, so it doesn't train other agencies):
+  - Law firms: How to Get More Signed Cases Without Buying Shared Leads
+  - Elective healthcare: How to Fill Your Consult Calendar With Patients Ready to Book
+  - Home improvement: How to Get Roofing, Remodeling and HVAC Leads Without Angi or Shared Lead Sites
+  - Senior living: How to Fill Move-Ins Without Depending on Referral-Site Fees
+  - Recruiting and staffing: How to Win Employer Clients Who Send Repeat Job Orders
+  - Estate security: How to Earn Private-Client Inquiries Without Advertising Your Clients
+- The offer and form sit on each industry page; service pages link to them. Guides live at /guides/{industry}/ (noindex), each with a branded PDF download, and end with a 25-minute exploration call form.
+- Forms are plain HTML (no JavaScript) posting to Web3Forms (key set in `leads.web3formsKey`). Every lead email to connect@ includes the form id (`guide:law-firms`, `call:law-firms`, `contact`), page and industry.
+- After editing a guide, run `npm run pdfs` and commit the PDFs.
+- Research: `docs/research/owner-search-research-2026-10.md`; verified facts: `docs/research/guide-spec.md`; writing rules: `docs/research/industry-guide-spec.md`.
+- The repo has six industries (estate security added October 14), not five.
 
 ## Email setup (Microsoft 365 via GoDaddy, DNS at Cloudflare)
 - **Working as of October 14, 2026.** Receiving tested and confirmed. MX verified live via MXToolbox.

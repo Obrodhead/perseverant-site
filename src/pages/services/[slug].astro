@@ -4,9 +4,8 @@ import Base from '../../layouts/Base.astro';
 import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import GuideOffer from '../../components/GuideOffer.astro';
 import { site } from '../../site.config';
-import { activeServices, activeIndustries, guideFor, isoDate } from '../../lib/content';
+import { activeServices, activeIndustries, activeGuides, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
 
 export async function getStaticPaths() {
@@ -18,7 +17,11 @@ const { entry, others } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const path = `/services/${entry.id}/`;
-const guide = await guideFor(entry.id);
+const allIndustries = await activeIndustries();
+const guideList = await activeGuides();
+const guides = allIndustries
+  .map((i) => ({ industry: i, guide: guideList.find((g) => g.data.industry === i.id) }))
+  .filter((x): x is { industry: typeof x.industry; guide: NonNullable<typeof x.guide> } => !!x.guide);
 const industries = (await activeIndustries()).filter((i) => i.data.services.includes(entry.id));
 
 const schema = graph(
@@ -61,15 +64,13 @@ const schema = graph(
       <article class="prose">
         <ShortAnswer text={d.answer} updated={d.updated} />
         <Content />
-        {guide && <GuideOffer guide={guide} page={path} />}
         <Faq faqs={d.faqs} />
       </article>
       <aside class="aside">
-        {guide && (
+        {guides.length > 0 && (
           <div class="aside-box aside-guide">
-            <h2>Free guide</h2>
-            <p><strong>{guide.data.title}</strong></p>
-            <a class="btn btn-primary" href="#guide">Get the guide</a>
+            <h2>Free guide for your industry</h2>
+            <ul>{guides.map((g) => <li><a href={`/industries/${g.industry.id}/#guide`}>{g.guide.data.title}</a></li>)}</ul>
           </div>
         )}
         <div class="aside-box">
@@ -93,7 +94,5 @@ const schema = graph(
       </aside>
     </div>
   </div>
-  {guide
-    ? <CtaBand heading={`Get ${guide.data.title}.`} text={guide.data.hook} href="#guide" label="Get the free guide" />
-    : <CtaBand />}
+  <CtaBand />
 </Base>

@@ -44,7 +44,7 @@ def font_css(port):
 
 
 def main():
-    pages = sorted(DIST.glob("guides/*/index.html")) + sorted(DIST.glob("guides/*/*/index.html"))
+    pages = sorted(DIST.glob("guides/*/index.html"))
     if not pages:
         sys.exit("No guide pages in dist/. Run `npm run build` first.")
     OUT.mkdir(parents=True, exist_ok=True)
@@ -74,7 +74,7 @@ def main():
             )
             for html in pages:
                 rel = html.relative_to(DIST / "guides").parent.parts  # (guide,) or (guide, industry)
-                name = "perseverant-digital-" + "-".join(rel) + ".pdf"
+                name = "perseverant-digital-" + "-".join(rel) + "-guide.pdf"
                 page.goto(f"http://127.0.0.1:{port}/guides/{'/'.join(rel)}/", wait_until="networkidle")
                 page.evaluate("document.fonts.ready")
                 page.emulate_media(media="print")

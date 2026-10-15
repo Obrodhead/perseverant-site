@@ -48,19 +48,17 @@ cross-link automatically. Never mention financial advisors or advisory firms any
 
 ## Lead magnet guides and forms
 
-One guide per service in `src/content/guides/{service id}.md` (schema in `src/content.config.ts`).
-The service page shows the offer and form. Each guide renders once per industry at
-`/guides/{id}/{industry id}/`, plus a general version at `/guides/{id}/` with an industry picker; all are
-noindex and left out of the sitemap and llms.txt. Industry-specific Markdown goes inside
-`<!-- industry:law-firms,other -->` … `<!-- /industry -->` blocks (own lines, blank line around, no nesting;
-`other` is the general version); text outside blocks shows to everyone, so keep it industry-neutral.
-Rules for writing blocks: `docs/research/industry-blocks-spec.md`. The guide form carries one small inline
-script that sets the redirect to the chosen industry's version; it renders no content. Facts in guides come only from `docs/research/guide-spec.md` with source and date.
-Each version also has a branded PDF in `public/downloads/` (committed). After changing any guide, run
-`npm run pdfs` (needs Python Playwright + Chromium) and commit the regenerated PDFs. Each version's
-Sources list is filtered automatically to the sources it cites (`citedSourcesOnly` in `src/lib/guides.ts`).
-Forms are plain HTML (`src/components/LeadForm.astro`) posting to Web3Forms with hidden `form` and `page`
-fields, so every lead email says where it came from. Settings live in `leads` in `src/site.config.ts`.
+One guide per industry in `src/content/guides/{industry id}.md` (schema in `src/content.config.ts`), built
+around the question owners in that industry search (for example "How to get roofing leads without Angi"),
+never around our service names, so it serves owners rather than other agencies. Writing rules:
+`docs/research/industry-guide-spec.md`; facts only from `docs/research/guide-spec.md` with source and date.
+The industry page shows the offer and form; the guide is at `/guides/{id}/`, noindex and left out of the
+sitemap and llms.txt. Service pages link to each industry's guide. Each guide has a branded PDF in
+`public/downloads/` (committed). After changing a guide, run `npm run pdfs` (needs Python Playwright +
+Chromium) and commit the PDFs. Sources lists are filtered to what each guide cites (`src/lib/guides.ts`).
+Forms are plain HTML with no JavaScript (`src/components/LeadForm.astro`) posting to Web3Forms with hidden
+`form`, `page` and `industry` fields, so every lead email says where it came from. Settings live in `leads`
+in `src/site.config.ts`. Old service-guide URLs redirect in `public/_redirects`.
 
 ## Entity consistency
 

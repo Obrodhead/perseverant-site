@@ -32,11 +32,12 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Consider a second estate security market page (Greater Los Angeles: wildfire rebuild hardening)
 - [ ] Move lead forms from Web3Forms to the CRM (or a Cloudflare Worker) once a CRM is chosen; keep the `form` and `page` fields
 - [ ] Add an automated reply email that sends the guide link (Web3Forms autoresponder is a paid feature, or do it in the CRM)
-- [ ] Owen reviews the six guides for voice; legal and healthcare examples reviewed before running ads to them
+- [ ] Owen reviews the six industry guides for voice; legal and healthcare guides reviewed before running ads to them
 - [ ] Case studies once clients approve them (real results only)
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-15: Replaced the six service guides with one guide per industry, built on the question owners search (on industry pages; service pages link to them). Forms back to zero JavaScript. Old guide URLs redirect.
 - 2026-10-15: Guides cut about 50%; every version downloadable as a branded PDF (`npm run pdfs`, files in public/downloads/, noindex via _headers)
 - 2026-10-15: Guides now tailored by industry: the form sends each lead to the version for the industry they pick (/guides/{service}/{industry}/)
 - 2026-10-15: Web3Forms access key added; lead forms live
