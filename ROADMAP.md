@@ -37,6 +37,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-15: Guides cut about 50%; every version downloadable as a branded PDF (`npm run pdfs`, files in public/downloads/, noindex via _headers)
 - 2026-10-15: Guides now tailored by industry: the form sends each lead to the version for the industry they pick (/guides/{service}/{industry}/)
 - 2026-10-15: Web3Forms access key added; lead forms live
 - 2026-10-15: Six lead magnet guides, one per service page (`src/content/guides/`, served at /guides/{id}/, noindex), with a no-JS request form on each service page, a 25-minute exploration call form at the end of each guide, a contact page form and /thanks/. Every lead email names the form and page. Research in `docs/research/`.

@@ -239,3 +239,26 @@ p { margin: 0; }
 .guide-picker ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .guide-picker a { display: inline-block; padding: 6px 12px; border: 1px solid var(--pine); border-radius: 999px; font-family: var(--display); font-size: 0.95rem; text-decoration: none; background: var(--paper); }
 .guide-picker a:hover { background: var(--pine); color: var(--on-pine); }
+.print-only { display: none; }
+@media print {
+  @page { margin: 0.6in 0.65in 0.75in; }
+  .print-only { display: block; }
+  .print-brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-size: 10pt; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 4px; }
+  .print-brand strong { color: var(--ink); font-size: 12pt; }
+  .guide .page-head { padding-block: 18px 12px; }
+  .guide h1 { font-size: 26pt; }
+  .guide .guide-lede { font-size: 13pt; }
+  .guide-body { font-size: 10.5pt; line-height: 1.5; }
+  .guide-body h2 { font-size: 16pt; }
+  .guide-body h3 { font-size: 12.5pt; }
+  .guide-body table { display: table; font-size: 9.5pt; }
+  .guide-body tr { break-inside: avoid; }
+  .answer p { font-size: 12pt; }
+  .print-cta { margin-top: 24px; border: 1.5px solid var(--pine); border-top: 4px solid var(--pine); border-radius: 4px; padding: 16px 18px; break-inside: avoid; }
+  .print-cta h2 { font-size: 15pt; margin-bottom: 6px; }
+  .print-cta p + p { margin-top: 8px; }
+  .print-cta a { color: var(--pine); }
+  .print-cta a::after { content: none !important; }
+  .guide-body a[href^='http']::after { content: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

@@ -8,7 +8,7 @@ import ShortAnswer from './ShortAnswer.astro';
 import LeadForm from './LeadForm.astro';
 import { site } from '../site.config';
 import { activeIndustries } from '../lib/content';
-import { forIndustry, guidePath, GENERAL } from '../lib/guides';
+import { forIndustry, citedSourcesOnly, guidePath, pdfPath, pdfExists, GENERAL } from '../lib/guides';
 
 interface Props { entry: CollectionEntry<'guides'>; industry: string }
 const { entry, industry } = Astro.props;
@@ -17,18 +17,28 @@ const path = guidePath(entry.id, industry);
 const service = await getEntry('services', g.service);
 const industries = await activeIndustries();
 const current = industries.find((i) => i.id === industry);
-const html = forIndustry(entry.rendered?.html ?? '', industry);
+const html = citedSourcesOnly(forIndustry(entry.rendered?.html ?? '', industry));
 const mins = site.leads.callMinutes;
+const pdf = pdfPath(entry.id, industry);
+const hasPdf = pdfExists(entry.id, industry);
 ---
 <Base title={current ? `${g.title} for ${current.data.label.toLowerCase()}` : g.title} description={g.summary} noindex>
   <div class="container narrow guide">
+    <div class="print-only print-brand">
+      <svg width="40" height="28" viewBox="0 10 64 44" aria-hidden="true">
+        <path d="M20 44A12 12 0 0 1 44 44M12 44A20 20 0 0 1 52 44M4 44A28 28 0 0 1 60 44" fill="none" stroke="#24503f" stroke-width="4.5" stroke-linecap="round" />
+        <circle cx="32" cy="44" r="5" fill="#a8812c" />
+      </svg>
+      <span><strong>{site.name}</strong><br />perseverantdigital.com · {site.email}</span>
+    </div>
     <header class="page-head">
-      <p class="crumbs">
+      <p class="crumbs no-print">
         <a href="/">Home</a> / {service ? <a href={`/services/${service.id}/`}>{service.data.title}</a> : 'Guides'} / Guide
       </p>
       <p class="eyebrow">A field guide from {site.name}{current && ` · for ${current.data.label.toLowerCase()}`}</p>
       <h1>{g.title}</h1>
       <p class="guide-lede">{g.hook}</p>
+      {hasPdf && <p class="no-print"><a class="btn btn-secondary" href={pdf} download>Download the PDF</a></p>}
       {industry === GENERAL ? (
         <nav class="guide-picker no-print" aria-label="Choose your industry">
           <p>Pick your industry for the version written for you:</p>
@@ -36,7 +46,7 @@ const mins = site.leads.callMinutes;
         </nav>
       ) : (
         <p class="guide-tools no-print">
-          Not your industry? <a href={guidePath(entry.id)}>Switch versions</a>. To save a copy, use your browser's Print and choose Save as PDF.
+          Not your industry? <a href={guidePath(entry.id)}>Switch versions</a>.
         </p>
       )}
     </header>
@@ -45,6 +55,12 @@ const mins = site.leads.callMinutes;
       <ShortAnswer text={g.answer} updated={g.updated} />
       <Fragment set:html={html} />
     </article>
+
+    <section class="print-only print-cta">
+      <h2>Want a second set of eyes on what you found?</h2>
+      <p>Book a free {mins}-minute exploration call. We will look at your answers with you, name the first fixes in order, and tell you honestly if we are not the right fit.</p>
+      <p><strong><a href={`${site.url}${path}#call`}>{`${site.url.replace('https://', '')}${path}`}</a></strong> · {site.email}</p>
+    </section>
 
     <section class="guide-call no-print" id="call" aria-labelledby="call-h">
       <p class="eyebrow">Free · {mins} minutes · No pitch deck</p>
