@@ -1,5 +1,5 @@
 ---
-title: SEO for High-Value Service Businesses
+title: SEO for Service Businesses
 summary: Technical, local and content SEO that brings qualified, high-intent prospects to your website from Google search.
 answer: SEO for a high-value service business means making your site the strongest answer Google can find for the searches your best customers make. That covers a technically sound site, a complete local presence for every location and service area, and content that answers real buying questions better than your competitors do.
 audience: Businesses with one or more locations that want steady inbound prospects from Google without paying for every click.
