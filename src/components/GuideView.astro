@@ -1,0 +1,70 @@
+---
+// One rendered version of a lead magnet guide: the general version (industry "other") or the
+// version for one industry. Pages are noindex and left out of the sitemap and llms.txt.
+import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ShortAnswer from './ShortAnswer.astro';
+import LeadForm from './LeadForm.astro';
+import { site } from '../site.config';
+import { activeIndustries } from '../lib/content';
+import { forIndustry, guidePath, GENERAL } from '../lib/guides';
+
+interface Props { entry: CollectionEntry<'guides'>; industry: string }
+const { entry, industry } = Astro.props;
+const g = entry.data;
+const path = guidePath(entry.id, industry);
+const service = await getEntry('services', g.service);
+const industries = await activeIndustries();
+const current = industries.find((i) => i.id === industry);
+const html = forIndustry(entry.rendered?.html ?? '', industry);
+const mins = site.leads.callMinutes;
+---
+<Base title={current ? `${g.title} for ${current.data.label.toLowerCase()}` : g.title} description={g.summary} noindex>
+  <div class="container narrow guide">
+    <header class="page-head">
+      <p class="crumbs">
+        <a href="/">Home</a> / {service ? <a href={`/services/${service.id}/`}>{service.data.title}</a> : 'Guides'} / Guide
+      </p>
+      <p class="eyebrow">A field guide from {site.name}{current && ` · for ${current.data.label.toLowerCase()}`}</p>
+      <h1>{g.title}</h1>
+      <p class="guide-lede">{g.hook}</p>
+      {industry === GENERAL ? (
+        <nav class="guide-picker no-print" aria-label="Choose your industry">
+          <p>Pick your industry for the version written for you:</p>
+          <ul>{industries.map((i) => <li><a href={guidePath(entry.id, i.id)}>{i.data.label}</a></li>)}</ul>
+        </nav>
+      ) : (
+        <p class="guide-tools no-print">
+          Not your industry? <a href={guidePath(entry.id)}>Switch versions</a>. To save a copy, use your browser's Print and choose Save as PDF.
+        </p>
+      )}
+    </header>
+
+    <article class="prose guide-body">
+      <ShortAnswer text={g.answer} updated={g.updated} />
+      <Fragment set:html={html} />
+    </article>
+
+    <section class="guide-call no-print" id="call" aria-labelledby="call-h">
+      <p class="eyebrow">Free · {mins} minutes · No pitch deck</p>
+      <h2 id="call-h">Want a second set of eyes on what you found?</h2>
+      <p>
+        This guide gets you most of the way. The last stretch usually takes tools, data and repetition.
+        In a {mins}-minute exploration call we will:
+      </p>
+      <ul>{g.callAgenda.map((x) => <li>{x}</li>)}</ul>
+      <p>If we are not the right fit, we will say so and point you somewhere better.</p>
+      {site.bookingUrl && <p><a class="btn btn-primary" href={site.bookingUrl}>Pick a time</a></p>}
+      <LeadForm
+        kind="call"
+        formId={`call:${entry.id}${current ? `:${industry}` : ''}`}
+        formLabel={`${mins}-minute exploration call from ${g.title}`}
+        page={path}
+        redirect="/thanks/"
+        submitLabel={`Request my ${mins}-minute call`}
+        industry={current?.data.label}
+      />
+    </section>
+  </div>
+</Base>

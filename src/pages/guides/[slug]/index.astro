@@ -1,0 +1,13 @@
+---
+// General version of each guide. The guide form lands here when no industry is chosen
+// (or the browser blocks the small script that picks the industry version).
+import GuideView from '../../../components/GuideView.astro';
+import { activeGuides } from '../../../lib/content';
+import { GENERAL } from '../../../lib/guides';
+
+export async function getStaticPaths() {
+  return (await activeGuides()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<GuideView entry={entry} industry={GENERAL} />

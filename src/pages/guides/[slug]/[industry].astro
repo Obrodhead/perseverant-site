@@ -1,0 +1,15 @@
+---
+// One version of each guide per active industry, e.g. /guides/seo/law-firms/.
+import GuideView from '../../../components/GuideView.astro';
+import { activeGuides, activeIndustries } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const guides = await activeGuides();
+  const industries = await activeIndustries();
+  return guides.flatMap((entry) =>
+    industries.map((i) => ({ params: { slug: entry.id, industry: i.id }, props: { entry, industry: i.id } })),
+  );
+}
+const { entry, industry } = Astro.props;
+---
+<GuideView entry={entry} industry={industry} />

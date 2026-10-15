@@ -234,3 +234,8 @@ p { margin: 0; }
 }
 .lead-form .lbl .opt { font-weight: 400; }
 .guide h1 { font-size: var(--step-3); }
+.guide-picker { border: 1px solid var(--line); border-top: 3px solid var(--seed); background: var(--panel); border-radius: 4px; padding: 16px 18px; display: grid; gap: 10px; }
+.guide-picker p { font-family: var(--display); font-weight: 600; }
+.guide-picker ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.guide-picker a { display: inline-block; padding: 6px 12px; border: 1px solid var(--pine); border-radius: 999px; font-family: var(--display); font-size: 0.95rem; text-decoration: none; background: var(--paper); }
+.guide-picker a:hover { background: var(--pine); color: var(--on-pine); }
