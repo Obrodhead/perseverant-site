@@ -6,7 +6,7 @@ export const site = {
   name: 'Perseverant Digital',
   legalName: 'Perseverant Digital LLC',
   url: 'https://perseverantdigital.com',
-  tagline: 'Lead generation for high-value services, built for AI search.',
+  tagline: 'AI search and lead generation for service businesses.',
   description:
     'Perseverant Digital is a Cleveland-based lead generation firm for businesses whose clients research carefully before they call: law firms, elective healthcare practices, home improvement companies, senior living providers, recruiting and staffing firms, and estate security firms. We combine AI search visibility, SEO, paid social, event campaigns and automation to turn attention into booked appointments.',
   email: 'connect@perseverantdigital.com',
