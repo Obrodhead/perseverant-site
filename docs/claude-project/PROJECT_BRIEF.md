@@ -1,6 +1,6 @@
 # Perseverant Digital – Project Brief
 
-Last updated: October 14, 2026. Living reference for the Claude project. Update it when facts change.
+Last updated: October 15, 2026. Living reference for the Claude project. Update it when facts change.
 
 ## The business
 - **Legal entity:** Perseverant Digital LLC, Ohio domestic LLC. Articles filed October 13, 2026 (Document ID 202628605660). Single member: Owen Brodhead. Awaiting state approval and entity number.
@@ -20,7 +20,7 @@ Last updated: October 14, 2026. Living reference for the Claude project. Update 
 ## Positioning
 Lead generation for high-value, high-lifetime-value service businesses, built for AI search.
 
-**Five niches:** law firms (PI, estate planning, family law, mass torts, criminal defense); elective healthcare (implants, ortho, plastic surgery, med spa, LASIK); home improvement (roofing, remodeling, HVAC, solar, windows); senior living and home care; recruiting and staffing (employer-side B2B).
+**Niches:** law firms (PI, estate planning, family law, mass torts, criminal defense); elective healthcare (implants, ortho, plastic surgery, med spa, LASIK); home improvement (roofing, remodeling, HVAC, solar, windows); senior living and home care; recruiting and staffing (employer-side B2B). The repo also has a sixth industry, estate security (added October 14, 2026), with a Palm Beach County local page.
 
 **Six services:** AI Search Visibility (AEO/GEO), SEO, Paid Social Lead Generation, Seminar and Webinar Campaigns, Marketing Automation and CRM Workflows, Custom Tools and Integrations.
 
@@ -36,9 +36,26 @@ Lead generation for high-value, high-lifetime-value service businesses, built fo
 - **Hosting:** Cloudflare Worker "perseverant-site" with static assets, auto-builds on push to `main`. Custom domains: perseverantdigital.com and www.
 - **Contact email:** connect@perseverantdigital.com (Microsoft 365 through GoDaddy).
 
+## Lead magnets and lead capture (added October 15, 2026)
+- Each service page offers a free guide: The AI Answer Audit (AI Search Visibility), The Local Map Pack Playbook (SEO), The Cost-per-Appointment Blueprint for Meta Ads (Paid Social), The Seminar Seat-to-Client Playbook, The 5-Minute Follow-Up System (Automation), The Cost-per-Client Tracking Map (Custom Tools).
+- Guides live in `src/content/guides/`, served at /guides/{service}/ (noindex, left out of the sitemap and llms.txt). Each ends with a 25-minute exploration call form. Industry pages link to the guides that fit.
+- Forms are plain HTML posting to Web3Forms. Every lead email to connect@perseverantdigital.com includes the form id (for example `guide:seo`, `call:seo`, `contact`), the page URL, name, email, business, phone, website, industry and whether they want the call.
+- **To switch forms on:** create a free access key at web3forms.com using connect@perseverantdigital.com and paste it into `leads.web3formsKey` in `src/site.config.ts`. Until then, forms fall back to a pre-addressed email link.
+- Research: `docs/research/owner-search-research-2026-10.md`. Verified facts allowed in guides: `docs/research/guide-spec.md`.
+
 ## Email setup (Microsoft 365 via GoDaddy, DNS at Cloudflare)
-- Done: MS verification TXT `MS=ms18160923` in Cloudflare; `_dmarc` TXT kept.
-- Remaining: get exact MX, SPF TXT, autodiscover CNAME (and DKIM if offered) from the Microsoft 365 admin center (Settings → Domains → perseverantdigital.com → DNS records) and add them in Cloudflare as **DNS only**. Never let GoDaddy switch DNS back to GoDaddy. Update DMARC reporting address once mail works.
+- **Working as of October 14, 2026.** Receiving tested and confirmed. MX verified live via MXToolbox.
+- Records in Cloudflare (all **DNS only**):
+  - MX `@` → `perseverantdigital-com.mail.protection.outlook.com`, priority 0
+  - TXT `@` → `v=spf1 include:spf.protection.outlook.com -all`
+  - CNAME `autodiscover` → `autodiscover.outlook.com`
+  - TXT `@` → `MS=ms18160923` (Microsoft verification)
+  - TXT `_dmarc` → `v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;`
+- Remaining:
+  - **DKIM:** go to security.microsoft.com, open the email authentication settings, then DKIM, and select perseverantdigital.com. Add the `selector1` and `selector2` CNAMEs in Cloudflare as DNS only, then enable signing.
+  - **DMARC reporting:** change `rua=` from the GoDaddy address to an address Owen controls.
+  - Optional later: BIMI (needs DKIM plus a stricter DMARC policy first).
+- Never use GoDaddy's "Create MX records" or "Connect Domain" wizards, because they can switch nameservers back to GoDaddy and take the site down. Make all DNS changes in Cloudflare.
 
 ## Business setup sequence (from the launch checklist)
 1. LLC approval → download stamped articles.
