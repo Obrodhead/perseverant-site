@@ -12,7 +12,8 @@ const schema = graph(organization(), person(), website());
 ---
 <Base title={site.name} description={site.description} schema={schema}>
   <section class="hero">
-    <div class="container">
+    <div class="container hero-grid">
+      <div class="hero-copy">
       <p class="eyebrow">Lead generation for high-value services</p>
       <h1>Be understood before you're chosen</h1>
       <p class="lede">
@@ -22,6 +23,27 @@ const schema = graph(organization(), person(), website());
       <div class="hero-actions">
         <a class="btn btn-primary" href={site.bookingUrl || '/contact/'}>{site.bookingUrl ? 'Book a call' : 'Get in touch'}</a>
         <a class="btn btn-secondary" href="/industries/">See industries</a>
+      </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 320" focusable="false">
+          <path class="ring" style="--i:0" d="M170 300A30 30 0 0 1 230 300" pathLength="1"/>
+          <path class="ring" style="--i:1" d="M148 300A52 52 0 0 1 252 300" pathLength="1"/>
+          <path class="ring" style="--i:2" d="M124 300A76 76 0 0 1 276 300" pathLength="1"/>
+          <path class="ring" style="--i:3" d="M98 300A102 102 0 0 1 302 300" pathLength="1"/>
+          <path class="ring" style="--i:4" d="M70 300A130 130 0 0 1 330 300" pathLength="1"/>
+          <path class="ring" style="--i:5" d="M40 300A160 160 0 0 1 360 300" pathLength="1"/>
+          <path class="ring" style="--i:6" d="M8 300A192 192 0 0 1 392 300" pathLength="1"/>
+          <g class="query" style="--q:0"><line x1="413.0" y1="230.8" x2="238.0" y2="287.6" pathLength="1"/><circle cx="413.0" cy="230.8" r="4.5"/></g>
+          <g class="query" style="--q:1"><line x1="375.4" y1="142.1" x2="229.7" y2="273.2" pathLength="1"/><circle cx="375.4" cy="142.1" r="4.5"/></g>
+          <g class="query" style="--q:2"><line x1="280.2" y1="101.6" x2="215.0" y2="262.9" pathLength="1"/><circle cx="280.2" cy="101.6" r="4.5"/></g>
+          <g class="query" style="--q:3"><line x1="174.9" y1="61.3" x2="195.8" y2="260.2" pathLength="1"/><circle cx="174.9" cy="61.3" r="4.5"/></g>
+          <g class="query" style="--q:4"><line x1="83.4" y1="113.4" x2="178.8" y2="266.1" pathLength="1"/><circle cx="83.4" cy="113.4" r="4.5"/></g>
+          <g class="query" style="--q:5"><line x1="3.3" y1="177.1" x2="166.1" y2="278.8" pathLength="1"/><circle cx="3.3" cy="177.1" r="4.5"/></g>
+          <g class="query" style="--q:6"><line x1="-11.5" y1="247.3" x2="161.2" y2="290.3" pathLength="1"/><circle cx="-11.5" cy="247.3" r="4.5"/></g>
+          <line class="ground" x1="0" y1="300" x2="400" y2="300"/>
+          <circle class="seed" cx="200" cy="300" r="9"/>
+        </svg>
       </div>
     </div>
   </section>
