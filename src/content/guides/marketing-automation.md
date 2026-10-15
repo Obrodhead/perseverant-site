@@ -42,7 +42,7 @@ You don't need more tools. You need your real numbers and a few reliable habits.
 
 ## What this looks like for law firms
 
-The person who fills out your form at 9 p.m. after a crash or an arrest may be contacting several firms. The first to call back with a clear next step usually gets the consultation.
+The person who fills out your form at 9 p.m. after a crash or an arrest may be contacting several firms. The first to call back with a clear next step often gets the consultation.
 
 Your first reply should collect only what you need for a conflict check and a booking. No legal advice, no predicted outcomes, and no "specialist" language unless a lawyer holds the certification (ABA Model Rule 7.1). If an AI chatbot handles intake, Florida Bar Ethics Opinion 24-1 (January 2024) says it should disclose that it is AI and not give legal advice (Hinshaw, February 5, 2024). Texas HB 2733, effective September 1, 2025, extends barratry law to electronic messages, so keep follow-up tied to the inquiry the person started.
 
