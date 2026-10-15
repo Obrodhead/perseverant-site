@@ -37,6 +37,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-15: Published insight: Has your AI been letting you down lately? You're not alone (hallucinations, over-reliance, model collapse, and whether AI-written sites hurt AI visibility; 10 dated sources)
 - 2026-10-15: Fixed large gaps on service, industry and article pages (prose rows were stretching to the sidebar's height)
 - 2026-10-15: Homepage hero: new H1 ("Be understood before you're chosen") and growth-rings art with converging query lines (CSS/SVG only, desktop only, respects reduced motion)
 - 2026-10-15: Added wrangler.jsonc (static assets from dist/) after newer wrangler versions began failing deploys without one
