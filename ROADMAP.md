@@ -37,6 +37,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-15: Added wrangler.jsonc (static assets from dist/) after newer wrangler versions began failing deploys without one
 - 2026-10-15: Removed trailing periods from page H1s and made H1s 35% smaller
 - 2026-10-15: Replaced the six service guides with one guide per industry, built on the question owners search (on industry pages; service pages link to them). Forms back to zero JavaScript. Old guide URLs redirect.
 - 2026-10-15: Guides cut about 50%; every version downloadable as a branded PDF (`npm run pdfs`, files in public/downloads/, noindex via _headers)

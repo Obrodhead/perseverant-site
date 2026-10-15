@@ -1,0 +1,10 @@
+// Cloudflare Worker config: serve the static Astro build. Without this file,
+// `npx wrangler deploy` tries to auto-convert the project and fails.
+{
+  "name": "perseverant-site",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
