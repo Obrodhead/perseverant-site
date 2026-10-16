@@ -70,6 +70,8 @@ p { margin: 0; }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; flex-wrap: wrap; }
 .brand { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 10px; }
 .brand svg { flex: none; }
+.brand-name { font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 1.3rem; letter-spacing: -0.015em; line-height: 1; }
+.brand-tail { color: var(--muted); }
 .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 22px; flex-wrap: wrap; }
 .site-nav a { font-family: var(--display); font-size: 0.98rem; color: var(--ink); text-decoration: none; }
 .site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--pine); text-decoration: underline; }
