@@ -4,6 +4,9 @@ summary: CRM setup and automated follow-up that responds to every lead in minute
 answer: Marketing automation makes sure every lead gets a fast, consistent response without anyone remembering to send it. We set up your CRM and build workflows for lead routing, instant replies, appointment reminders and long-term nurture, so prospects move forward while your team focuses on closing.
 audience: Businesses losing leads to slow follow-up or juggling disconnected tools.
 order: 5
+label: Follow-up
+stage: follow-through
+pairsWith: [paid-social, seminar-webinar-campaigns, custom-tools]
 status: active
 updated: 2026-10-14
 deliverables:

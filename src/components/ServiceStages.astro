@@ -1,0 +1,36 @@
+---
+// Services grouped into the three stages of the system. Used on the homepage and /services/.
+import { activeServices } from '../lib/content';
+import { stages } from '../lib/stages';
+
+interface Props { level?: 2 | 3 }
+const { level = 3 } = Astro.props;
+const StageTag = level === 2 ? 'h2' : 'h3';
+const CardTag = level === 2 ? 'h3' : 'h4';
+const services = await activeServices();
+const groups = stages
+  .map((st) => ({ ...st, items: services.filter((s) => s.data.stage === st.id) }))
+  .filter((g) => g.items.length > 0);
+---
+<ol class="stages">
+  {groups.map((g) => (
+    <li class="stage" id={`stage-${g.id}`}>
+      <div class="stage-head">
+        <span class="num">{g.num}</span>
+        <StageTag class="stage-name">{g.name}</StageTag>
+        <p>{g.line}</p>
+      </div>
+      <ul class="service-grid stage-grid">
+        {g.items.map((s) => (
+          <li>
+            <a href={`/services/${s.id}/`}>
+              <CardTag>{s.data.title}</CardTag>
+              <p>{s.data.summary}</p>
+              <span class="more">Learn more →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </li>
+  ))}
+</ol>

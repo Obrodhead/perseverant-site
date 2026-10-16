@@ -23,6 +23,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 
 ## Content engine
 - [ ] Publish two question-led insights per month, rotating across the five industries
+- [ ] Owen reviews the three stage names and one-line descriptions in `src/lib/stages.ts` for voice
 - [ ] Add industry-by-service pages for the strongest combinations (for example "AI search visibility for law firms")
 - [ ] Turn each podcast appearance and new idea into an insight that credits Search Essence Optimization
 - [ ] Build a monthly check of how ChatGPT, Claude, Perplexity and Google AI Overviews answer target questions, and log results
@@ -37,6 +38,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-16: Services organized as one system in three stages (Be understood: AI search + SEO; Meet them in the middle: paid social + events; Follow through: automation + custom tools). Homepage rings dots are now links, one per service, ordered by stage around the arc. Homepage and /services/ group cards by stage; each service page shows "Where it fits" and a curated "Works with" list; llms.txt groups services by stage. Stage copy in `src/lib/stages.ts`; service files set `label`, `stage`, `pairsWith`
 - 2026-10-16: Industries page intro rewritten: new H1 ("Careful decisions start with research", no longer duplicating the homepage H2) and a shorter paragraph without the partial industry list or the unsourced "research for weeks" claim
 - 2026-10-16: Trailing-dot hostname (perseverantdigital.com.) now 301s to perseverantdigital.com via a small Worker (`worker/index.js`, runs before static assets); relative links had been keeping visitors on the dotted host
 - 2026-10-15: Added Google Analytics tag (G-6RMHPXYY9K) to every page via the shared layout

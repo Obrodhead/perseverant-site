@@ -42,7 +42,9 @@ cross-link automatically. Never mention financial advisors or advisory firms any
 
 ## Add, pause or retire a service
 
-- Add: copy any file in `src/content/services/`, edit frontmatter and body, set `order`.
+- Add: copy any file in `src/content/services/`, edit frontmatter and body, set `order`, `label` (short name
+  on the homepage rings), `stage` (understood | reach | follow-through, defined in `src/lib/stages.ts`) and
+  `pairsWith` (service ids shown as "Works with"). The homepage rings draw one linked dot per active service.
 - Pause: set `status: paused`. It disappears from nav, sitemap and llms.txt; the file stays.
 - Retire: delete the file, and add a redirect in `public/_redirects` (`/services/old/ /services/ 301`).
 

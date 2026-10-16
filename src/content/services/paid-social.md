@@ -4,6 +4,9 @@ summary: Meta ad campaigns built from patterns in top-performing lead generation
 answer: Paid social lead generation works when the campaign is built around one clear offer, such as a consultation, an event or a useful guide, and measured by booked appointments rather than clicks. We build Meta campaigns from patterns found in top-performing lead generation campaigns, then test creative, audiences and follow-up until cost per appointment comes down.
 audience: Businesses ready to invest in a predictable flow of new prospect conversations.
 order: 3
+label: Paid social
+stage: reach
+pairsWith: [seminar-webinar-campaigns, marketing-automation, ai-search-visibility]
 status: active
 updated: 2026-10-14
 deliverables:

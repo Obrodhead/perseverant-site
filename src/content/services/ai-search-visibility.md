@@ -4,6 +4,9 @@ summary: Get your business named and cited when prospects ask ChatGPT, Claude, P
 answer: AI search visibility is the work of getting your business named and cited when prospects ask AI assistants who to hire. We find the questions your best customers ask, publish clear answers on pages AI crawlers can read, structure them with schema, and build the outside mentions that make your business a source those systems trust.
 audience: High-value service businesses that want to be the name AI assistants recommend in their market.
 order: 1
+label: AI search
+stage: understood
+pairsWith: [seo, marketing-automation, custom-tools]
 status: active
 updated: 2026-10-14
 deliverables:

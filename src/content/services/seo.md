@@ -4,6 +4,9 @@ summary: Technical, local and content SEO that brings qualified, high-intent pro
 answer: SEO for a high-value service business means making your site the strongest answer Google can find for the searches your best customers make. That covers a technically sound site, a complete local presence for every location and service area, and content that answers real buying questions better than your competitors do.
 audience: Businesses with one or more locations that want steady inbound prospects from Google without paying for every click.
 order: 2
+label: SEO
+stage: understood
+pairsWith: [ai-search-visibility, paid-social, marketing-automation]
 status: active
 updated: 2026-10-14
 deliverables:

@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import ServiceStages from '../../components/ServiceStages.astro';
 import { site } from '../../site.config';
 import { activeServices } from '../../lib/content';
 import { graph, breadcrumbs, ORG_ID } from '../../lib/schema';
@@ -30,18 +31,7 @@ const schema = graph(
       <h1>Grassroots growth that draws your people, sharpened by precise paid media</h1>
       <p class="lede" style="color: var(--muted); font-size: var(--step-1); max-width: 56ch;">The foundation is earned: clear answers in Google and AI search, a strong local presence, events and follow-up that feel human. Paid media then reaches the right people at the right moment. Start with the piece that closes your biggest gap, and measure everything by booked appointments.</p>
     </header>
-    <ul class="service-grid" style="margin-bottom: 72px;">
-      {services.map((s, i) => (
-        <li>
-          <a href={`/services/${s.id}/`}>
-            <span class="num">{String(i + 1).padStart(2, '0')}</span>
-            <h2 style="font-size: 1.2rem;">{s.data.title}</h2>
-            <p>{s.data.summary}</p>
-            <span class="more">Learn more →</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div style="margin-bottom: 72px;"><ServiceStages level={2} /></div>
   </div>
   <CtaBand />
 </Base>

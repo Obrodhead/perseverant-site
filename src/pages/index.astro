@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
+import ServiceStages from '../components/ServiceStages.astro';
+import { stageOf } from '../lib/stages';
 import { site } from '../site.config';
 import { activeServices, activeIndustries, publishedInsights, displayDate, isoDate } from '../lib/content';
 import { graph, organization, person, website } from '../lib/schema';
@@ -9,6 +11,24 @@ const services = await activeServices();
 const industries = await activeIndustries();
 const insights = (await publishedInsights()).slice(0, 3);
 const schema = graph(organization(), person(), website());
+
+// Rings art: one dot per service, ordered by stage around the arc (left to right),
+// each a link whose line runs to the seed (the client's business).
+const CX = 200, CY = 300, R = 222, END = 40;
+const angles = services.length === 6 ? [168, 144, 108, 72, 36, 12]
+  : services.map((_, i) => 168 - (i * 156) / Math.max(services.length - 1, 1));
+const dots = services.map((s, i) => {
+  const a = (angles[i] * Math.PI) / 180;
+  const f = (n: number) => n.toFixed(1);
+  return {
+    href: `/services/${s.id}/`,
+    label: s.data.label,
+    aria: `${s.data.title}, ${stageOf(s.data.stage).name.toLowerCase()}`,
+    x: f(CX + R * Math.cos(a)), y: f(CY - R * Math.sin(a)),
+    x2: f(CX + END * Math.cos(a)), y2: f(CY - END * Math.sin(a)),
+    ly: f(CY - R * Math.sin(a) - 13),
+  };
+});
 ---
 <Base title={site.name} description={site.description} schema={schema}>
   <section class="hero">
@@ -25,26 +45,28 @@ const schema = graph(organization(), person(), website());
         <a class="btn btn-secondary" href="/industries/">See industries</a>
       </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 400 320" focusable="false">
-          <path class="ring" style="--i:0" d="M170 300A30 30 0 0 1 230 300" pathLength="1"/>
-          <path class="ring" style="--i:1" d="M148 300A52 52 0 0 1 252 300" pathLength="1"/>
-          <path class="ring" style="--i:2" d="M124 300A76 76 0 0 1 276 300" pathLength="1"/>
-          <path class="ring" style="--i:3" d="M98 300A102 102 0 0 1 302 300" pathLength="1"/>
-          <path class="ring" style="--i:4" d="M70 300A130 130 0 0 1 330 300" pathLength="1"/>
-          <path class="ring" style="--i:5" d="M40 300A160 160 0 0 1 360 300" pathLength="1"/>
-          <path class="ring" style="--i:6" d="M8 300A192 192 0 0 1 392 300" pathLength="1"/>
-          <g class="query" style="--q:0"><line x1="413.0" y1="230.8" x2="238.0" y2="287.6" pathLength="1"/><circle cx="413.0" cy="230.8" r="4.5"/></g>
-          <g class="query" style="--q:1"><line x1="375.4" y1="142.1" x2="229.7" y2="273.2" pathLength="1"/><circle cx="375.4" cy="142.1" r="4.5"/></g>
-          <g class="query" style="--q:2"><line x1="280.2" y1="101.6" x2="215.0" y2="262.9" pathLength="1"/><circle cx="280.2" cy="101.6" r="4.5"/></g>
-          <g class="query" style="--q:3"><line x1="174.9" y1="61.3" x2="195.8" y2="260.2" pathLength="1"/><circle cx="174.9" cy="61.3" r="4.5"/></g>
-          <g class="query" style="--q:4"><line x1="83.4" y1="113.4" x2="178.8" y2="266.1" pathLength="1"/><circle cx="83.4" cy="113.4" r="4.5"/></g>
-          <g class="query" style="--q:5"><line x1="3.3" y1="177.1" x2="166.1" y2="278.8" pathLength="1"/><circle cx="3.3" cy="177.1" r="4.5"/></g>
-          <g class="query" style="--q:6"><line x1="-11.5" y1="247.3" x2="161.2" y2="290.3" pathLength="1"/><circle cx="-11.5" cy="247.3" r="4.5"/></g>
-          <line class="ground" x1="0" y1="300" x2="400" y2="300"/>
-          <circle class="seed" cx="200" cy="300" r="9"/>
+      <nav class="hero-art" aria-label="Services">
+        <svg viewBox="-56 58 512 254" focusable="false" role="group" aria-labelledby="rings-title">
+          <title id="rings-title">Six services, three stages, one system around your business</title>
+          <g aria-hidden="true">
+            {[30, 52, 76, 102, 130, 160, 192].map((r, i) => (
+              <path class="ring" style={`--i:${i}`} d={`M${CX - r} ${CY}A${r} ${r} 0 0 1 ${CX + r} ${CY}`} pathLength="1"/>
+            ))}
+          </g>
+          {dots.map((d, i) => (
+            <a class="query" style={`--q:${i}`} href={d.href} aria-label={d.aria}>
+              <line x1={d.x} y1={d.y} x2={d.x2} y2={d.y2} pathLength="1"/>
+              <circle class="hit" cx={d.x} cy={d.y} r="22"/>
+              <circle class="dot" cx={d.x} cy={d.y} r="5"/>
+              <text x={d.x} y={d.ly} text-anchor="middle">{d.label}</text>
+            </a>
+          ))}
+          <g aria-hidden="true">
+            <line class="ground" x1="-56" y1="300" x2="456" y2="300"/>
+            <circle class="seed" cx="200" cy="300" r="9"/>
+          </g>
         </svg>
-      </div>
+      </nav>
     </div>
   </section>
 
@@ -74,21 +96,10 @@ const schema = graph(organization(), person(), website());
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Services</p>
-        <h2>Every channel a prospect uses before they call you.</h2>
-        <p>Pick one or combine them. Each service is measured by booked appointments, not clicks.</p>
+        <h2>Three stages, one system.</h2>
+        <p>Each stage makes the next one work harder. Being understood lowers the cost of every ad and event. Fast, human follow-up turns that interest into booked appointments. Start where your biggest gap is.</p>
       </div>
-      <ul class="service-grid">
-        {services.map((s, i) => (
-          <li>
-            <a href={`/services/${s.id}/`}>
-              <span class="num">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{s.data.title}</h3>
-              <p>{s.data.summary}</p>
-              <span class="more">Learn more →</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <ServiceStages />
     </div>
   </section>
 

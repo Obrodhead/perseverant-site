@@ -4,6 +4,9 @@ summary: Custom apps, AI workflows and integrations that replace costly third-pa
 answer: Sometimes the right fix is a small custom tool instead of another subscription. We build focused apps, AI-assisted workflows and integrations that replace costly third-party tools, fit the way your team already works, and remove repetitive manual marketing work. Each build starts with a workflow review, so we only automate what is worth automating.
 audience: Businesses paying for tools that only half fit, or doing repetitive marketing tasks by hand.
 order: 6
+label: Custom tools
+stage: follow-through
+pairsWith: [marketing-automation, ai-search-visibility, paid-social]
 status: active
 updated: 2026-10-14
 deliverables:

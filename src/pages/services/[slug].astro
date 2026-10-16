@@ -7,6 +7,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../site.config';
 import { activeServices, activeIndustries, activeGuides, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
+import { stageOf } from '../../lib/stages';
 
 export async function getStaticPaths() {
   const services = await activeServices();
@@ -22,6 +23,9 @@ const guideList = await activeGuides();
 const guides = allIndustries
   .map((i) => ({ industry: i, guide: guideList.find((g) => g.data.industry === i.id) }))
   .filter((x): x is { industry: typeof x.industry; guide: NonNullable<typeof x.guide> } => !!x.guide);
+const stage = stageOf(d.stage);
+const works = d.pairsWith.map((id) => others.find((o) => o.id === id)).filter((o): o is NonNullable<typeof o> => !!o);
+const related = works.length ? works : others.slice(0, 3);
 const industries = (await activeIndustries()).filter((i) => i.data.services.includes(entry.id));
 
 const schema = graph(
@@ -67,6 +71,10 @@ const schema = graph(
         <Faq faqs={d.faqs} />
       </article>
       <aside class="aside">
+        <div class="aside-box aside-stage">
+          <h2>Where it fits</h2>
+          <p><span class="num">Stage {stage.num} of 3</span><a href={`/services/#stage-${stage.id}`}>{stage.name}</a>. {stage.line}</p>
+        </div>
         {guides.length > 0 && (
           <div class="aside-box aside-guide">
             <h2>Free guide for your industry</h2>
@@ -88,8 +96,8 @@ const schema = graph(
           </div>
         )}
         <div class="aside-box">
-          <h2>Related services</h2>
-          <ul>{others.slice(0, 3).map((o) => <li><a href={`/services/${o.id}/`}>{o.data.title}</a></li>)}</ul>
+          <h2>Works with</h2>
+          <ul>{related.map((o) => <li><a href={`/services/${o.id}/`}>{o.data.title}</a></li>)}</ul>
         </div>
       </aside>
     </div>

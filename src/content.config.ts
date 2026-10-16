@@ -16,6 +16,12 @@ const services = defineCollection({
     deliverables: z.array(z.string()).min(1),
     faqs: z.array(faq).default([]),
     order: z.number().default(100),
+    // Short name for the homepage rings art, e.g. "AI search"
+    label: z.string(),
+    // Where the service sits in the system (see src/lib/stages.ts)
+    stage: z.enum(['understood', 'reach', 'follow-through']),
+    // Service ids this one works best with, shown as "Works with" on the service page
+    pairsWith: z.array(z.string()).default([]),
     // active = live everywhere; paused = removed from nav, sitemap and llms.txt
     status: z.enum(['active', 'paused']).default('active'),
     updated: z.coerce.date(),

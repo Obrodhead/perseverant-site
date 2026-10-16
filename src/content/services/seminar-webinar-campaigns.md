@@ -4,6 +4,9 @@ summary: End-to-end seminar and webinar campaigns, from invitation ads to remind
 answer: A seminar or webinar campaign gives prospects a low-pressure way to see your expertise before they ever book an appointment. We run the full campaign, including topic and offer, registration page, invitation ads, reminder sequences that lift attendance, and follow-up that turns attendees into scheduled consultations.
 audience: Businesses with an expert who presents well, such as an attorney, practitioner or community director.
 order: 4
+label: Events
+stage: reach
+pairsWith: [paid-social, marketing-automation, ai-search-visibility]
 status: active
 updated: 2026-10-14
 deliverables:
