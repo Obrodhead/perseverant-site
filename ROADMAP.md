@@ -29,6 +29,8 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Build a monthly check of how ChatGPT, Claude, Perplexity and Google AI Overviews answer target questions, and log results
 
 ## Later
+- [ ] Homepage rings: give each service its own ring segment (a faint orbit arc through the six dots, one segment per service) so hovering a service can darken "its" ring; needs a small markup change in `src/pages/index.astro`
+- [ ] Consider showing a compact version of the rings art on mobile (currently desktop only)
 - [ ] Validate the estate security niche: keyword volumes and CPCs (safe room, panic room, residential security assessment) for Palm Beach County; check the local pack and AI answers; talk to 5 local architects or estate managers
 - [ ] Consider a second estate security market page (Greater Los Angeles: wildfire rebuild hardening)
 - [ ] Move lead forms from Web3Forms to the CRM (or a Cloudflare Worker) once a CRM is chosen; keep the `form` and `page` fields
@@ -38,6 +40,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-16: Visual personality pass (CSS only, copy and layout unchanged): Fibonacci motion tokens and spring easing; homepage rings as a cross-section (uneven, slightly eccentric years, earlywood bands, grow from the seed outward, warm light behind); cards and sections sprout on scroll (scroll-driven, gated behind reduced-motion and `@supports`, finished page by default); card lift with canopy shadows; root-like "Learn more" underline and stepping arrow; double-ring focus; ring glyphs on eyebrows and "How we work"; ring markers on stage numbers; one organic section divider; faint paper grain; footer as soil with deepened muted text; Thoreau and Aurelius quotes share a seed-and-ring-line style; breathing ring on the CTA button; `text-wrap: pretty`, `::selection`, `accent-color`. Lighthouse unchanged (100, CLS 0); inline CSS 3.98 KB → 5.71 KB gzipped
 - 2026-10-16: Email signature updated to the new wordmark: hosted image at /email/wordmark.png (Young Serif rendered as PNG, since email clients ignore web fonts), text in Georgia
 - 2026-10-16: New header wordmark: "Perseverant" in Young Serif with "Digital" in muted green (option 11 from the wordmark exploration); logo unchanged
 - 2026-10-16: Services organized as one system in three stages (Be understood: AI search + SEO; Meet them in the middle: paid social + events; Follow through: automation + custom tools). Homepage rings dots are now links, one per service, ordered by stage around the arc. Homepage and /services/ group cards by stage; each service page shows "Where it fits" and a curated "Works with" list; llms.txt groups services by stage. Stage copy in `src/lib/stages.ts`; service files set `label`, `stage`, `pairsWith`

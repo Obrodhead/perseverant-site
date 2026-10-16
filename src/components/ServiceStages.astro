@@ -26,7 +26,7 @@ const groups = stages
             <a href={`/services/${s.id}/`}>
               <CardTag>{s.data.title}</CardTag>
               <p>{s.data.summary}</p>
-              <span class="more">Learn more →</span>
+              <span class="more">Learn more <span class="arr" aria-hidden="true">→</span></span>
             </a>
           </li>
         ))}

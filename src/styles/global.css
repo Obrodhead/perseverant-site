@@ -24,12 +24,40 @@
 
   --measure: 68ch;
   --wide: 1120px;
+
+  /* Shades derived from pine and seed; no new hues. Mixes with transparent use oklch; mixes between two colors use oklab. */
+  --pine-tint: color-mix(in oklch, var(--pine) 9%, transparent);
+  --pine-glow: color-mix(in oklch, var(--pine) 45%, transparent);
+  --select: color-mix(in oklab, var(--pine) 20%, var(--paper));
+  --muted-deep: color-mix(in oklab, var(--muted) 78%, var(--ink));
+  --soil: color-mix(in oklab, var(--panel) 92%, var(--seed) 8%); /* oklab: oklch hue interpolation pulls near-neutral grays straight to gold */
+  /* Light through a canopy: layered, low-opacity, tinted with the brand hue */
+  --shadow-canopy:
+    0 1px 2px color-mix(in oklch, var(--pine-deep) 10%, transparent),
+    0 6px 14px -6px color-mix(in oklch, var(--pine-deep) 16%, transparent),
+    0 18px 34px -16px color-mix(in oklch, var(--pine) 22%, transparent);
+
+  /* Motion: nothing in nature snaps. Durations follow Fibonacci. */
+  --ease-grow: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: linear(0, 0.109, 0.342, 0.593, 0.805, 0.954, 1.041, 1.078, 1.082, 1.068, 1.047, 1.027, 1.011, 1.003, 1 58%, 1);
+  --dur-1: 144ms;
+  --dur-2: 233ms;
+  --dur-3: 377ms;
+  --dur-4: 610ms;
+  --dur-5: 987ms;
+
   color-scheme: light;
+  accent-color: var(--pine);
 }
+@supports not (transition-timing-function: linear(0, 1)) {
+  :root { --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1); }
+}
+::selection { background: var(--select); color: var(--ink); }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
+  position: relative;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -40,13 +68,20 @@ body {
 img { max-width: 100%; height: auto; }
 a { color: var(--pine); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
 a:hover { color: var(--pine-deep); text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--pine); outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--pine); outline-offset: 4px; box-shadow: 0 0 0 1.5px var(--pine-glow); border-radius: 2px; } /* two rings, like growth rings */
 
 h1, h2, h3, h4 { font-family: var(--display); line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; margin: 0; color: var(--ink); }
 h1 { font-size: clamp(1.56rem, 3.575vw, 2.34rem); font-weight: 700; } /* 65% of --step-4 */
 h2 { font-size: var(--step-2); font-weight: 700; }
 h3 { font-size: var(--step-1); font-weight: 600; }
 p { margin: 0; }
+p, li, blockquote { text-wrap: pretty; }
+
+/* Organic grain: one tiled noise layer, scrolls with the page, never intercepts input */
+body::after {
+  content: ''; position: absolute; inset: 0; z-index: 50; pointer-events: none; opacity: 0.03;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px;
+}
 
 .container {
   width: 100%;
@@ -64,6 +99,12 @@ p { margin: 0; }
   text-transform: uppercase;
   color: var(--muted);
 }
+/* Ring glyph: a thin ring around a seed pith, the logo in miniature */
+.eyebrow::before, .principles h3::before {
+  content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; box-sizing: border-box;
+  border: 1.25px solid var(--pine); background: radial-gradient(circle, var(--seed) 0 1.1px, transparent 1.5px);
+}
+.eyebrow::before { margin-right: 0.65em; vertical-align: 0.05em; }
 
 /* Header */
 .site-header { border-bottom: 1px solid var(--line); }
@@ -77,7 +118,11 @@ p { margin: 0; }
 .site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--pine); text-decoration: underline; }
 
 /* Buttons */
-.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 600; font-size: 1rem; padding: 12px 20px; border-radius: 4px; text-decoration: none; border: 1.5px solid var(--pine); }
+.btn { position: relative; display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 600; font-size: 1rem; padding: 12px 20px; border-radius: 4px; text-decoration: none; border: 1.5px solid var(--pine); transition: transform var(--dur-2) var(--ease-spring); }
+.btn::after { content: ''; position: absolute; inset: -1.5px; border-radius: inherit; box-shadow: var(--shadow-canopy); opacity: 0; pointer-events: none; transition: opacity var(--dur-3) var(--ease-grow); }
+.btn:hover { transform: translateY(-2px); }
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: translateY(0); }
 .btn-primary { background: var(--pine); color: var(--on-pine); }
 .btn-primary:hover { background: var(--pine-deep); color: var(--on-pine); text-decoration: none; }
 .btn-secondary { color: var(--pine); background: transparent; }
@@ -96,32 +141,35 @@ p { margin: 0; }
   .hero-art { display: block; }
   .hero-art svg { width: 100%; height: auto; overflow: visible; }
 }
-/* Growth rings: echo the logo, fade outward, draw in once on load */
-.hero-art .ring { fill: none; stroke: var(--pine); stroke-width: 2.4; stroke-linecap: round;
-  opacity: calc(0.85 - var(--i) * 0.11); stroke-dasharray: 1; stroke-dashoffset: 1;
-  animation: ring-draw 1.4s cubic-bezier(.3,.7,.2,1) forwards; animation-delay: calc(var(--i) * 0.14s); }
-.hero-art .query { opacity: 0; animation: query-in 0.8s ease-out forwards; animation-delay: calc(1.1s + var(--q) * 0.12s); text-decoration: none; }
-.hero-art .query line { stroke: var(--seed); stroke-width: 1.2; stroke-dasharray: 0.02 0.03; opacity: 0.55; transition: opacity .2s, stroke-width .2s; }
+/* Growth rings: a living cross-section. Uneven, slightly eccentric years (set in index.astro),
+   each a pale earlywood band inside a thin latewood edge, fading outward from the seed. */
+/* Warm light on a cut stump, stopping at the ground line (95.3% of the art's height) */
+.hero-art { background: radial-gradient(ellipse 58% 90% at 50% 100%, color-mix(in oklch, var(--seed) 10%, transparent), transparent 72%) top / 100% 95.3% no-repeat; }
+.hero-art .ring { opacity: calc(0.85 - var(--i) * 0.11); pointer-events: none; }
+.hero-art .ring path { fill: none; }
+.hero-art .late { stroke: var(--pine); stroke-width: 2.2; stroke-linecap: round; }
+.hero-art .early { stroke: var(--pine-tint); }
+.hero-art .query { text-decoration: none; }
+.hero-art .query line { stroke: var(--seed); stroke-width: 1.2; stroke-dasharray: 0.02 0.03; opacity: 0.55; transition: opacity var(--dur-2) var(--ease-grow); }
+.hero-art .query .beam { stroke-width: 1.8; stroke-dasharray: none; opacity: 0; }
 .hero-art .query .hit { fill: transparent; }
-.hero-art .query .dot { fill: var(--pine); transform-box: fill-box; transform-origin: center; transition: transform .2s, fill .2s; }
-.hero-art .query text { font-family: var(--display); font-size: 12.5px; font-weight: 600; fill: var(--muted); letter-spacing: .01em; transition: fill .2s; }
-.hero-art .query:hover line, .hero-art .query:focus-visible line { opacity: 1; stroke-width: 1.8; stroke-dasharray: none; }
+.hero-art .query .dot { fill: var(--pine); transform-box: fill-box; transform-origin: center; transition: transform var(--dur-2) var(--ease-spring); }
+.hero-art .query text { font-family: var(--display); font-size: 12.5px; font-weight: 600; fill: var(--muted); letter-spacing: .01em; }
+.hero-art .query:hover line, .hero-art .query:focus-visible line { opacity: 0.2; }
+.hero-art .query:hover .beam, .hero-art .query:focus-visible .beam { opacity: 1; }
 .hero-art .query:hover .dot, .hero-art .query:focus-visible .dot { transform: scale(1.6); fill: var(--seed); }
 .hero-art .query:hover text, .hero-art .query:focus-visible text { fill: var(--pine-deep); }
-.hero-art .query:focus-visible { outline: none; }
+.hero-art .query:focus-visible { outline: none; box-shadow: none; }
 .hero-art .query:focus-visible text { text-decoration: underline; }
-@keyframes query-in { to { opacity: 1; } }
 .hero-art .ground { stroke: var(--line); stroke-width: 1.5; }
 .hero-art .seed { fill: var(--seed); }
-@keyframes ring-draw { to { stroke-dashoffset: 0; } }
-@media (prefers-reduced-motion: reduce) { .hero-art .ring { animation: none; stroke-dashoffset: 0; } .hero-art .query { animation: none; opacity: 1; } .hero-art .query * { transition: none; } }
 
 /* Services grouped by stage */
 .stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 40px; }
 @media (min-width: 900px) { .stages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; } }
 .stage { display: grid; grid-template-rows: auto 1fr; gap: 18px; min-width: 0; }
 .stage-head { display: grid; gap: 6px; align-content: start; }
-.stage-head .num { font-family: var(--mono); font-size: 0.78rem; color: var(--seed); }
+.stage-head .num { font-family: var(--mono); font-size: 0.78rem; color: var(--seed); justify-self: start; display: inline-grid; place-items: center; width: 2.3em; height: 2.3em; margin-block: -3px; border-radius: 50%; border: 1px solid color-mix(in oklch, var(--seed) 70%, transparent); box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px color-mix(in oklch, var(--seed) 30%, transparent); font-variant-numeric: tabular-nums; } /* stage numbers as ring markers */
 .stage-name { font-size: 1.15rem; }
 .stage-head p { color: var(--muted); font-size: 0.96rem; line-height: 1.55; }
 .stage-grid { grid-template-columns: 1fr; align-content: start; align-self: start; }
@@ -131,22 +179,33 @@ p { margin: 0; }
 /* Sections */
 .section { padding-block: clamp(48px, 7vw, 88px); }
 .section + .section { border-top: 1px solid var(--line); }
+/* One divider drawn as a growth line instead of a rule */
+.section + .section.section-arc { border-top: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 12' preserveAspectRatio='none'%3E%3Cpath d='M0 .5C260 .5 420 1.5 560 5.5S820 11 980 7 1120 1.5 1200 1' fill='none' stroke='%23d4dacf' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") top center / 100% 12px no-repeat; }
 .section-head { display: grid; gap: 10px; margin-bottom: 32px; max-width: 60ch; }
 .section-head p { color: var(--muted); }
 
 /* Service grid */
 .service-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .service-grid li { background: var(--paper); min-width: 0; }
-.service-grid a { display: grid; gap: 10px; padding: 26px 24px 28px; height: 100%; color: inherit; text-decoration: none; }
-.service-grid a:hover { background: var(--panel); }
+.service-grid a { position: relative; isolation: isolate; display: grid; gap: 10px; padding: 26px 24px 28px; height: 100%; color: inherit; text-decoration: none; transition: transform var(--dur-3) var(--ease-spring); }
+.service-grid a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--panel); box-shadow: var(--shadow-canopy); opacity: 0; pointer-events: none; transition: opacity var(--dur-3) var(--ease-grow); }
+.service-grid li:hover, .service-grid li:focus-within { position: relative; z-index: 1; }
+.service-grid a:hover { transform: translateY(-2px); }
+.service-grid a:hover::before, .service-grid a:focus-visible::before { opacity: 1; }
 .service-grid .num { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
 .service-grid h3 { font-size: 1.2rem; }
 .service-grid p { color: var(--muted); font-size: 0.98rem; line-height: 1.55; }
-.service-grid .more { font-family: var(--display); font-size: 0.92rem; color: var(--pine); font-weight: 600; }
+.service-grid .more { font-family: var(--display); font-size: 0.92rem; color: var(--pine); font-weight: 600; justify-self: start; position: relative; }
+/* The underline grows left to right like a root; the arrow steps forward */
+.service-grid .more::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--dur-3) var(--ease-grow); }
+.service-grid .more .arr { display: inline-block; transition: transform var(--dur-2) var(--ease-spring); }
+.service-grid a:hover .more::after, .service-grid a:focus-visible .more::after { transform: scaleX(1); }
+.service-grid a:hover .arr, .service-grid a:focus-visible .arr { transform: translateX(4px); }
 
 /* Principles */
 .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
-.principles div { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.principles div { position: relative; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.principles h3::before { position: absolute; left: -16px; top: 0.5em; }
 .principles h3 { font-size: 1.1rem; }
 .principles p { color: var(--muted); font-size: 0.98rem; }
 
@@ -176,8 +235,13 @@ p { margin: 0; }
 .aside-box h2 { font-size: 1rem; font-family: var(--mono); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .aside-box ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 0.98rem; }
 
-/* Pull quote */
-.pull-quote { margin: 0.4em 0; padding: 4px 0 4px 20px; border-left: 2px solid var(--seed); display: grid; gap: 6px; }
+/* Pull quote and footer quote share one voice: a seed atop a double ring-line */
+.pull-quote, .quote { position: relative; hanging-punctuation: first; padding-left: 22px;
+  background:
+    linear-gradient(var(--seed), var(--seed)) 3px 14px / 2px calc(100% - 14px) no-repeat,
+    linear-gradient(color-mix(in oklch, var(--seed) 40%, transparent), color-mix(in oklch, var(--seed) 40%, transparent)) 8px 18px / 1px calc(100% - 18px) no-repeat; }
+.pull-quote::before, .quote::before { content: ''; position: absolute; left: 0; top: 2px; width: 8px; height: 8px; border-radius: 50%; background: var(--seed); box-shadow: 0 0 0 2px color-mix(in oklch, var(--seed) 22%, transparent); }
+.pull-quote { margin: 0.4em 0; padding-block: 4px; display: grid; gap: 6px; }
 .pull-quote p { font-style: italic; font-size: 1.15rem; line-height: 1.5; color: var(--ink); }
 .pull-quote cite { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
 
@@ -206,23 +270,60 @@ p { margin: 0; }
 .cta-band p { max-width: 52ch; opacity: 0.9; }
 .cta-band .btn-primary { background: var(--on-pine); color: var(--pine-deep); border-color: var(--on-pine); }
 .cta-band .btn-primary:hover { background: #ffffff; color: var(--pine-deep); }
+.cta-band .btn-primary::before { content: ''; position: absolute; inset: -8px; border-radius: 10px; border: 1px solid color-mix(in oklch, var(--on-pine) 35%, transparent); pointer-events: none; }
 
 /* Footer */
-.site-footer { border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--muted); }
+/* Footer as soil: a deeper, warmer ground. Muted text deepens with it so contrast holds. */
+.site-footer { --muted: var(--muted-deep); border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--muted); background: var(--soil); }
 .site-footer .container { padding-block: 40px 48px; display: grid; gap: 28px; }
 .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; }
 .footer-grid h2 { font-family: var(--mono); font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .footer-grid a { color: var(--ink); text-decoration: none; }
 .footer-grid a:hover { color: var(--pine); text-decoration: underline; }
-.quote { font-style: italic; max-width: 52ch; color: var(--ink); }
-.quote cite { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); display: block; margin-top: 6px; }
+.quote { font-style: italic; max-width: 54ch; color: var(--ink); font-size: 1.15rem; line-height: 1.6; padding-block: 6px; }
+.quote::before { top: 0.55em; box-shadow: 0 0 0 2px var(--soil), 0 0 0 3px color-mix(in oklch, var(--seed) 35%, transparent); }
+.quote cite { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); display: block; margin-top: 10px; }
 .fineprint { font-family: var(--mono); font-size: 0.75rem; }
 
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 16px; top: 16px; background: var(--paper); padding: 8px 12px; z-index: 10; }
 
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  *, *::before, *::after { transition-duration: 0s !important; }
+}
+
+/* Motion. Everything above is the finished page. Entrances only run where motion is welcome
+   AND scroll-driven animation is supported, so crawlers, older browsers and reduced-motion
+   visitors always get complete, static content. */
+@keyframes ring-grow { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes sprout { from { opacity: 0; transform: translateY(14px); } }
+@keyframes breathe { 50% { transform: scale(1.015); } }
+.service-grid li:nth-child(2), .principles > div:nth-child(2), .post-list li:nth-child(2) { --i: 1; }
+.service-grid li:nth-child(3), .principles > div:nth-child(3), .post-list li:nth-child(3) { --i: 2; }
+.service-grid li:nth-child(4), .principles > div:nth-child(4) { --i: 3; }
+.service-grid li:nth-child(5) { --i: 4; }
+.service-grid li:nth-child(6) { --i: 5; }
+.stage:nth-child(2) { --s: 1; }
+.stage:nth-child(3) { --s: 2; }
+.stage .stage-grid li { --i: var(--s, 0); }
+@media (max-width: 639px) { .service-grid li, .principles > div, .post-list li, .stage .stage-grid li { --i: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .cta-band .btn-primary::before { animation: breathe 6s ease-in-out infinite; }
+  @supports (animation-timeline: view()) {
+    /* Rings grow from the seed outward on first paint */
+    .hero-art .ring path { stroke-dasharray: 1; animation: ring-grow var(--dur-5) var(--ease-grow) calc(120ms + var(--i) * 89ms) both; }
+    .hero-art .query { animation: fade-in var(--dur-4) var(--ease-grow) calc(700ms + var(--q) * 89ms) both; }
+    /* Sections and cards sprout once as they enter */
+    .section-head, .stage-head, .service-grid li > a, .principles > div, .post-list li {
+      animation: sprout var(--ease-grow) both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, var(--s, 0)) * 4%) cover calc(30% + var(--i, var(--s, 0)) * 4%);
+    }
+  }
+}
 
 /* Lead magnet offer on service pages */
 .guide-offer { margin-top: 1.4em; border: 1px solid var(--line); border-top: 3px solid var(--seed); background: var(--panel); padding: clamp(20px, 4vw, 32px); border-radius: 4px; display: grid; gap: 12px; scroll-margin-top: 24px; }
@@ -242,7 +343,7 @@ p { margin: 0; }
   background: #fff; border: 1px solid #b9c2b5; border-radius: 4px; padding: 10px 12px; min-height: 44px;
 }
 .lead-form textarea { resize: vertical; }
-.lead-form input:focus-visible, .lead-form select:focus-visible, .lead-form textarea:focus-visible { outline: 2px solid var(--pine); outline-offset: 1px; }
+.lead-form input:focus-visible, .lead-form select:focus-visible, .lead-form textarea:focus-visible { outline: 2px solid var(--pine); outline-offset: 3px; }
 .field-row { display: grid; gap: 14px; }
 @media (min-width: 640px) { .field-row { grid-template-columns: 1fr 1fr; } }
 .lead-form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-family: var(--body); }

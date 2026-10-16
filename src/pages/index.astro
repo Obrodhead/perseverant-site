@@ -29,6 +29,20 @@ const dots = services.map((s, i) => {
     ly: f(CY - R * Math.sin(a) - 13),
   };
 });
+
+// Growth rings: uneven years (gaps vary about ±10–15%), slightly eccentric like real wood.
+// Each ring is a pale earlywood band inside a thin latewood edge; the seed is the pith.
+const RADII = [30, 49, 75, 98, 129, 157, 192];
+const DX = [0, 1, -1.5, 2, -1, 2.5, -2];          // center nudges, px
+const RY = [1, 1.02, 0.985, 1.025, 0.99, 1.03, 0.985]; // vertical radius factor
+const arc = (cx: number, r: number, k: number) =>
+  `M${(cx - r).toFixed(1)} ${CY}A${r.toFixed(1)} ${(r * k).toFixed(1)} 0 0 1 ${(cx + r).toFixed(1)} ${CY}`;
+const rings = RADII.map((r, i) => {
+  const gap = r - (i === 0 ? 14 : RADII[i - 1]);
+  const w = +(gap * 0.5).toFixed(1);
+  const cx = CX + DX[i];
+  return { i, w, edge: arc(cx, r, RY[i]), band: arc(cx, r - 1.4 - w / 2, RY[i]) };
+});
 ---
 <Base title={site.name} description={site.description} schema={schema}>
   <section class="hero">
@@ -49,13 +63,17 @@ const dots = services.map((s, i) => {
         <svg viewBox="-56 58 512 254" focusable="false" role="group" aria-labelledby="rings-title">
           <title id="rings-title">Six services, three stages, one system around your business</title>
           <g aria-hidden="true">
-            {[30, 52, 76, 102, 130, 160, 192].map((r, i) => (
-              <path class="ring" style={`--i:${i}`} d={`M${CX - r} ${CY}A${r} ${r} 0 0 1 ${CX + r} ${CY}`} pathLength="1"/>
+            {rings.map((g) => (
+              <g class="ring" style={`--i:${g.i}`}>
+                <path class="early" d={g.band} stroke-width={g.w} pathLength="1"/>
+                <path class="late" d={g.edge} pathLength="1"/>
+              </g>
             ))}
           </g>
           {dots.map((d, i) => (
             <a class="query" style={`--q:${i}`} href={d.href} aria-label={d.aria}>
               <line x1={d.x} y1={d.y} x2={d.x2} y2={d.y2} pathLength="1"/>
+              <line class="beam" x1={d.x} y1={d.y} x2={d.x2} y2={d.y2}/>
               <circle class="hit" cx={d.x} cy={d.y} r="22"/>
               <circle class="dot" cx={d.x} cy={d.y} r="5"/>
               <text x={d.x} y={d.ly} text-anchor="middle">{d.label}</text>
@@ -84,7 +102,7 @@ const dots = services.map((s, i) => {
               <span class="num">{s.data.examples.slice(0, 3).join(' · ')}</span>
               <h3>{s.data.label}</h3>
               <p>{s.data.summary}</p>
-              <span class="more">Learn more →</span>
+              <span class="more">Learn more <span class="arr" aria-hidden="true">→</span></span>
             </a>
           </li>
         ))}
@@ -92,7 +110,7 @@ const dots = services.map((s, i) => {
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-arc">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Services</p>
