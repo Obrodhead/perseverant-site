@@ -37,6 +37,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-16: Industries page intro rewritten: new H1 ("Careful decisions start with research", no longer duplicating the homepage H2) and a shorter paragraph without the partial industry list or the unsourced "research for weeks" claim
 - 2026-10-16: Trailing-dot hostname (perseverantdigital.com.) now 301s to perseverantdigital.com via a small Worker (`worker/index.js`, runs before static assets); relative links had been keeping visitors on the dotted host
 - 2026-10-15: Added Google Analytics tag (G-6RMHPXYY9K) to every page via the shared layout
 - 2026-10-15: Published insight: Has your AI been letting you down lately? You're not alone (hallucinations, over-reliance, model collapse, and whether AI-written sites hurt AI visibility; 10 dated sources)
