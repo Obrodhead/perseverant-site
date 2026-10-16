@@ -15,6 +15,7 @@ OUT = ROOT / "public" / "downloads"
 FONTS = ROOT / "node_modules" / "@fontsource"
 
 FACES = [  # family, package, file stem, weight, style
+    ("Young Serif", "young-serif", "young-serif-latin-400-normal", 400, "normal"),
     ("Schibsted Grotesk", "schibsted-grotesk", "schibsted-grotesk-latin-500-normal", 500, "normal"),
     ("Schibsted Grotesk", "schibsted-grotesk", "schibsted-grotesk-latin-600-normal", 600, "normal"),
     ("Schibsted Grotesk", "schibsted-grotesk", "schibsted-grotesk-latin-700-normal", 700, "normal"),

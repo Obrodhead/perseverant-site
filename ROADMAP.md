@@ -29,6 +29,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Build a monthly check of how ChatGPT, Claude, Perplexity and Google AI Overviews answer target questions, and log results
 
 ## Later
+- [ ] Guide PDFs: tighten page breaks (page 1 ends after the lede and some sections jump to the next page, leaving large gaps); likely `break-inside: avoid` on the short answer and tables
 - [ ] Homepage rings: give each service its own ring segment (a faint orbit arc through the six dots, one segment per service) so hovering a service can darken "its" ring; needs a small markup change in `src/pages/index.astro`
 - [ ] Consider showing a compact version of the rings art on mobile (currently desktop only)
 - [ ] Validate the estate security niche: keyword volumes and CPCs (safe room, panic room, residential security assessment) for Palm Beach County; check the local pack and AI answers; talk to 5 local architects or estate managers
@@ -40,6 +41,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-16: Guide PDFs now carry the current wordmark (Young Serif, "Digital" in muted green) beside the ring mark; Young Serif bundled for the PDF build (@fontsource/young-serif); paper grain and motion turned off in print
 - 2026-10-16: Published insight: Google is moving Local Services Ads into Performance Max (what changes, who moves first, one campaign-level target CPA, responsiveness as a ranking factor, pre-migration checklist; sources: Google Ads Help, Google Local Services Help, PPC Land). Links to home improvement and law firms pages
 - 2026-10-16: Visual personality pass (CSS only, copy and layout unchanged): Fibonacci motion tokens and spring easing; homepage rings as a cross-section (uneven, slightly eccentric years, earlywood bands, grow from the seed outward, warm light behind); cards and sections sprout on scroll (scroll-driven, gated behind reduced-motion and `@supports`, finished page by default); card lift with canopy shadows; root-like "Learn more" underline and stepping arrow; double-ring focus; ring glyphs on eyebrows and "How we work"; ring markers on stage numbers; one organic section divider; faint paper grain; footer as soil with deepened muted text; Thoreau and Aurelius quotes share a seed-and-ring-line style; breathing ring on the CTA button; `text-wrap: pretty`, `::selection`, `accent-color`. Lighthouse unchanged (100, CLS 0); inline CSS 3.98 KB → 5.71 KB gzipped
 - 2026-10-16: Email signature updated to the new wordmark: hosted image at /email/wordmark.png (Young Serif rendered as PNG, since email clients ignore web fonts), text in Georgia
