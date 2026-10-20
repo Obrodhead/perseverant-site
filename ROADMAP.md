@@ -44,6 +44,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-20: Service page sidebars merge "Industries" and the guide list into one "Free guide for your industry" box: only the industries that use that service, each linking straight to its guide offer, instead of every guide title
 - 2026-10-20: Industrial services guide published: "How to Win Planned Plant Work Before the Bid List Is Set" (worksheets: source tracker, outage calendar, prequalification checklist, engineer page checklist, touch schedule; branded PDF). Research and verified facts added to `docs/research/` (TREW/GlobalSpec 2026, 6sense 2025, ISNetworld, Siemens, LinkedIn)
 - 2026-10-20: Published insight: How do plant engineers choose a repair contractor in 2026? Insights can now set `guide:` to end with that guide's offer and form (and a matching CTA band)
 - 2026-10-20: Added a seventh industry, Industrial services (industrial repair, coatings and maintenance contractors; measured in booked site walkdowns; cites Siemens True Cost of Downtime 2024). New optional `group` field on industries; the industries page now shows a "Contractors" group (home improvement plus industrial services) above "More industries we serve". Industry lists updated in `site.config.ts` and About. Grid lines moved onto cells so short rows no longer leave gray blocks

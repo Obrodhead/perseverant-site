@@ -55,7 +55,8 @@ around the question owners in that industry search (for example "How to get roof
 never around our service names, so it serves owners rather than other agencies. Writing rules:
 `docs/research/industry-guide-spec.md`; facts only from `docs/research/guide-spec.md` with source and date.
 The industry page shows the offer and form; the guide is at `/guides/{id}/`, noindex and left out of the
-sitemap and llms.txt. Service pages link to each industry's guide. Each guide has a branded PDF in
+sitemap and llms.txt. Service pages show one "Free guide for your industry" box listing only the industries
+that include that service, each linking to its guide offer (`/industries/{id}/#guide`). Each guide has a branded PDF in
 `public/downloads/` (committed). After changing a guide, run `npm run pdfs` (needs Python Playwright +
 Chromium) and commit the PDFs. Sources lists are filtered to what each guide cites (`src/lib/guides.ts`).
 Forms are plain HTML with no JavaScript (`src/components/LeadForm.astro`) posting to Web3Forms with hidden
