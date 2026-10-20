@@ -5,8 +5,9 @@ import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import GuideOffer from '../../components/GuideOffer.astro';
+import GuidePicker from '../../components/GuidePicker.astro';
 import { site } from '../../site.config';
-import { publishedInsights, isoDate, displayDate } from '../../lib/content';
+import { publishedInsights, activeIndustries, isoDate, displayDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID, PERSON_ID } from '../../lib/schema';
 
 export async function getStaticPaths() {
@@ -23,6 +24,7 @@ const updated = d.updated ?? d.published;
 const guide = d.guide ? await getEntry('guides', d.guide) : undefined;
 const activeGuide = guide && guide.data.status === 'active' ? guide : undefined;
 const guideIndustry = activeGuide ? await getEntry('industries', activeGuide.data.industry) : undefined;
+const allIndustries = activeGuide ? [] : await activeIndustries();
 
 const schema = graph(
   {
@@ -61,7 +63,9 @@ const schema = graph(
       <ShortAnswer text={d.answer} updated={updated} />
       <Content />
       <Faq faqs={d.faqs} />
-      {activeGuide && <GuideOffer guide={activeGuide} page={path} industryLabel={guideIndustry?.data.label ?? ''} />}
+      {activeGuide
+        ? <GuideOffer guide={activeGuide} page={path} industryLabel={guideIndustry?.data.label ?? ''} />
+        : <GuidePicker industries={allIndustries} variant="inline" />}
     </article>
   </div>
   {activeGuide

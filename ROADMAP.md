@@ -38,12 +38,17 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Add an automated reply email that sends the guide link (Web3Forms autoresponder is a paid feature, or do it in the CRM)
 - [ ] Owen reviews the six industry guides for voice; legal and healthcare guides reviewed before running ads to them
 - [ ] Case studies once clients approve them (real results only)
+- [ ] Add a short privacy page covering Google Analytics, the two path-tracking cookies and the Web3Forms form handling; link it in the footer
+- [ ] Monthly path review: read `path`, `landing` and `source` on each lead email, and run a GA4 Path exploration from /services/* and /insights/*; fix the pages where visitors stall
+- [ ] Send UTM tags on every LinkedIn, Meta and email link so `campaign` fills in on lead emails
 - [ ] Owen reviews the Industrial services page (`src/content/industries/industrial-services.md`) for voice
 - [ ] Mention LinkedIn as the B2B paid channel on the Paid Social page (industrial services and recruiting)
 - [ ] Owen reviews the industrial services guide and the plant-engineers insight for voice
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-20: Lead path tracking at the edge: the Worker records landing page, source, UTM/ad click ids and recent pages in two first-party cookies and adds them as hidden fields to every lead form, so each lead email shows the path to the form (no client JavaScript)
+- 2026-10-20: Insights without a `guide:` now end with an industry guide picker (short industry names linking to each guide offer) instead of only the generic contact banner; service sidebars use the same component
 - 2026-10-20: Service page sidebars merge "Industries" and the guide list into one "Free guide for your industry" box: only the industries that use that service, each linking straight to its guide offer, instead of every guide title
 - 2026-10-20: Industrial services guide published: "How to Win Planned Plant Work Before the Bid List Is Set" (worksheets: source tracker, outage calendar, prequalification checklist, engineer page checklist, touch schedule; branded PDF). Research and verified facts added to `docs/research/` (TREW/GlobalSpec 2026, 6sense 2025, ISNetworld, Siemens, LinkedIn)
 - 2026-10-20: Published insight: How do plant engineers choose a repair contractor in 2026? Insights can now set `guide:` to end with that guide's offer and form (and a matching CTA band)

@@ -60,7 +60,10 @@ that include that service, each linking to its guide offer (`/industries/{id}/#g
 `public/downloads/` (committed). After changing a guide, run `npm run pdfs` (needs Python Playwright +
 Chromium) and commit the PDFs. Sources lists are filtered to what each guide cites (`src/lib/guides.ts`).
 Forms are plain HTML with no JavaScript (`src/components/LeadForm.astro`) posting to Web3Forms with hidden
-`form`, `page` and `industry` fields, so every lead email says where it came from. Settings live in `leads`
+`form`, `page` and `industry` fields, so every lead email says where it came from. The Worker
+(`worker/index.js`) also adds `came_from`, `path`, `landing`, `source`, `campaign` and `first_seen` to every
+`form.lead-form` at the edge (see ARCHITECTURE.md); keep the `lead-form` class on any new form. Insights that
+set `guide:` end with that guide's form; others end with the industry guide picker (`GuidePicker.astro`). Settings live in `leads`
 in `src/site.config.ts`. Old service-guide URLs redirect in `public/_redirects`.
 
 ## Entity consistency

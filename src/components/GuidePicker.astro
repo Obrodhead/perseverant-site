@@ -1,0 +1,33 @@
+---
+// "Free guide for your industry": short industry names, each linking straight to that industry's
+// guide offer and form. Used in service page sidebars (industries that use the service) and at the
+// end of insights that don't set a single `guide:` (every industry with a guide).
+import type { CollectionEntry } from 'astro:content';
+import { activeGuides } from '../lib/content';
+
+interface Props {
+  industries: CollectionEntry<'industries'>[];
+  /** 'aside' for a sidebar box, 'inline' for the end of an article */
+  variant?: 'aside' | 'inline';
+}
+const { industries, variant = 'aside' } = Astro.props;
+const guideIds = new Set((await activeGuides()).map((g) => g.data.industry));
+const items = industries.map((i) => ({
+  label: i.data.label,
+  href: guideIds.has(i.id) ? `/industries/${i.id}/#guide` : `/industries/${i.id}/`,
+}));
+---
+{items.length > 0 && (variant === 'aside' ? (
+  <div class="aside-box aside-guide">
+    <h2>Free guide for your industry</h2>
+    <p>Pick your field for a guide built on what owners in it are asking.</p>
+    <ul>{items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+  </div>
+) : (
+  <section class="guide-picker" aria-labelledby="guide-picker-h">
+    <p class="eyebrow">Free guide</p>
+    <h2 id="guide-picker-h">Get the guide for your industry</h2>
+    <p>Each one is built on the questions owners in that field are asking, with worksheets you can use this week.</p>
+    <ul>{items.map((i) => <li><a href={i.href}>{i.label} <span class="arr" aria-hidden="true">→</span></a></li>)}</ul>
+  </section>
+))}

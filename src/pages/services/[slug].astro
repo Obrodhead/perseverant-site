@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import GuidePicker from '../../components/GuidePicker.astro';
 import { site } from '../../site.config';
 import { activeServices, activeIndustries, activeGuides, isoDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID } from '../../lib/schema';
@@ -23,7 +24,6 @@ const guideList = await activeGuides();
 const guides = allIndustries
   .map((i) => ({ industry: i, guide: guideList.find((g) => g.data.industry === i.id) }))
   .filter((x): x is { industry: typeof x.industry; guide: NonNullable<typeof x.guide> } => !!x.guide);
-const guideIds = new Set(guides.map((g) => g.industry.id));
 const stage = stageOf(d.stage);
 const works = d.pairsWith.map((id) => others.find((o) => o.id === id)).filter((o): o is NonNullable<typeof o> => !!o);
 const related = works.length ? works : others.slice(0, 3);
@@ -76,15 +76,7 @@ const schema = graph(
           <h2>Where it fits</h2>
           <p><span class="num">Stage {stage.num} of 3</span><a href={`/services/#stage-${stage.id}`}>{stage.name}</a>. {stage.line}</p>
         </div>
-        {industries.length > 0 ? (
-          <div class="aside-box aside-guide">
-            <h2>Free guide for your industry</h2>
-            <p>Pick your field for a guide built on what owners in it are asking.</p>
-            <ul>{industries.map((i) => (
-              <li><a href={guideIds.has(i.id) ? `/industries/${i.id}/#guide` : `/industries/${i.id}/`}>{i.data.label}</a></li>
-            ))}</ul>
-          </div>
-        ) : guides.length > 0 && (
+        {industries.length > 0 ? <GuidePicker industries={industries} /> : guides.length > 0 && (
           <div class="aside-box aside-guide">
             <h2>Free guide for your industry</h2>
             <p>Each industry has its own guide, built on what owners in that field are asking.</p>

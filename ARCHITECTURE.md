@@ -50,3 +50,14 @@ change without a redesign.
 
 Astro (static output, no client JS) · Markdown content collections · `@astrojs/sitemap` ·
 hosted on Cloudflare Pages (free) · deploys on every push to `main`.
+
+## Lead path tracking (server side, no client JavaScript)
+`worker/index.js` runs before the static assets on every request. On HTML pages it keeps two first-party,
+HttpOnly cookies: `pd_first` (landing page, referring site or "direct", UTM tags and ad click ids, first
+date; 90 days) and `pd_trail` (last six page paths; 30 days). It then uses HTMLRewriter to add hidden
+fields to every `form.lead-form`: `came_from`, `path`, `landing`, `source`, `campaign`, `first_seen`.
+Every lead email therefore shows how the person found the site and the pages they took to the form.
+Only paths, hostnames and campaign tags are kept, never query strings or personal data. HTML responses are
+sent `Cache-Control: private, no-cache` because they are per visitor. If anything fails, the page is
+served untouched. Test locally with `npx wrangler dev` after `npm run build`.
+
