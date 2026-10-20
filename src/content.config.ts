@@ -48,6 +48,8 @@ const industries = defineCollection({
     title: z.string(),
     // Short label for grids and nav, e.g. "Law firms"
     label: z.string(),
+    // Optional group on the industries page, e.g. "Contractors". Ungrouped industries list after the groups.
+    group: z.string().optional(),
     summary: z.string().max(160),
     answer: z.string(),
     examples: z.array(z.string()).min(1),

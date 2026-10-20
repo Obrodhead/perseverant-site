@@ -6,7 +6,13 @@ import { activeIndustries } from '../../lib/content';
 import { graph, breadcrumbs, ORG_ID } from '../../lib/schema';
 
 const industries = await activeIndustries();
-const description = 'Industries we serve: law firms, elective healthcare, home improvement, senior living and home care, recruiting and staffing, and estate security firms.';
+// Grouped industries first (in order of first appearance), then everything ungrouped.
+const groupNames = [...new Set(industries.map((s) => s.data.group).filter((g): g is string => Boolean(g)))];
+const sections = [
+  ...groupNames.map((name) => ({ name, items: industries.filter((s) => s.data.group === name) })),
+  { name: groupNames.length ? 'More industries we serve' : '', items: industries.filter((s) => !s.data.group) },
+].filter((g) => g.items.length > 0);
+const description = 'Industries we serve: home improvement and industrial contractors, law firms, elective healthcare, senior living and home care, recruiting and staffing, and estate security firms.';
 const schema = graph(
   {
     '@type': 'CollectionPage',
@@ -31,18 +37,23 @@ const schema = graph(
       <h1>Careful decisions start with research</h1>
       <p style="color: var(--muted); font-size: var(--step-1); max-width: 56ch;">Your clients don't hire on impulse. They take their time, asking Google and AI assistants detailed questions before they ever reach out. We help them understand who you are and why you fit, so the first conversation starts with trust.</p>
     </header>
-    <ul class="service-grid" style="margin-bottom: 72px;">
-      {industries.map((s) => (
-        <li>
-          <a href={`/industries/${s.id}/`}>
-            <span class="num">{s.data.examples.slice(0, 3).join(' · ')}</span>
-            <h2 style="font-size: 1.2rem;">{s.data.label}</h2>
-            <p>{s.data.summary}</p>
-            <span class="more">Learn more <span class="arr" aria-hidden="true">→</span></span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    {sections.map((g) => (
+      <section style="margin-bottom: 56px;">
+        {g.name && <h2 class="eyebrow" style="margin-bottom: 16px;">{g.name}</h2>}
+        <ul class="service-grid">
+          {g.items.map((s) => (
+            <li>
+              <a href={`/industries/${s.id}/`}>
+                <span class="num">{s.data.examples.slice(0, 3).join(' · ')}</span>
+                <h3>{s.data.label}</h3>
+                <p>{s.data.summary}</p>
+                <span class="more">Learn more <span class="arr" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
   </div>
   <CtaBand />
 </Base>

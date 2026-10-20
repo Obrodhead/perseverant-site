@@ -1,6 +1,7 @@
 ---
 title: Lead Generation for Home Improvement Companies
 label: Home improvement
+group: Contractors
 summary: Lead generation for roofing, remodeling, HVAC, solar and window companies that fills the calendar with in-home estimates.
 answer: Home improvement lead generation should be measured by estimates booked and jobs sold, not form fills. We build local SEO and AI search visibility for the services and towns you want to win, run paid campaigns that target homeowners ready to act, and automate fast follow-up so leads become in-home appointments before they call your competitors.
 examples:

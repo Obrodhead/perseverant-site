@@ -8,7 +8,7 @@ export const site = {
   url: 'https://perseverantdigital.com',
   tagline: 'AI search and lead generation for service businesses.',
   description:
-    'Perseverant Digital is a Cleveland-based lead generation firm for businesses whose clients research carefully before they call: law firms, elective healthcare practices, home improvement companies, senior living providers, recruiting and staffing firms, and estate security firms. We combine AI search visibility, SEO, paid social, event campaigns and automation to turn attention into booked appointments.',
+    'Perseverant Digital is a Cleveland-based lead generation firm for businesses whose clients research carefully before they call: law firms, elective healthcare practices, home improvement companies, industrial repair and maintenance contractors, senior living providers, recruiting and staffing firms, and estate security firms. We combine AI search visibility, SEO, paid social, event campaigns and automation to turn attention into booked appointments.',
   email: 'connect@perseverantdigital.com',
   bookingUrl: '', // TODO: paste a scheduling link (Calendly, etc.) to show a booking button
   // Lead forms. Plain HTML forms (no JavaScript) post to Web3Forms, which emails every
