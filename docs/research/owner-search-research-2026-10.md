@@ -60,5 +60,22 @@ Research behind the six service-page guides. These are the questions business **
 ## Estate security
 Covered from the existing industry page and ASIS data; owner questions center on discreet visibility, referral paths with architects and estate managers, and explaining the assessment process before a call.
 
+## Industrial services (repair, coatings, maintenance contractors) — added October 20, 2026
+Owner questions, from contractor forums (r/IndustrialMaintenance, ECN electrical forum), contractor trade
+press and planning guides. Intent research, no keyword-volume tool.
+- Growth: "How do I get more industrial maintenance work beyond word of mouth?" "How do I reach plant managers?"
+  "How do I get on a plant's approved vendor / RFQ list?" "How do I win turnaround or outage work?"
+- Prequalification: "Is ISNetworld / Avetta worth it?" "Why did my grade stall an award?" (safety stats, EMR,
+  written programs, insurance).
+- Search and AI: "Why does ChatGPT name a competitor for on-line leak repair / tank relining?" "Do plant
+  engineers even search for contractors?"
+- Paid: "Do LinkedIn ads work for industrial services?" "Target maintenance and reliability engineers at specific plants."
+- Follow-up: "How do I stay in front of plants between outages without being a pest?" "Emergency calls that never turn into planned work."
+- Tools: "Which source produced awarded jobs?" "Track walkdowns to bids to awards."
+- Forum themes on what wins: safety record first, formal vendor registration and RFQ lists, reliable repairs
+  that hold, fast response, direct outreach to maintenance/engineering managers, specialization, a credible website or LinkedIn presence.
+- Guide chosen: "How to Win Planned Plant Work Before the Bid List Is Set" (shortlists form early, before the RFQ). Companion insight: "How do plant engineers choose a repair contractor in 2026?"
+- Constraints: CAN-SPAM applies to B2B email; TCPA for texts; LinkedIn terms for automation; never name plants or clients.
+
 ## Gaps
 No credible public benchmarks were found for cost per signed case, seminar-to-client conversion, full-arch cost per lead, or home care lead response, so the guides use labeled example math instead.

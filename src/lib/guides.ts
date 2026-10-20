@@ -36,6 +36,7 @@ const SOURCE_ALIASES: [RegExp, string[]][] = [
   [/Home Health Care News|Activated Insights/, ['turnover', 'Activated Insights', 'Home Care Pulse']],
   [/Senior Housing News/, ['Senior Housing News', 'Bild', 'move-ins']],
   [/ASIS/, ['ASIS']],
+  [/LinkedIn Marketing Solutions/, ['LinkedIn says']],
   [/Clio/, ['Clio']],
   [/Harvard Business Review/, ['Harvard Business Review', 'HBR']],
   [/Kelley Drye/, ['Kelley Drye', 'one-to-one', 'Eleventh Circuit', 'prior express written consent']],

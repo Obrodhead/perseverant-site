@@ -39,11 +39,13 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Owen reviews the six industry guides for voice; legal and healthcare guides reviewed before running ads to them
 - [ ] Case studies once clients approve them (real results only)
 - [ ] Owen reviews the Industrial services page (`src/content/industries/industrial-services.md`) for voice
-- [ ] Industrial services guide: research what plant-repair and maintenance contractor owners search (working idea: winning planned plant work without waiting on bid lists), then write it per `docs/research/industry-guide-spec.md` and run `npm run pdfs`
-- [ ] Consider an "industrial services" insight on repair-or-replace content for engineers, and LinkedIn as its paid channel on the Paid Social page
+- [ ] Mention LinkedIn as the B2B paid channel on the Paid Social page (industrial services and recruiting)
+- [ ] Owen reviews the industrial services guide and the plant-engineers insight for voice
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-20: Industrial services guide published: "How to Win Planned Plant Work Before the Bid List Is Set" (worksheets: source tracker, outage calendar, prequalification checklist, engineer page checklist, touch schedule; branded PDF). Research and verified facts added to `docs/research/` (TREW/GlobalSpec 2026, 6sense 2025, ISNetworld, Siemens, LinkedIn)
+- 2026-10-20: Published insight: How do plant engineers choose a repair contractor in 2026? Insights can now set `guide:` to end with that guide's offer and form (and a matching CTA band)
 - 2026-10-20: Added a seventh industry, Industrial services (industrial repair, coatings and maintenance contractors; measured in booked site walkdowns; cites Siemens True Cost of Downtime 2024). New optional `group` field on industries; the industries page now shows a "Contractors" group (home improvement plus industrial services) above "More industries we serve". Industry lists updated in `site.config.ts` and About. Grid lines moved onto cells so short rows no longer leave gray blocks
 - 2026-10-16: Guide PDFs now carry the current wordmark (Young Serif, "Digital" in muted green) beside the ring mark; Young Serif bundled for the PDF build (@fontsource/young-serif); paper grain and motion turned off in print
 - 2026-10-16: Published insight: Google is moving Local Services Ads into Performance Max (what changes, who moves first, one campaign-level target CPA, responsiveness as a ranking factor, pre-migration checklist; sources: Google Ads Help, Google Local Services Help, PPC Land). Links to home improvement and law firms pages

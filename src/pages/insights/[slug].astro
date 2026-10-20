@@ -1,9 +1,10 @@
 ---
-import { render } from 'astro:content';
+import { render, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ShortAnswer from '../../components/ShortAnswer.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import GuideOffer from '../../components/GuideOffer.astro';
 import { site } from '../../site.config';
 import { publishedInsights, isoDate, displayDate } from '../../lib/content';
 import { graph, breadcrumbs, faqPage, ORG_ID, PERSON_ID } from '../../lib/schema';
@@ -18,6 +19,10 @@ const { Content } = await render(entry);
 const d = entry.data;
 const path = `/insights/${entry.id}/`;
 const updated = d.updated ?? d.published;
+// A post can end with one industry guide's offer and request form.
+const guide = d.guide ? await getEntry('guides', d.guide) : undefined;
+const activeGuide = guide && guide.data.status === 'active' ? guide : undefined;
+const guideIndustry = activeGuide ? await getEntry('industries', activeGuide.data.industry) : undefined;
 
 const schema = graph(
   {
@@ -56,7 +61,10 @@ const schema = graph(
       <ShortAnswer text={d.answer} updated={updated} />
       <Content />
       <Faq faqs={d.faqs} />
+      {activeGuide && <GuideOffer guide={activeGuide} page={path} industryLabel={guideIndustry?.data.label ?? ''} />}
     </article>
   </div>
-  <CtaBand />
+  {activeGuide
+    ? <CtaBand heading={activeGuide.data.title} text={activeGuide.data.hook} href="#guide" label="Get the free guide" />
+    : <CtaBand />}
 </Base>
