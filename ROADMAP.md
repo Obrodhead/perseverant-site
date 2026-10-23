@@ -47,6 +47,7 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-10-23: Published insight: Is Google charging you for calls you never answered? (Local Services Ads missed-call billing since October 1, 2026: 20-second rule, voicemail counts, hours from Google Business Profile, 15-day follow-up window, 30-day automated credits, seven-step fix list; sources: Google Local Services Help, Search Engine Roundtable, PPC Land, TechWyse). Ends with the home improvement guide; links to the Performance Max and cost-per-appointment insights
 - 2026-10-20: Lead path tracking at the edge: the Worker records landing page, source, UTM/ad click ids and recent pages in two first-party cookies and adds them as hidden fields to every lead form, so each lead email shows the path to the form (no client JavaScript)
 - 2026-10-20: Insights without a `guide:` now end with an industry guide picker (short industry names linking to each guide offer) instead of only the generic contact banner; service sidebars use the same component
 - 2026-10-20: Service page sidebars merge "Industries" and the guide list into one "Free guide for your industry" box: only the industries that use that service, each linking straight to its guide offer, instead of every guide title
