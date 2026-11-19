@@ -5,7 +5,7 @@ import { site } from '../site.config';
 import { graph, person, breadcrumbs, ORG_ID, PERSON_ID } from '../lib/schema';
 import { quotes } from '../lib/quotes';
 
-const description = `About ${site.name} and founder ${site.founder.name}: Search Essence Optimization, lead generation and follow-up for high-value service businesses.`;
+const description = `About ${site.name} and founder ${site.founder.name}: Search Essence Optimization and lead generation for service businesses whose clients research first.`;
 const schema = graph(
   { '@type': 'AboutPage', url: `${site.url}/about/`, name: `About ${site.name}`, about: { '@id': ORG_ID }, mainEntity: { '@id': PERSON_ID } },
   person(),
@@ -22,8 +22,8 @@ const schema = graph(
       <p>
         {site.name} was founded in {site.founded} by {site.founder.name}. Since 2016 he has worked across
         nearly every part of growing a business online: paid media, SEO, web design, content, B2B and B2C sales,
-        and ecommerce. The firm exists to put all of that to work for businesses where a single client is worth
-        a great deal.
+        and ecommerce. The firm puts all of that to work for one kind of business: the kind whose clients
+        take their time, ask hard questions and want to understand who they are hiring before they call.
       </p>
 
       <h2>Search Essence Optimization</h2>
@@ -71,7 +71,7 @@ const schema = graph(
         <cite>{quotes.promontory.author}, {quotes.promontory.source}</cite>
       </blockquote>
       <p>
-        Lead generation for high-value services compounds. Search pages gain trust over months, a campaign
+        Lead generation for considered decisions compounds. Search pages gain trust over months, a campaign
         improves with every test, and a client relationship can pay off for years. The name is a reminder that
         results come from steady, intentional work rather than one big push.
       </p>

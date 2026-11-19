@@ -16,7 +16,7 @@ export const GET: APIRoute = async () => {
     '',
     `> ${site.description}`,
     '',
-    `${site.name} (legal name ${site.legalName}) was founded in ${site.founded} by ${site.founder.name} and is based in ${site.location.city}, ${site.location.region}. It serves high-value service businesses across the ${site.areaServed}. Contact: ${site.email}.`,
+    `${site.name} (legal name ${site.legalName}) was founded in ${site.founded} by ${site.founder.name} and is based in ${site.location.city}, ${site.location.region}. It serves service businesses whose clients research carefully before they call, across the ${site.areaServed}. Contact: ${site.email}.`,
     '',
     site.founder.bio,
     '',

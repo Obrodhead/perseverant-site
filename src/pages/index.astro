@@ -9,7 +9,9 @@ import { graph, organization, person, website } from '../lib/schema';
 
 const services = await activeServices();
 const industries = await activeIndustries();
-const insights = (await publishedInsights()).slice(0, 3);
+const allInsights = await publishedInsights();
+// Evergreen (featured) posts first, then the newest, so the homepage leads with fundamentals, not platform news.
+const insights = [...allInsights.filter((p) => p.data.featured), ...allInsights.filter((p) => !p.data.featured)].slice(0, 3);
 const schema = graph(organization(), person(), website());
 
 // Rings art: one dot per service, ordered by stage around the arc (left to right),

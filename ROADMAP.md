@@ -22,7 +22,9 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Create a Google Business Profile for Perseverant Digital (service-area business) with matching name and description
 
 ## Content engine
-- [ ] Publish two question-led insights per month, rotating across the five industries
+- [ ] Publish two question-led insights per month, rotating across the seven industries. Favor evergreen fundamentals that answer a question nobody has answered well; keep platform news (Google Ads, LSA changes) occasional and unfeatured
+- [ ] Owen reviews the Nov 18 copy pass for voice: About opener, SEO page Search Essence section, Paid Social rewrite, stage 2 name ("Go where they are") and the five deepened industry pages
+- [ ] Update the Claude project brief (lists five/six industries; site has seven)
 - [ ] Owen reviews the three stage names and one-line descriptions in `src/lib/stages.ts` for voice
 - [ ] Add industry-by-service pages for the strongest combinations (for example "AI search visibility for law firms")
 - [ ] Turn each podcast appearance and new idea into an insight that credits Search Essence Optimization
@@ -42,11 +44,11 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 - [ ] Monthly path review: read `path`, `landing` and `source` on each lead email, and run a GA4 Path exploration from /services/* and /insights/*; fix the pages where visitors stall
 - [ ] Send UTM tags on every LinkedIn, Meta and email link so `campaign` fills in on lead emails
 - [ ] Owen reviews the Industrial services page (`src/content/industries/industrial-services.md`) for voice
-- [ ] Mention LinkedIn as the B2B paid channel on the Paid Social page (industrial services and recruiting)
 - [ ] Owen reviews the industrial services guide and the plant-engineers insight for voice
 - [ ] Redirect perseverent.com to perseverantdigital.com if it isn't refunded
 
 ## Done
+- 2026-11-18: Essence pass. Removed "a single client is worth a great deal" and "high-value" framing (About, AI search, SEO, llms.txt, insights index). SEO page gains a Search Essence Optimization section and FAQ (URL and title unchanged). Stage 2 renamed from "Meet them in the middle" to "Go where they are", so that phrase stays with Search Essence. Paid Social rewritten around grassroots first, paid media as the sharpener; dropped the unverifiable "patterns in top-performing campaigns" claim; added LinkedIn for B2B. Law, elective healthcare, home improvement, senior living and recruiting pages deepened with cited facts from docs/research/guide-spec.md. Insights get a `featured` flag; homepage shows evergreen posts first. `_headers` now sets UTF-8 on llms.txt, llms-full.txt and robots.txt (llms-full.txt was rendering the em dash as mojibake)
 - 2026-10-23: Published insight: Is Google charging you for calls you never answered? (Local Services Ads missed-call billing since October 1, 2026: 20-second rule, voicemail counts, hours from Google Business Profile, 15-day follow-up window, 30-day automated credits, seven-step fix list; sources: Google Local Services Help, Search Engine Roundtable, PPC Land, TechWyse). Ends with the home improvement guide; links to the Performance Max and cost-per-appointment insights
 - 2026-10-20: Lead path tracking at the edge: the Worker records landing page, source, UTM/ad click ids and recent pages in two first-party cookies and adds them as hidden fields to every lead form, so each lead email shows the path to the form (no client JavaScript)
 - 2026-10-20: Insights without a `guide:` now end with an industry guide picker (short industry names linking to each guide offer) instead of only the generic contact banner; service sidebars use the same component

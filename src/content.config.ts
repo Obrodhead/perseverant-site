@@ -39,6 +39,8 @@ const insights = defineCollection({
     tags: z.array(z.string()).default([]),
     // Optional guide id (same as its industry id). The post then ends with that guide's offer and form.
     guide: z.string().optional(),
+    // Evergreen posts to show on the homepage first. Keep timely platform news unfeatured.
+    featured: z.boolean().default(false),
     faqs: z.array(faq).default([]),
     draft: z.boolean().default(false),
   }),

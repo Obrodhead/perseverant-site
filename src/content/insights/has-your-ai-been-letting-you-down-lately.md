@@ -3,6 +3,7 @@ title: Has your AI been letting you down lately? You're not alone
 description: Why AI answers feel worse, what the research says about hallucinations and model collapse, and how businesses can give AI better information.
 answer: Usually the AI isn't broken. It's underfed. Inside a chat, a thin prompt forces the model to guess. Across the web, more AI-written text and less original human writing gives future models less to learn from. Both gaps get filled with confident errors. The fix is the same in both places, specific and verified human knowledge, starting with what's published about your business.
 published: 2026-10-15
+featured: true
 tags: [AI search, hallucinations, content strategy]
 faqs:
   - q: Can I correct something wrong that ChatGPT says about my business?

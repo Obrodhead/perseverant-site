@@ -2,13 +2,13 @@
 title: AI Search Visibility (AEO and GEO)
 summary: Get your business named and cited when prospects ask ChatGPT, Claude, Perplexity, Gemini and Google AI Overviews who to hire.
 answer: AI search visibility is the work of getting your business named and cited when prospects ask AI assistants who to hire. We find the questions your best customers ask, publish clear answers on pages AI crawlers can read, structure them with schema, and build the outside mentions that make your business a source those systems trust.
-audience: High-value service businesses that want to be the name AI assistants recommend in their market.
+audience: Service businesses whose clients ask careful questions before they call, and who want AI assistants to describe them accurately.
 order: 1
 label: AI search
 stage: understood
 pairsWith: [seo, marketing-automation, custom-tools]
 status: active
-updated: 2026-10-14
+updated: 2026-11-18
 deliverables:
   - Question research for your ideal customer, by service and location
   - An answer library of pages written to be quoted

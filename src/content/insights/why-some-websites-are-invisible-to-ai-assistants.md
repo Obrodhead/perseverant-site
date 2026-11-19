@@ -3,6 +3,7 @@ title: Why Some Business Websites Are Invisible to ChatGPT and Claude
 description: Many AI crawlers read only raw HTML and skip JavaScript. Here's how to check whether AI assistants can see your website.
 answer: Crawlers from OpenAI, Anthropic and Perplexity read only the HTML your server sends and do not run JavaScript. If your website loads its main content with scripts, those AI assistants may see little or nothing, even when the page looks complete in a browser and ranks in Google. Serving content as finished HTML fixes it.
 published: 2026-10-14
+featured: true
 tags: [AI search, technical SEO]
 faqs:
   - q: How can I tell if AI crawlers can read my site?

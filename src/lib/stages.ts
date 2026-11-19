@@ -10,8 +10,8 @@ export const stages = [
   {
     id: 'reach',
     num: '02',
-    name: 'Meet them in the middle',
-    line: 'Many good prospects are not searching yet. Paid social and events go to them with a useful reason to raise a hand.',
+    name: 'Go where they are',
+    line: 'Many good prospects are not searching yet. Paid social and events bring them a useful reason to raise a hand, sharpening the trust your search presence has already earned.',
   },
   {
     id: 'follow-through',

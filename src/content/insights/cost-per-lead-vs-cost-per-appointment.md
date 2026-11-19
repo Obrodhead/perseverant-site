@@ -3,6 +3,7 @@ title: Cost per Lead vs. Cost per Booked Appointment for High-Ticket Services
 description: Why businesses with high-value clients should judge marketing by cost per booked appointment and revenue, not cost per lead.
 answer: For high-ticket services, cost per lead is a misleading number because leads vary enormously in quality. Cost per booked appointment, and ultimately cost per new client, shows what marketing actually produces. A channel with expensive leads can be the most profitable one if those leads book, show up and sign at a higher rate.
 published: 2026-10-14
+featured: true
 tags: [lead generation, measurement]
 faqs:
   - q: What should I track to calculate cost per booked appointment?
