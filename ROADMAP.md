@@ -24,7 +24,6 @@ What's next for perseverantdigital.com. Claude: read this first, work from the t
 ## Content engine
 - [ ] Publish two question-led insights per month, rotating across the seven industries. Favor evergreen fundamentals that answer a question nobody has answered well; keep platform news (Google Ads, LSA changes) occasional and unfeatured
 - [ ] Owen reviews the Nov 18 copy pass for voice: About opener, SEO page Search Essence section, Paid Social rewrite, stage 2 name ("Go where they are") and the five deepened industry pages
-- [ ] Update the Claude project brief (lists five/six industries; site has seven)
 - [ ] Owen reviews the three stage names and one-line descriptions in `src/lib/stages.ts` for voice
 - [ ] Add industry-by-service pages for the strongest combinations (for example "AI search visibility for law firms")
 - [ ] Turn each podcast appearance and new idea into an insight that credits Search Essence Optimization
